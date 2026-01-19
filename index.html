@@ -8,7 +8,6 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-<div id="app">
 
 <header>
   <h1>🌱 Умный полив</h1>
@@ -19,10 +18,6 @@
       Автоматический режим
       <input type="checkbox" id="autoMode" onchange="toggleAutoMode()">
     </label>
-  <!-- Заголовок/индикаторы -->
-  <div class="status-bar">
-    <div id="waterLevel">Вода: --%</div>
-    <div id="batteryLevel">Батарея: --%</div>
   </div>
 </header>
 
@@ -55,48 +50,9 @@
       <button onclick="togglePump(5)">Полить</button>
     </div>
   </section>
-  <!-- Режимы -->
-  <div class="modes">
-    <button id="autoModeBtn">Авто</button>
-    <button id="manualModeBtn">Ручной</button>
-  </div>
 
   <section class="camera">
     <h2>📷 Камера</h2>
     <img id="cameraStream" src="camera-placeholder.jpg" alt="Видео с камеры">
   </section>
 </main>
-  <!-- Насосы -->
-  <div class="pumps">
-    <button id="pump1Btn">Насос 1</button>
-    <button id="pump2Btn">Насос 2</button>
-    <button id="pump3Btn">Насос 3</button>
-    <button id="pump4Btn">Насос 4</button>
-    <button id="pump5Btn">Насос 5</button>
-  </div>
-
-  <!-- Датчики влажности -->
-  <div class="sensors">
-    <div>Датчик 1: <span id="sensor1">--%</span></div>
-    <div>Датчик 2: <span id="sensor2">--%</span></div>
-    <div>Датчик 3: <span id="sensor3">--%</span></div>
-    <div>Датчик 4: <span id="sensor4">--%</span></div>
-    <div>Датчик 5: <span id="sensor5">--%</span></div>
-  </div>
-
-  <!-- Модальное окно -->
-  <div id="appModal" class="modal">
-    <div class="modal-content">
-      <p id="modalText">Текст модального окна</p>
-      <div class="modal-buttons">
-        <button id="modalOk">OK</button>
-        <button id="modalCancel">Отмена</button>
-      </div>
-    </div>
-  </div>
-
-<script src="app.js"></script>
-</body>
-</html>
-</div>
-
