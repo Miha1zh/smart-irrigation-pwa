@@ -1,98 +1,114 @@
-/* === Основной стиль интерфейса === */
+/* ===== БАЗОВЫЙ СТИЛЬ ===== */
 body {
+  font-family: Arial, sans-serif;
   background-color: #121212;
-  color: #fff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #eee;
   margin: 0;
-  padding: 20px;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-#app {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-#waterBattery {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
-
-#plants div {
-  background-color: #1e1e1e;
   padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
-/* === Кнопки === */
-button {
-  padding: 5px 12px;
-  margin-left: 5px;
-  background-color: #4caf50; /* зелёный цвет */
-  color: #fff;
+header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.status p,
+.status label {
+  margin: 5px 0;
+}
+
+/* ===== РАСТЕНИЯ ===== */
+.plants {
+  display: grid;
+  gap: 15px;
+}
+
+.plant {
+  background: #1f1f1f;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.plant button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 16px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  transition: background 0.2s;
 }
 
-button:hover {
+.plant button:active {
   background-color: #388e3c;
 }
 
-/* Иконки внутри кнопок (например FontAwesome) */
-button i {
-  margin-right: 6px;
+/* ===== КАМЕРА ===== */
+.camera {
+  margin-top: 20px;
 }
 
-/* Чекбокс авто режима */
-#autoMode {
-  transform: scale(1.2);
-  margin-left: 8px;
+.camera img {
+  width: 100%;
+  border-radius: 10px;
+  background: #333;
 }
 
-/* === Модальное окно === */
+/* ===== МОДАЛЬНОЕ ОКНО (В ТОМ ЖЕ СТИЛЕ) ===== */
 .modal {
   display: none;
   position: fixed;
-  top:0;
-  left:0;
-  width: 100%;
-  height:100%;
-  background-color: rgba(0,0,0,0.7);
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.75);
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
 .modal-content {
-  background-color: #1e1e1e;
+  background: #1f1f1f;
   padding: 20px;
-  border-radius: 10px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 320px;
   text-align: center;
-  max-width: 90%;
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
 }
 
 .modal-buttons button {
-  margin: 10px;
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-/* === Индикаторы влажности === */
-.moisture {
-  font-weight: bold;
-  margin-right: 10px;
+#modalOk {
+  background-color: #4caf50;
+  color: #fff;
 }
 
-/* === Иконки насосов для кнопок (пример) === */
-/* Нужно подключить FontAwesome или другой набор иконок в HTML */
+#modalOk:active {
+  background-color: #388e3c;
+}
+
+#modalCancel {
+  background-color: #555;
+  color: #eee;
+}
+
+#modalCancel:active {
+  background-color: #444;
+}
