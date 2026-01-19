@@ -1,25 +1,61 @@
+/* === Основной стиль интерфейса === */
 body {
-  background-color: #121212;
+  background-color: #121212; /* тёмная тема */
   color: #fff;
-  font-family: sans-serif;
-  padding: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
 }
 
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#app {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#waterBattery {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+#plants div {
+  background-color: #1e1e1e;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Кнопки */
 button {
-  padding: 5px 10px;
+  padding: 5px 12px;
   margin-left: 5px;
   background-color: #1e88e5;
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
 button:hover {
   background-color: #1565c0;
 }
 
-/* Модальное окно */
+/* Чекбокс авто режима */
+#autoMode {
+  transform: scale(1.2);
+  margin-left: 8px;
+}
+
+/* === Модальное окно === */
 .modal {
   display: none;
   position: fixed;
@@ -38,8 +74,15 @@ button:hover {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
+  max-width: 90%;
 }
 
 .modal-buttons button {
   margin: 10px;
+}
+
+/* === Индикаторы влажности === */
+.moisture {
+  font-weight: bold;
+  margin-right: 10px;
 }
