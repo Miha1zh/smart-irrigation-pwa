@@ -3,7 +3,7 @@ let pumps = [0, 0, 0, 0, 0];
 let autoMode = false;
 let moistureLevels = [42, 35, 61, 28, 55];
 let battery = 99;
-let water = 73; // в процентах
+let water = 99; // в процентах
 
 // ---- Модальное окно ----
 const modal = document.getElementById('appModal');
@@ -76,6 +76,7 @@ updateUI();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
+
 
 
 
