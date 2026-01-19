@@ -2,7 +2,7 @@
 let pumps = [0, 0, 0, 0, 0];
 let autoMode = false;
 let moistureLevels = [42, 35, 61, 28, 55];
-let battery = 00;
+let battery = 100;
 let water = 00; // в процентах
 
 // ---- Модальное окно ----
@@ -31,7 +31,7 @@ function updateUI() {
   document.getElementById('battery').innerText = battery;
   document.getElementById('water').innerText = water;
   moisture.forEach((val, i) => {
-    document.querySelector(`#plant{i+1} .moisture`).innerText = val;
+    document.querySelector(`#plant{i+1} .moistureLevels`).innerText = val;
   });
 }
 
@@ -76,6 +76,7 @@ updateUI();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
+
 
 
 
