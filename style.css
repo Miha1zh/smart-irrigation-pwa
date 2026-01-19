@@ -1,4 +1,4 @@
-/* ===== БАЗОВЫЙ СТИЛЬ ===== */
+/* ===== ОСНОВНОЙ СТИЛЬ (КАК У ТЕБЯ И БЫЛ) ===== */
 body {
   font-family: Arial, sans-serif;
   background-color: #121212;
@@ -17,7 +17,6 @@ header {
   margin: 5px 0;
 }
 
-/* ===== РАСТЕНИЯ ===== */
 .plants {
   display: grid;
   gap: 15px;
@@ -70,7 +69,7 @@ header {
 .modal-content {
   background: #1f1f1f;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 10px;
   width: 90%;
   max-width: 320px;
   text-align: center;
@@ -95,6 +94,7 @@ header {
   cursor: pointer;
 }
 
+/* Кнопка OK — как кнопки насосов */
 #modalOk {
   background-color: #4caf50;
   color: #fff;
@@ -104,6 +104,7 @@ header {
   background-color: #388e3c;
 }
 
+/* Кнопка Отмена */
 #modalCancel {
   background-color: #555;
   color: #eee;
