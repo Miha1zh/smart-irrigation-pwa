@@ -31,7 +31,7 @@ function updateUI() {
   document.getElementById('battery').innerText = battery;
   document.getElementById('water').innerText = water;
   moistureLevels.forEach((val, i) => {
-    document.querySelector(`#plant${i+1} .moistureLevels`).innerText = val;
+    document.querySelector(`#plant{i+1} .moistureLevels`).innerText = val;
   });
 }
 
@@ -76,6 +76,7 @@ updateUI();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
+
 
 
 
