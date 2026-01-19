@@ -1,40 +1,53 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Умный полив</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Умный полив</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="app">
+
+<header>
   <h1>Умный полив</h1>
+</header>
 
-  <div>
-    <label>
-      Авто режим:
-      <input type="checkbox" id="autoMode">
-    </label>
+<div class="status">
+  <p>💧 Вода: <span id="water">0</span>%</p>
+  <p>🔋 Батарея: <span id="battery">0</span>%</p>
+  <label>
+    Авто режим:
+    <input type="checkbox" id="autoMode">
+  </label>
+</div>
+
+<div class="plants">
+  <div class="plant">
+    🌱 Растение 1 — <span class="moisture">0</span>%
+    <button id="pump1Btn">Включить насос</button>
   </div>
-
-  <div id="waterBattery">
-    <p>Вода: <span id="water">0</span>%</p>
-    <p>Батарея: <span id="battery">0</span>%</p>
+  <div class="plant">
+    🌱 Растение 2 — <span class="moisture">0</span>%
+    <button id="pump2Btn">Включить насос</button>
   </div>
-
-  <div id="plants">
-    <div id="plant1">Растение 1: <span class="moisture">0</span>% <button id="pump1Btn">Вкл насос 1</button></div>
-    <div id="plant2">Растение 2: <span class="moisture">0</span>% <button id="pump2Btn">Вкл насос 2</button></div>
-    <div id="plant3">Растение 3: <span class="moisture">0</span>% <button id="pump3Btn">Вкл насос 3</button></div>
-    <div id="plant4">Растение 4: <span class="moisture">0</span>% <button id="pump4Btn">Вкл насос 4</button></div>
-    <div id="plant5">Растение 5: <span class="moisture">0</span>% <button id="pump5Btn">Вкл насос 5</button></div>
+  <div class="plant">
+    🌱 Растение 3 — <span class="moisture">0</span>%
+    <button id="pump3Btn">Включить насос</button>
+  </div>
+  <div class="plant">
+    🌱 Растение 4 — <span class="moisture">0</span>%
+    <button id="pump4Btn">Включить насос</button>
+  </div>
+  <div class="plant">
+    🌱 Растение 5 — <span class="moisture">0</span>%
+    <button id="pump5Btn">Включить насос</button>
   </div>
 </div>
 
 <!-- Модальное окно -->
 <div id="appModal" class="modal">
   <div class="modal-content">
-    <p id="modalText">Текст модального окна</p>
+    <p id="modalText">Текст</p>
     <div class="modal-buttons">
       <button id="modalOk">OK</button>
       <button id="modalCancel">Отмена</button>
