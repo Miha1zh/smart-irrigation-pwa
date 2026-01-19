@@ -1,7 +1,7 @@
 // Фейковые данные для теста, потом заменим на API ESP32
 let pumps = [0, 0, 0, 0, 0];
 let autoMode = false;
-let moistureLevels = [42, 35, 61, 28, 55];
+let moisture = [42, 35, 61, 28, 55];
 let battery = 78;
 let water = 73; // в процентах
 
@@ -30,7 +30,7 @@ function showModal(message, onOk, onCancel) {
 function updateUI() {
   document.getElementById('battery').innerText = battery;
   document.getElementById('water').innerText = water;
-  moistureLevels.forEach((val, i) => {
+  moisture.forEach((val, i) => {
     document.querySelector(`#plant${i+1} .moisture`).innerText = val;
   });
 }
@@ -76,3 +76,4 @@ updateUI();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
+
