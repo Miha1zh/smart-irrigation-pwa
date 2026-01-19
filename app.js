@@ -1,4 +1,3 @@
-@@ -1,35 +1,59 @@
 ﻿// Фейковые данные для теста, потом заменим на API ESP32
 let pumps = [0, 0, 0, 0, 0];
 let autoMode = false;
@@ -86,4 +85,5 @@ updateSensor(2, 60);
 updateSensor(3, 30);
 updateSensor(4, 75);
 updateSensor(5, 50);
+
 
