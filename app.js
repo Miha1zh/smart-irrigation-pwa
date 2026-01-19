@@ -1,3 +1,18 @@
+@@ -1,35 +1,59 @@
+﻿// Фейковые данные для теста, потом заменим на API ESP32
+let pumps = [0, 0, 0, 0, 0];
+let autoMode = false;
+let moistureLevels = [42, 35, 61, 28, 55];
+let battery = 78;
+let water = 73; // в процентах
+
+function updateUI() {
+  document.getElementById('battery').innerText = battery;
+  document.getElementById('water').innerText = water;
+  moistureLevels.forEach((val, i) => {
+    document.querySelector(`#plant${i+1} .moisture`).innerText = val;
+  });
+}
 // Модальное окно
 const modal = document.getElementById('appModal');
 const modalText = document.getElementById('modalText');
@@ -13,12 +28,21 @@ function showModal(message, onOk, onCancel) {
     if (onOk) onOk();
   };
 
+function togglePump(id) {
+  // Вручную включаем насос, максимум 30 секунд (таймер на ESP32)
+  pumps[id-1] = pumps[id-1] ? 0 : 1;
+  alert("Насос " + id + " → " + (pumps[id-1] ? "ВКЛ" : "ВЫКЛ"));
+  // В будущем: fetch(`/api/pump/${id}/toggle`)
   modalCancel.onclick = () => {
     modal.style.display = 'none';
     if (onCancel) onCancel();
   };
 }
 
+function toggleAutoMode() {
+  autoMode = document.getElementById('autoMode').checked;
+  alert("Автоматический режим → " + (autoMode ? "ВКЛ" : "ВЫКЛ"));
+  // В будущем: fetch(`/api/mode/${autoMode ? 'auto' : 'manual'}`)
 // Управление насосами
 function togglePump(pumpNumber, state) {
   const action = state ? 'Включить' : 'Выключить';
@@ -28,6 +52,8 @@ function togglePump(pumpNumber, state) {
   });
 }
 
+// Инициализация
+updateUI();
 // Назначаем кнопки
 document.getElementById('pump1Btn').onclick = () => togglePump(1, true);
 document.getElementById('pump2Btn').onclick = () => togglePump(2, true);
@@ -46,6 +72,9 @@ document.getElementById('manualModeBtn').onclick = () => {
   console.log('Ручной режим включён');
 };
 
+// Регистрация service worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
 // Обновление датчиков (пример)
 function updateSensor(id, value) {
   document.getElementById(`sensor${id}`).textContent = value + '%';
@@ -57,3 +86,4 @@ updateSensor(2, 60);
 updateSensor(3, 30);
 updateSensor(4, 75);
 updateSensor(5, 50);
+
