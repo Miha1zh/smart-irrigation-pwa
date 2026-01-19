@@ -1,11 +1,29 @@
+@@ -1,52 +1,65 @@
+﻿body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #eee;
 body {
   background: #121212;
   color: #fff;
   font-family: "Segoe UI", sans-serif;
   margin: 0;
+  padding: 10px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.status p, .status label {
+  margin: 5px 0;
   padding: 0;
 }
 
+.plants {
+  display: grid;
+  gap: 15px;
 .status-bar {
   display: flex;
   justify-content: space-around;
@@ -14,6 +32,10 @@ body {
   font-weight: bold;
 }
 
+.plant {
+  background: #1f1f1f;
+  padding: 15px;
+  border-radius: 10px;
 .modes, .pumps, .sensors {
   display: flex;
   justify-content: space-around;
@@ -21,9 +43,15 @@ body {
   flex-wrap: wrap;
 }
 
+.plant button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px;
 button {
   background: #4caf50;
   border: none;
+  border-radius: 8px;
+  background-color: #4caf50;
   border-radius: 10px;
   padding: 10px 20px;
   color: #fff;
@@ -46,6 +74,8 @@ button#autoModeBtn { background: #ff9800; }
   align-items: center;
 }
 
+.plant button:active {
+  background-color: #388e3c;
 .modal-content {
   background: #222;
   padding: 20px;
@@ -54,12 +84,18 @@ button#autoModeBtn { background: #ff9800; }
   max-width: 80%;
 }
 
+.camera {
+  margin-top: 20px;
 .modal-buttons {
   margin-top: 15px;
   display: flex;
   justify-content: space-around;
 }
 
+.camera img {
+  width: 100%;
+  border-radius: 10px;
+  background: #333;
 .modal-buttons button#modalCancel {
   background: #f44336;
 }
