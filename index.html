@@ -1,62 +1,44 @@
-﻿<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Умный полив</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="manifest" href="manifest.json">
-</head>
-<body>
+<div id="app">
 
-<header>
-  <h1>🌱 Умный полив</h1>
-  <div class="status">
-    <p>🔋 Батарея: <span id="battery">--</span>%</p>
-    <p>💧 Вода: <span id="water">--</span>%</p>
-    <label>
-      Автоматический режим
-      <input type="checkbox" id="autoMode" onchange="toggleAutoMode()">
-    </label>
+  <!-- Заголовок/индикаторы -->
+  <div class="status-bar">
+    <div id="waterLevel">Вода: --%</div>
+    <div id="batteryLevel">Батарея: --%</div>
   </div>
-</header>
 
-<main>
-  <section class="plants">
-    <h2>Растения</h2>
-    <div class="plant" id="plant1">
-      <p>Растение 1 🍅</p>
-      <p>Влажность: <span class="moisture">--</span>%</p>
-      <button onclick="togglePump(1)">Полить</button>
-    </div>
-    <div class="plant" id="plant2">
-      <p>Растение 2 🫑</p>
-      <p>Влажность: <span class="moisture">--</span>%</p>
-      <button onclick="togglePump(2)">Полить</button>
-    </div>
-    <div class="plant" id="plant3">
-      <p>Растение 3 🌿</p>
-      <p>Влажность: <span class="moisture">--</span>%</p>
-      <button onclick="togglePump(3)">Полить</button>
-    </div>
-    <div class="plant" id="plant4">
-      <p>Растение 4 🌻</p>
-      <p>Влажность: <span class="moisture">--</span>%</p>
-      <button onclick="togglePump(4)">Полить</button>
-    </div>
-    <div class="plant" id="plant5">
-      <p>Растение 5 🍓</p>
-      <p>Влажность: <span class="moisture">--</span>%</p>
-      <button onclick="togglePump(5)">Полить</button>
-    </div>
-  </section>
+  <!-- Режимы -->
+  <div class="modes">
+    <button id="autoModeBtn">Авто</button>
+    <button id="manualModeBtn">Ручной</button>
+  </div>
 
-  <section class="camera">
-    <h2>📷 Камера</h2>
-    <img id="cameraStream" src="camera-placeholder.jpg" alt="Видео с камеры">
-  </section>
-</main>
+  <!-- Насосы -->
+  <div class="pumps">
+    <button id="pump1Btn">Насос 1</button>
+    <button id="pump2Btn">Насос 2</button>
+    <button id="pump3Btn">Насос 3</button>
+    <button id="pump4Btn">Насос 4</button>
+    <button id="pump5Btn">Насос 5</button>
+  </div>
 
-<script src="app.js"></script>
-</body>
-</html>
+  <!-- Датчики влажности -->
+  <div class="sensors">
+    <div>Датчик 1: <span id="sensor1">--%</span></div>
+    <div>Датчик 2: <span id="sensor2">--%</span></div>
+    <div>Датчик 3: <span id="sensor3">--%</span></div>
+    <div>Датчик 4: <span id="sensor4">--%</span></div>
+    <div>Датчик 5: <span id="sensor5">--%</span></div>
+  </div>
+
+  <!-- Модальное окно -->
+  <div id="appModal" class="modal">
+    <div class="modal-content">
+      <p id="modalText">Текст модального окна</p>
+      <div class="modal-buttons">
+        <button id="modalOk">OK</button>
+        <button id="modalCancel">Отмена</button>
+      </div>
+    </div>
+  </div>
+
+</div>
