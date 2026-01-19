@@ -3,7 +3,7 @@ let pumps = [0, 0, 0, 0, 0];
 let autoMode = false;
 let moistureLevels = [42, 35, 61, 28, 55];
 let battery = 00;
-let water = 99; // в процентах
+let water = 00; // в процентах
 
 // ---- Модальное окно ----
 const modal = document.getElementById('appModal');
@@ -30,7 +30,7 @@ function showModal(message, onOk, onCancel) {
 function updateUI() {
   document.getElementById('battery').innerText = battery;
   document.getElementById('water').innerText = water;
-  moistureLevels.forEach((val, i) => {
+  moisture.forEach((val, i) => {
     document.querySelector(`#plant{i+1} .moisture`).innerText = val;
   });
 }
@@ -76,6 +76,7 @@ updateUI();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
+
 
 
 
