@@ -1,6 +1,6 @@
 /* === Основной стиль интерфейса === */
 body {
-  background-color: #121212; /* тёмная тема */
+  background-color: #121212;
   color: #fff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
@@ -33,20 +33,27 @@ h1 {
   align-items: center;
 }
 
-/* Кнопки */
+/* === Кнопки === */
 button {
   padding: 5px 12px;
   margin-left: 5px;
-  background-color: #1e88e5;
+  background-color: #4caf50; /* зелёный цвет */
   color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
   transition: background 0.2s;
 }
 
 button:hover {
-  background-color: #1565c0;
+  background-color: #388e3c;
+}
+
+/* Иконки внутри кнопок (например FontAwesome) */
+button i {
+  margin-right: 6px;
 }
 
 /* Чекбокс авто режима */
@@ -86,3 +93,6 @@ button:hover {
   font-weight: bold;
   margin-right: 10px;
 }
+
+/* === Иконки насосов для кнопок (пример) === */
+/* Нужно подключить FontAwesome или другой набор иконок в HTML */
