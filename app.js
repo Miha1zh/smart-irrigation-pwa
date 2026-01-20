@@ -38,15 +38,18 @@ function updateUI() {
   const moistureSpans = document.querySelectorAll('.moisture');
   moistureLevels.forEach((val, i) => {    if (moistureSpans[i]) {      moistureSpans[i].innerText = val;    }  
                                      });
+// кнопки насосов
   pumps.forEach((state, i) => {
   const btn = document.getElementById(`pump${i + 1}Btn`);
   if (!btn) return;
+    if (state) {
+      btn.classList.add('pump-active');
+      btn.innerText = `Выключить насос ${i+1}`;
+    } else {
+      btn.classList.remove('pump-active');
 // пример авто-полива ---- if (autoMode && moistureLevels[2] < 30) {  togglePump(3, true); // ВКЛ автоматически}
-  btn.innerText = state
-    ? `Выключить насос ${i + 1}`
-    : `Включить насос ${i + 1}`;
-
-  btn.classList.toggle('active', !!state);
+  btn.innerText = `Включить насос ${i + 1}`;
+           }
                             });
 }
 
@@ -137,6 +140,7 @@ updateUI();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
+
 
 
 
