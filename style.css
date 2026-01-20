@@ -116,7 +116,13 @@ header {
 
 /* Подсвека кнопок */
 .plant button.active {
-  background-color: #66bb6a;
-  box-shadow: 0 0 10px rgba(102, 187, 106, 0.7);
+  background-color: #2bbbad; /* зелёно-голубой */
+  box-shadow: 0 0 12px rgba(43, 187, 173, 0.7);
 }
+
+.plant button.active:active {
+  background-color: #1fa89a;
+}
+}
+
 
