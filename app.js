@@ -52,7 +52,7 @@ function togglePumpModal(id) {
 // ---- Управление авто/ручной режим ----
 function toggleAutoModeModal() {
   const newMode = !autoMode;
-  showModal(`Переключить автоматический режим → ${newMode ? "ВКЛ" : "ВЫКЛ"} автоматический режим?`, () => {
+  showModal(`${newMode ? "ВКЛ" : "ВЫКЛ"} автоматический режим?`, () => {
     autoMode = newMode;
     document.getElementById('autoMode').checked = autoMode;
     console.log("Автоматический режим → " + (autoMode ? "ВКЛ" : "ВЫКЛ"));
@@ -77,6 +77,7 @@ updateUI();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
+
 
 
 
