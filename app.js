@@ -34,38 +34,65 @@ function updateUI() {
   const moistureSpans = document.querySelectorAll('.moisture');
   moistureLevels.forEach((val, i) => {    if (moistureSpans[i]) {      moistureSpans[i].innerText = val;    }  
                                      });
+  pumps.forEach((state, i) => {
+  const btn = document.getElementById(`pump${i + 1}Btn`);
+  if (btn) {
+    btn.innerText = state
+      ? `Выключить насос ${i + 1}`
+      : `Включить насос ${i + 1}`;
+           }
+                             });
 }
 
 // ---- Управление насосами через модалку ----
-function togglePumpModal(id) {
-  const currentState = pumps[id-1];
-  const action = currentState ? "Выключить" : "Включить";
+function togglePump(id) {
+  const index = id - 1;
+  pumps[index] = pumps[index] ? 0 : 1;
 
-  showModal(`${action} насос №${id}?`, () => {
-    pumps[id-1] = currentState ? 0 : 1;
-    console.log(`Насос ${id} → ${pumps[id-1] ? "ВКЛ" : "ВЫКЛ"}`);
-    updateUI();
-    // TODO: fetch(`/api/pump/${id}/toggle`)
-  });
+  const btn = document.getElementById(`pump${id}Btn`);
+  if (btn) {
+    btn.innerText = pumps[index]
+      ? `Выключить насос ${id}`
+      : `Включить насос ${id}`;
+  }
+
+  console.log(`Насос ${id} → ${pumps[index] ? "ВКЛ" : "ВЫКЛ"}`);
+
+  // TODO: fetch(`/api/pump/${id}/${pumps[index] ? 'on' : 'off'}`)
 }
 
 // ---- Управление авто/ручной режим ----
 function toggleAutoModeModal() {
-  const newMode = !autoMode;
-  showModal(`${newMode ? "ВКЛ" : "ВЫКЛ"} автоматический режим?`, () => {
-    autoMode = newMode;
-    document.getElementById('autoMode').checked = autoMode;
-    console.log("Автоматический режим → " + (autoMode ? "ВКЛ" : "ВЫКЛ"));
-    // TODO: fetch(`/api/mode/${autoMode ? 'auto' : 'manual'}`)
-  });
+  const checkbox = document.getElementById('autoMode');
+
+  if (!checkbox.checked) {
+    // ПЫТАЕМСЯ ВЫКЛЮЧИТЬ → подтверждение
+    showModal(
+      'Выключить автоматический режим?',
+      () => {
+        autoMode = false;
+        checkbox.checked = false;
+        console.log('Автоматический режим → ВЫКЛ');
+      },
+      () => {
+        checkbox.checked = true;
+      }
+    );
+  } else {
+    // ВКЛЮЧЕНИЕ — БЕЗ ПОДТВЕРЖДЕНИЯ
+    autoMode = true;
+    console.log('Автоматический режим → ВКЛ');
+  }
+
+  // TODO: fetch(`/api/mode/${autoMode ? 'auto' : 'manual'}`)
 }
 
 // ---- Регистрация обработчиков кнопок насосов ----
-document.getElementById('pump1Btn').onclick = () => togglePumpModal(1);
-document.getElementById('pump2Btn').onclick = () => togglePumpModal(2);
-document.getElementById('pump3Btn').onclick = () => togglePumpModal(3);
-document.getElementById('pump4Btn').onclick = () => togglePumpModal(4);
-document.getElementById('pump5Btn').onclick = () => togglePumpModal(5);
+document.getElementById('pump1Btn').onclick = () => togglePump(1);
+document.getElementById('pump2Btn').onclick = () => togglePump(2);
+document.getElementById('pump3Btn').onclick = () => togglePump(3);
+document.getElementById('pump4Btn').onclick = () => togglePump(4);
+document.getElementById('pump5Btn').onclick = () => togglePump(5);
 
 // ---- Переключатель авто/ручной режим ----
 document.getElementById('autoMode').onclick = toggleAutoModeModal;
@@ -77,6 +104,7 @@ updateUI();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
+
 
 
 
