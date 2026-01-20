@@ -85,6 +85,7 @@ function togglePump(id, forceState = null) {
   } else {
     // ---- НАСОС ВЫКЛ ----
     if (btn) {
+       btn.classList.add('pump-active'); // убри это потом к черту
       btn.innerText = `Включить насос ${id}`;
       btn.classList.remove('active');
     }
@@ -142,6 +143,7 @@ updateUI();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
+
 
 
 
