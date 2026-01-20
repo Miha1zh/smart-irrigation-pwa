@@ -113,3 +113,10 @@ header {
 #modalCancel:active {
   background-color: #444;
 }
+
+/* Подсвека кнопок */
+.plant button.active {
+  background-color: #66bb6a;
+  box-shadow: 0 0 10px rgba(102, 187, 106, 0.7);
+}
+
