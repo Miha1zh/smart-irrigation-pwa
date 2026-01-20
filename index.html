@@ -4,12 +4,16 @@
   <meta charset="UTF-8">
   <title>Умный полив</title>
 
-  <!-- PWA: манифест и иконки -->
+  <!-- Мобильная адаптация -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <!-- PWA манифест -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#2bbbad">
 
-  <!-- Для iOS -->
+  <!-- iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Полив">
   <link rel="apple-touch-icon" href="icon-192.png">
 
@@ -18,6 +22,9 @@
 
   <!-- Стили -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Скрипты -->
+  <script src="app.js" defer></script>
 </head>
 <body>
 
@@ -71,6 +78,7 @@
 <script src="app.js"></script>
 </body>
 </html>
+
 
 
 
