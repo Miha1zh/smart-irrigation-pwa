@@ -3,7 +3,11 @@ let pumps = [0, 0, 0, 0, 0];
 let autoMode = false;
 let moistureLevels = [42, 35, 61, 28, 55];
 let battery = 100;
-let water = 00; // в процентах
+let water = 0; // в процентах
+
+// ---- Таймеры насосов ----
+const PUMP_MAX_TIME = 30 * 1000; // 30 секунд
+let pumpTimers = [null, null, null, null, null];
 
 // ---- Модальное окно ----
 const modal = document.getElementById('appModal');
@@ -36,30 +40,59 @@ function updateUI() {
                                      });
   pumps.forEach((state, i) => {
   const btn = document.getElementById(`pump${i + 1}Btn`);
-  if (btn) {
-    btn.innerText = state
-      ? `Выключить насос ${i + 1}`
-      : `Включить насос ${i + 1}`;
-           }
-                             });
+  if (!btn) return;
+// пример авто-полива ---- if (autoMode && moistureLevels[2] < 30) {  togglePump(3, true); // ВКЛ автоматически}
+  btn.innerText = state
+    ? `Выключить насос ${i + 1}`
+    : `Включить насос ${i + 1}`;
+
+  btn.classList.toggle('active', !!state);
+                            });
 }
 
-// ---- Управление насосами через модалку ----
-function togglePump(id) {
+// ---- Управление насосами  ---- можно вызвать вручную, автоматически, из будущего API
+function togglePump(id, forceState = null) {
   const index = id - 1;
-  pumps[index] = pumps[index] ? 0 : 1;
+
+  // если forceState передан — используем его
+  if (forceState !== null) {
+    pumps[index] = forceState ? 1 : 0;
+  } else {
+    pumps[index] = pumps[index] ? 0 : 1;
+  }
 
   const btn = document.getElementById(`pump${id}Btn`);
-  if (btn) {
-    btn.innerText = pumps[index]
-      ? `Выключить насос ${id}`
-      : `Включить насос ${id}`;
+
+  if (pumps[index]) {
+    // ---- НАСОС ВКЛ ----
+    if (btn) {
+      btn.innerText = `Выключить насос ${id}`;
+      btn.classList.add('active');
+    }
+
+    // таймер безопасности
+    clearTimeout(pumpTimers[index]);
+    pumpTimers[index] = setTimeout(() => {
+      console.warn(`Насос ${id} выключен по таймеру безопасности`);
+      togglePump(id, false);
+    }, PUMP_MAX_TIME);
+
+  } else {
+    // ---- НАСОС ВЫКЛ ----
+    if (btn) {
+      btn.innerText = `Включить насос ${id}`;
+      btn.classList.remove('active');
+    }
+
+    clearTimeout(pumpTimers[index]);
+    pumpTimers[index] = null;
   }
 
   console.log(`Насос ${id} → ${pumps[index] ? "ВКЛ" : "ВЫКЛ"}`);
 
   // TODO: fetch(`/api/pump/${id}/${pumps[index] ? 'on' : 'off'}`)
 }
+
 
 // ---- Управление авто/ручной режим ----
 function toggleAutoModeModal() {
@@ -104,6 +137,7 @@ updateUI();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
+
 
 
 
