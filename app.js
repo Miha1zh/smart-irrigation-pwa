@@ -36,21 +36,23 @@ function updateUI() {
   document.getElementById('water').innerText = water;
 
   const moistureSpans = document.querySelectorAll('.moisture');
-  moistureLevels.forEach((val, i) => {    if (moistureSpans[i]) {      moistureSpans[i].innerText = val;    }  
-                                     });
-// кнопки насосов
+  moistureLevels.forEach((val, i) => {
+    if (moistureSpans[i]) moistureSpans[i].innerText = val;
+  });
+
+  // Кнопки насосов
   pumps.forEach((state, i) => {
-  const btn = document.getElementById(`pump${i + 1}Btn`);
-  if (!btn) return;
+    const btn = document.getElementById(`pump${i+1}Btn`);
+    if (!btn) return;
+
     if (state) {
       btn.classList.add('pump-active');
       btn.innerText = `Выключить насос ${i+1}`;
     } else {
       btn.classList.remove('pump-active');
-// пример авто-полива ---- if (autoMode && moistureLevels[2] < 30) {  togglePump(3, true); // ВКЛ автоматически}
-  btn.innerText = `Включить насос ${i + 1}`;
-           }
-                            });
+      btn.innerText = `Включить насос ${i+1}`;
+    }
+  });
 }
 
 // ---- Управление насосами  ---- можно вызвать вручную, автоматически, из будущего API
@@ -140,6 +142,7 @@ updateUI();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
+
 
 
 
