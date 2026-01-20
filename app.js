@@ -30,9 +30,10 @@ function showModal(message, onOk, onCancel) {
 function updateUI() {
   document.getElementById('battery').innerText = battery;
   document.getElementById('water').innerText = water;
-  moisture.forEach((val, i) => {
-    document.querySelector(`#plant{i+1} .moistureLevels`).innerText = val;
-  });
+
+  const moistureSpans = document.querySelectorAll('.moisture');
+  moistureLevels.forEach((val, i) => {    if (moistureSpans[i]) {      moistureSpans[i].innerText = val;    }  
+                                     });
 }
 
 // ---- Управление насосами через модалку ----
@@ -76,6 +77,7 @@ updateUI();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
+
 
 
 
