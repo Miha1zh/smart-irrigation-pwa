@@ -142,7 +142,8 @@ header {
 }
 
 .app-title {
-  font-size: 20px; /* было больше — теперь аккуратнее */
+  font-size: 24px; /* размер шрифта заголовка */
+  font-weight: 600;
   margin: 0;
 }
 
@@ -166,4 +167,5 @@ header {
 .top-btn:active {
   transform: scale(0.92);
 }
+
 
