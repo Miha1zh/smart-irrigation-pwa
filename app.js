@@ -137,3 +137,23 @@ updateUI();
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
+
+// --- Верхние окна ---
+const settingsModal = document.getElementById('settingsModal');
+const scheduleModal = document.getElementById('scheduleModal');
+
+document.getElementById('settingsBtn').onclick = () => {
+  settingsModal.style.display = 'flex';
+};
+
+document.getElementById('scheduleBtn').onclick = () => {
+  scheduleModal.style.display = 'flex';
+};
+
+function closeSettings() {
+  settingsModal.style.display = 'none';
+}
+
+function closeSchedule() {
+  scheduleModal.style.display = 'none';
+}
