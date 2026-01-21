@@ -33,6 +33,11 @@
   <h1>Умный полив</h1>
 </header>
 
+<div class="top-actions">
+  <button id="settingsBtn" class="top-btn">⚙️</button>
+  <button id="scheduleBtn" class="top-btn">⏰</button>
+</div>
+  
 <div class="status">
   <p>💧 Вода: <span id="water">0</span>%</p>
   <p>🔋 Батарея: <span id="battery">0</span>%</p>
@@ -76,6 +81,24 @@
   </div>
 </div>
 
+<!--модальное око Настройки -->
+<div id="settingsModal" class="modal">
+  <div class="modal-content">
+    <h3>Настройки</h3>
+    <p>Здесь будут настройки системы</p>
+    <button onclick="closeSettings()">Закрыть</button>
+  </div>
+</div>
+
+<!--модальное око Расписание -->
+<div id="scheduleModal" class="modal">
+  <div class="modal-content">
+    <h3>Расписание полива</h3>
+    <p>Здесь будет расписание</p>
+    <button onclick="closeSchedule()">Закрыть</button>
+  </div>
+</div>
+  
  <!-- <script src="app.js"></script> -->
 </body>
 </html>
@@ -84,6 +107,7 @@
 
 
  
+
 
 
 
