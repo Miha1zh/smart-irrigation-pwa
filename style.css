@@ -169,5 +169,62 @@ header {
   transform: scale(0.92);
 }
 
+/* ===== Расписание ===== */
+
+.schedule {
+  max-width: 400px;
+}
+
+.schedule-section {
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #1f1f1f;
+  border-radius: 10px;
+}
+
+.section-header {
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-body {
+  margin-top: 10px;
+}
+
+.section-body.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+#timeList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.time-row {
+  display: flex;
+  gap: 10px;
+}
+
+.time-row button {
+  background: #c62828;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+.add-btn {
+  margin-top: 10px;
+  width: 100%;
+  background: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+}
 
 
