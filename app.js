@@ -158,7 +158,6 @@ function closeSchedule() {
   scheduleModal.style.display = 'none';
 }
 
-// данные по умолчанию для расписания
 let schedule = {
   mode: "time",
   times: ["08:00", "18:00"],
@@ -169,8 +168,6 @@ let schedule = {
     to: "06:00"
   }
 };
-
-// работа с окном расписание
 const scheduleModal = document.getElementById("scheduleModal");
 
 document.getElementById("scheduleBtn").onclick = () => {
@@ -181,8 +178,6 @@ document.getElementById("scheduleBtn").onclick = () => {
 document.getElementById("closeScheduleBtn").onclick = () => {
   scheduleModal.style.display = "none";
 };
-
-// --- отрисовка времен ---
 function renderSchedule() {
   document.getElementById("wateringCount").innerText = schedule.times.length;
 
@@ -216,10 +211,8 @@ function renderSchedule() {
   document.getElementById("sleepFrom").value = schedule.sleep.from;
   document.getElementById("sleepTo").value = schedule.sleep.to;
 
-  updateModeUI(); 
-  }
-
-//--- переключение режимов расписания---
+  updateModeUI();
+}
 document.querySelectorAll("input[name='scheduleMode']").forEach(radio => {
   radio.onchange = e => {
     schedule.mode = e.target.value;
@@ -238,15 +231,11 @@ function updateModeUI() {
     schedule.mode !== "interval"
   );
 }
-
-//--- добавление времени---
 document.getElementById("addTimeBtn").onclick = () => {
   schedule.times.push("12:00");
   schedule.times.sort();
   renderSchedule();
 };
-
-//спящий режим + валидация старта интервала
 document.getElementById("sleepFrom").onchange = e => {
   schedule.sleep.from = e.target.value;
 };
@@ -270,12 +259,11 @@ document.getElementById("intervalStart").onchange = e => {
 
   renderSchedule();
 };
-
-// сохранение, пока заглушка
 document.getElementById("saveScheduleBtn").onclick = () => {
   console.log("Сохранено:", schedule);
   scheduleModal.style.display = "none";
 };
+
 
 
 
