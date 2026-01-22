@@ -52,7 +52,7 @@ function showModal(message, onOk, onCancel) {
     modal.style.display = 'none';
     if (onCancel) onCancel();
   };
-} // что за скобка нужна?
+//} // что за скобка нужна?
 
     // --- отрисовка времен ---
 function renderSchedule() {
@@ -276,6 +276,7 @@ function closeSettings() {
 function closeSchedule() {
   scheduleModal.style.display = 'none';
 }
+
 
 
 
