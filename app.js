@@ -118,6 +118,31 @@ document.getElementById("addTimeBtn").onclick = () => {
   renderSchedule();
 };
 
+//спящий режим + валидация старта интервала
+document.getElementById("sleepFrom").onchange = e => {
+  schedule.sleep.from = e.target.value;
+};
+
+document.getElementById("sleepTo").onchange = e => {
+  schedule.sleep.to = e.target.value;
+
+  if (schedule.startTime < schedule.sleep.to) {
+    schedule.startTime = schedule.sleep.to;
+  }
+
+  renderSchedule();
+};
+
+document.getElementById("intervalStart").onchange = e => {
+  if (e.target.value < schedule.sleep.to) {
+    schedule.startTime = schedule.sleep.to;
+  } else {
+    schedule.startTime = e.target.value;
+  }
+
+  renderSchedule();
+};
+
 // ---- UI обновление ----
 function updateUI() {
   document.getElementById('battery').innerText = battery;
@@ -245,6 +270,7 @@ function closeSettings() {
 function closeSchedule() {
   scheduleModal.style.display = 'none';
 }
+
 
 
 
