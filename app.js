@@ -111,6 +111,13 @@ function updateModeUI() {
   );
 }
 
+//--- добавление времени---
+document.getElementById("addTimeBtn").onclick = () => {
+  schedule.times.push("12:00");
+  schedule.times.sort();
+  renderSchedule();
+};
+
 // ---- UI обновление ----
 function updateUI() {
   document.getElementById('battery').innerText = battery;
@@ -238,6 +245,7 @@ function closeSettings() {
 function closeSchedule() {
   scheduleModal.style.display = 'none';
 }
+
 
 
 
