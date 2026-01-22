@@ -28,7 +28,7 @@ function showModal(message, onOk, onCancel) {
     modal.style.display = 'none';
     if (onCancel) onCancel();
   };
-//} // что за скобка нужна?
+} 
 
 // ---- UI обновление ----
 function updateUI() {
@@ -276,5 +276,6 @@ document.getElementById("saveScheduleBtn").onclick = () => {
   console.log("Сохранено:", schedule);
   scheduleModal.style.display = "none";
 };
+
 
 
