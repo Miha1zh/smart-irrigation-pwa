@@ -143,6 +143,12 @@ document.getElementById("intervalStart").onchange = e => {
   renderSchedule();
 };
 
+// сохранение, пока заглушка
+document.getElementById("saveScheduleBtn").onclick = () => {
+  console.log("Сохранено:", schedule);
+  scheduleModal.style.display = "none";
+};
+
 // ---- UI обновление ----
 function updateUI() {
   document.getElementById('battery').innerText = battery;
@@ -270,6 +276,7 @@ function closeSettings() {
 function closeSchedule() {
   scheduleModal.style.display = 'none';
 }
+
 
 
 
