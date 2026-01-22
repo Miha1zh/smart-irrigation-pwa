@@ -52,7 +52,44 @@ function showModal(message, onOk, onCancel) {
     modal.style.display = 'none';
     if (onCancel) onCancel();
   };
-}
+} // что за скобка нужна?
+
+    // --- отрисовка времен ---
+function renderSchedule() {
+  document.getElementById("wateringCount").innerText = schedule.times.length;
+
+  const list = document.getElementById("timeList");
+  list.innerHTML = "";
+
+  schedule.times.forEach((time, i) => {
+    const row = document.createElement("div");
+    row.className = "time-row";
+
+    row.innerHTML = `
+      <input type="time" value="${time}">
+      <button>✕</button>
+    `;
+
+    row.querySelector("input").onchange = e => {
+      schedule.times[i] = e.target.value;
+      schedule.times.sort();
+    };
+
+    row.querySelector("button").onclick = () => {
+      schedule.times.splice(i, 1);
+      renderSchedule();
+    };
+
+    list.appendChild(row);
+  });
+
+  document.getElementById("intervalHours").value = schedule.intervalHours;
+  document.getElementById("intervalStart").value = schedule.startTime;
+  document.getElementById("sleepFrom").value = schedule.sleep.from;
+  document.getElementById("sleepTo").value = schedule.sleep.to;
+
+  updateUI(); // тут я исправи, бвло ubdateModeUI()
+  }
 
 // ---- UI обновление ----
 function updateUI() {
@@ -181,5 +218,6 @@ function closeSettings() {
 function closeSchedule() {
   scheduleModal.style.display = 'none';
 }
+
 
 
