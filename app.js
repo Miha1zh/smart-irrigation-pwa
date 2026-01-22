@@ -5,30 +5,6 @@ let moistureLevels = [42, 35, 61, 28, 55];
 let battery = 100;
 let water = 0; // в процентах
 
-// данные по умолчанию для расписания
-let schedule = {
-  mode: "time",
-  times: ["08:00", "18:00"],
-  intervalHours: 6,
-  startTime: "06:00",
-  sleep: {
-    from: "22:00",
-    to: "06:00"
-  }
-};
-
-// работа с окном расписание
-const scheduleModal = document.getElementById("scheduleModal");
-
-document.getElementById("scheduleBtn").onclick = () => {
-  scheduleModal.style.display = "flex";
-  renderSchedule();
-};
-
-document.getElementById("closeScheduleBtn").onclick = () => {
-  scheduleModal.style.display = "none";
-};
-
 // ---- Таймеры насосов ----
 const PUMP_MAX_TIME = 30 * 1000; // 30 секунд
 let pumpTimers = [null, null, null, null, null];
@@ -53,101 +29,6 @@ function showModal(message, onOk, onCancel) {
     if (onCancel) onCancel();
   };
 //} // что за скобка нужна?
-
-    // --- отрисовка времен ---
-function renderSchedule() {
-  document.getElementById("wateringCount").innerText = schedule.times.length;
-
-  const list = document.getElementById("timeList");
-  list.innerHTML = "";
-
-  schedule.times.forEach((time, i) => {
-    const row = document.createElement("div");
-    row.className = "time-row";
-
-    row.innerHTML = `
-      <input type="time" value="${time}">
-      <button>✕</button>
-    `;
-
-    row.querySelector("input").onchange = e => {
-      schedule.times[i] = e.target.value;
-      schedule.times.sort();
-    };
-
-    row.querySelector("button").onclick = () => {
-      schedule.times.splice(i, 1);
-      renderSchedule();
-    };
-
-    list.appendChild(row);
-  });
-
-  document.getElementById("intervalHours").value = schedule.intervalHours;
-  document.getElementById("intervalStart").value = schedule.startTime;
-  document.getElementById("sleepFrom").value = schedule.sleep.from;
-  document.getElementById("sleepTo").value = schedule.sleep.to;
-
-  updateModeUI(); 
-  }
-
-//--- переключение режимов расписания---
-document.querySelectorAll("input[name='scheduleMode']").forEach(radio => {
-  radio.onchange = e => {
-    schedule.mode = e.target.value;
-    updateModeUI();
-  };
-});
-
-function updateModeUI() {
-  document.getElementById("timeMode").classList.toggle(
-    "disabled",
-    schedule.mode !== "time"
-  );
-
-  document.getElementById("intervalMode").classList.toggle(
-    "disabled",
-    schedule.mode !== "interval"
-  );
-}
-
-//--- добавление времени---
-document.getElementById("addTimeBtn").onclick = () => {
-  schedule.times.push("12:00");
-  schedule.times.sort();
-  renderSchedule();
-};
-
-//спящий режим + валидация старта интервала
-document.getElementById("sleepFrom").onchange = e => {
-  schedule.sleep.from = e.target.value;
-};
-
-document.getElementById("sleepTo").onchange = e => {
-  schedule.sleep.to = e.target.value;
-
-  if (schedule.startTime < schedule.sleep.to) {
-    schedule.startTime = schedule.sleep.to;
-  }
-
-  renderSchedule();
-};
-
-document.getElementById("intervalStart").onchange = e => {
-  if (e.target.value < schedule.sleep.to) {
-    schedule.startTime = schedule.sleep.to;
-  } else {
-    schedule.startTime = e.target.value;
-  }
-
-  renderSchedule();
-};
-
-// сохранение, пока заглушка
-document.getElementById("saveScheduleBtn").onclick = () => {
-  console.log("Сохранено:", schedule);
-  scheduleModal.style.display = "none";
-};
 
 // ---- UI обновление ----
 function updateUI() {
@@ -277,10 +158,123 @@ function closeSchedule() {
   scheduleModal.style.display = 'none';
 }
 
+// данные по умолчанию для расписания
+let schedule = {
+  mode: "time",
+  times: ["08:00", "18:00"],
+  intervalHours: 6,
+  startTime: "06:00",
+  sleep: {
+    from: "22:00",
+    to: "06:00"
+  }
+};
 
+// работа с окном расписание
+const scheduleModal = document.getElementById("scheduleModal");
 
+document.getElementById("scheduleBtn").onclick = () => {
+  scheduleModal.style.display = "flex";
+  renderSchedule();
+};
 
+document.getElementById("closeScheduleBtn").onclick = () => {
+  scheduleModal.style.display = "none";
+};
 
+// --- отрисовка времен ---
+function renderSchedule() {
+  document.getElementById("wateringCount").innerText = schedule.times.length;
 
+  const list = document.getElementById("timeList");
+  list.innerHTML = "";
+
+  schedule.times.forEach((time, i) => {
+    const row = document.createElement("div");
+    row.className = "time-row";
+
+    row.innerHTML = `
+      <input type="time" value="${time}">
+      <button>✕</button>
+    `;
+
+    row.querySelector("input").onchange = e => {
+      schedule.times[i] = e.target.value;
+      schedule.times.sort();
+    };
+
+    row.querySelector("button").onclick = () => {
+      schedule.times.splice(i, 1);
+      renderSchedule();
+    };
+
+    list.appendChild(row);
+  });
+
+  document.getElementById("intervalHours").value = schedule.intervalHours;
+  document.getElementById("intervalStart").value = schedule.startTime;
+  document.getElementById("sleepFrom").value = schedule.sleep.from;
+  document.getElementById("sleepTo").value = schedule.sleep.to;
+
+  updateModeUI(); 
+  }
+
+//--- переключение режимов расписания---
+document.querySelectorAll("input[name='scheduleMode']").forEach(radio => {
+  radio.onchange = e => {
+    schedule.mode = e.target.value;
+    updateModeUI();
+  };
+});
+
+function updateModeUI() {
+  document.getElementById("timeMode").classList.toggle(
+    "disabled",
+    schedule.mode !== "time"
+  );
+
+  document.getElementById("intervalMode").classList.toggle(
+    "disabled",
+    schedule.mode !== "interval"
+  );
+}
+
+//--- добавление времени---
+document.getElementById("addTimeBtn").onclick = () => {
+  schedule.times.push("12:00");
+  schedule.times.sort();
+  renderSchedule();
+};
+
+//спящий режим + валидация старта интервала
+document.getElementById("sleepFrom").onchange = e => {
+  schedule.sleep.from = e.target.value;
+};
+
+document.getElementById("sleepTo").onchange = e => {
+  schedule.sleep.to = e.target.value;
+
+  if (schedule.startTime < schedule.sleep.to) {
+    schedule.startTime = schedule.sleep.to;
+  }
+
+  renderSchedule();
+};
+
+document.getElementById("intervalStart").onchange = e => {
+  if (e.target.value < schedule.sleep.to) {
+    schedule.startTime = schedule.sleep.to;
+  } else {
+    schedule.startTime = e.target.value;
+  }
+
+  renderSchedule();
+};
+
+// сохранение, пока заглушка
+document.getElementById("saveScheduleBtn").onclick = () => {
+  console.log("Сохранено:", schedule);
+  scheduleModal.style.display = "none";
+};
 
 
