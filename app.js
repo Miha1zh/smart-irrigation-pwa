@@ -5,6 +5,18 @@ let moistureLevels = [42, 35, 61, 28, 55];
 let battery = 100;
 let water = 0; // в процентах
 
+// данные по умолчанию для расписания
+let schedule = {
+  mode: "time",
+  times: ["08:00", "18:00"],
+  intervalHours: 6,
+  startTime: "06:00",
+  sleep: {
+    from: "22:00",
+    to: "06:00"
+  }
+};
+
 // ---- Таймеры насосов ----
 const PUMP_MAX_TIME = 30 * 1000; // 30 секунд
 let pumpTimers = [null, null, null, null, null];
@@ -157,3 +169,4 @@ function closeSettings() {
 function closeSchedule() {
   scheduleModal.style.display = 'none';
 }
+
