@@ -88,8 +88,28 @@ function renderSchedule() {
   document.getElementById("sleepFrom").value = schedule.sleep.from;
   document.getElementById("sleepTo").value = schedule.sleep.to;
 
-  updateUI(); // тут я исправи, бвло ubdateModeUI()
+  updateModeUI(); 
   }
+
+//--- переключение режимов расписания---
+document.querySelectorAll("input[name='scheduleMode']").forEach(radio => {
+  radio.onchange = e => {
+    schedule.mode = e.target.value;
+    updateModeUI();
+  };
+});
+
+function updateModeUI() {
+  document.getElementById("timeMode").classList.toggle(
+    "disabled",
+    schedule.mode !== "time"
+  );
+
+  document.getElementById("intervalMode").classList.toggle(
+    "disabled",
+    schedule.mode !== "interval"
+  );
+}
 
 // ---- UI обновление ----
 function updateUI() {
@@ -218,6 +238,7 @@ function closeSettings() {
 function closeSchedule() {
   scheduleModal.style.display = 'none';
 }
+
 
 
 
