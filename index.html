@@ -90,14 +90,70 @@
   </div>
 </div>
 
-<!--модальное око Расписание -->
+<!-- ===== Модальное окно: Расписание ===== -->
 <div id="scheduleModal" class="modal">
-  <div class="modal-content">
-    <h3>Расписание полива</h3>
-    <p>Здесь будет расписание</p>
-    <button onclick="closeSchedule()">Закрыть</button>
+  <div class="modal-content schedule">
+
+    <h2>⏰ Расписание полива</h2>
+
+    <!-- ===== Режим по времени ===== -->
+    <div class="schedule-section">
+      <label class="section-header">
+        <input type="radio" name="scheduleMode" value="time" checked>
+        По времени
+      </label>
+
+      <div class="section-body" id="timeMode">
+        <p>Количество поливов: <b id="wateringCount">2</b></p>
+
+        <div id="timeList"></div>
+
+        <button class="add-btn" id="addTimeBtn">+ Добавить время</button>
+      </div>
+    </div>
+
+    <!-- ===== Режим по интервалу ===== -->
+    <div class="schedule-section">
+      <label class="section-header">
+        <input type="radio" name="scheduleMode" value="interval">
+        По интервалу
+      </label>
+
+      <div class="section-body disabled" id="intervalMode">
+        <label>
+          Интервал (часов):
+          <input type="number" id="intervalHours" min="1" value="6">
+        </label>
+
+        <label>
+          Начать с:
+          <input type="time" id="intervalStart">
+        </label>
+      </div>
+    </div>
+
+    <!-- ===== Спящий режим ===== -->
+    <div class="schedule-section">
+      <h3>🌙 Спящий режим</h3>
+
+      <label>
+        С:
+        <input type="time" id="sleepFrom" value="22:00">
+      </label>
+
+      <label>
+        До:
+        <input type="time" id="sleepTo" value="06:00">
+      </label>
+    </div>
+
+    <div class="modal-buttons">
+      <button id="saveScheduleBtn">Сохранить</button>
+      <button id="closeScheduleBtn">Закрыть</button>
+    </div>
+
   </div>
-</div>
+ </div>
   
  <!-- <script src="app.js"></script> -->
 </body>
@@ -107,6 +163,7 @@
 
 
  
+
 
 
 
