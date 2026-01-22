@@ -17,6 +17,18 @@ let schedule = {
   }
 };
 
+// работа с окном расписание
+const scheduleModal = document.getElementById("scheduleModal");
+
+document.getElementById("scheduleBtn").onclick = () => {
+  scheduleModal.style.display = "flex";
+  renderSchedule();
+};
+
+document.getElementById("closeScheduleBtn").onclick = () => {
+  scheduleModal.style.display = "none";
+};
+
 // ---- Таймеры насосов ----
 const PUMP_MAX_TIME = 30 * 1000; // 30 секунд
 let pumpTimers = [null, null, null, null, null];
@@ -169,4 +181,5 @@ function closeSettings() {
 function closeSchedule() {
   scheduleModal.style.display = 'none';
 }
+
 
