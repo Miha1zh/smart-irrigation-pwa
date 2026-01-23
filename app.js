@@ -141,25 +141,10 @@ if ('serviceWorker' in navigator) {
 // --- Верхние окна ---
 const settingsModal = document.getElementById('settingsModal');
 const scheduleModal = document.getElementById('scheduleModal');
-//initScheduleUI(); // инициализация расписания
 
 document.getElementById('settingsBtn').onclick = () => {
   settingsModal.style.display = 'flex';
 };
-
-/*document.getElementById('scheduleBtn').onclick = () => {
-  scheduleModal.style.display = 'flex';
-};*/ //это тоже сдвоено 
-
-//функция инициализация расписания
-function initScheduleUI() {
-  // режим
-  document
-    .querySelector(`input[name="scheduleMode"][value="${schedule.mode}"]`)
-    .checked = true;
-
-  renderSchedule();
-}
 
 function closeSettings() {
   settingsModal.style.display = 'none';
@@ -179,8 +164,6 @@ let schedule = {
     to: "06:00"
   }
 };
-//const scheduleModal = document.getElementById("scheduleModal");
-// там выше есть этоже объявление
 
 document.getElementById("scheduleBtn").onclick = () => {
   scheduleModal.style.display = "flex";
@@ -290,6 +273,7 @@ if ('serviceWorker' in navigator) {
       .catch(err => console.error('SW ошибка', err));
   });
 }
+
 
 
 
