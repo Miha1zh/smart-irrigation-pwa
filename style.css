@@ -85,6 +85,7 @@ header {
   gap: 10px;
 }
 
+/* Универсальные кнопки в модалках */
 .modal-buttons button {
   flex: 1;
   padding: 12px;
@@ -92,25 +93,22 @@ header {
   border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
-}
-
-/* Кнопка OK — как кнопки насосов */
-#modalOk {
-  background-color: #4caf50;
   color: #fff;
 }
 
-#modalOk:active {
+.modal-buttons button.save {
+  background-color: #4caf50;
+}
+
+.modal-buttons button.save:active {
   background-color: #388e3c;
 }
 
-/* Кнопка Отмена */
-#modalCancel {
+.modal-buttons button.cancel {
   background-color: #555;
-  color: #eee;
 }
 
-#modalCancel:active {
+.modal-buttons button.cancel:active {
   background-color: #444;
 }
 
@@ -242,4 +240,5 @@ header {
 .schedule input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   }
+
 
