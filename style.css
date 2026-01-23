@@ -105,12 +105,12 @@ header {
 }
 /* Серая кнопка отмена  ,  закрыть*/
 .modal-buttons button.cancel {
-  background-color: #388e3c;  !important;
-  color:#444 !important;
-}
+  background-color: #333  ! important;
+  color: #777 ! important;
+} 
 
 .modal-buttons button.cancel:active {
-  background-color: #444;
+  background-color: #444 ! important;
 }
 
 /* Подсвека кнопок */
@@ -241,6 +241,7 @@ header {
 .schedule input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   }
+
 
 
 
