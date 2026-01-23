@@ -95,7 +95,7 @@ header {
   cursor: pointer;
   color: #fff;
 }
-
+/* зеленая кнопка сохранения , ОК */
 .modal-buttons button.save {
   background-color: #4caf50;
 }
@@ -103,7 +103,7 @@ header {
 .modal-buttons button.save:active {
   background-color: #388e3c;
 }
-
+/* Серая кнопка отмена  ,  закрыть*/
 .modal-buttons button.cancel {
   background-color: #555;
 }
@@ -240,5 +240,6 @@ header {
 .schedule input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   }
+
 
 
