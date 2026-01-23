@@ -146,9 +146,9 @@ document.getElementById('settingsBtn').onclick = () => {
   settingsModal.style.display = 'flex';
 };
 
-document.getElementById('scheduleBtn').onclick = () => {
+/*document.getElementById('scheduleBtn').onclick = () => {
   scheduleModal.style.display = 'flex';
-};
+};*/ //это тоже сдвоено 
 
 function closeSettings() {
   settingsModal.style.display = 'none';
@@ -168,7 +168,8 @@ let schedule = {
     to: "06:00"
   }
 };
-const scheduleModal = document.getElementById("scheduleModal");
+//const scheduleModal = document.getElementById("scheduleModal");
+// там выше есть этоже объявление
 
 document.getElementById("scheduleBtn").onclick = () => {
   scheduleModal.style.display = "flex";
@@ -265,5 +266,15 @@ document.getElementById("saveScheduleBtn").onclick = () => {
 };
 
 
+// ===============================
+// SERVICE WORKER — ВСЕГДА В КОНЦЕ
+// ===============================
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(reg => console.log('SW зарегистрирован', reg.scope))
+      .catch(err => console.error('SW ошибка', err));
+  });
+}
 
 
