@@ -141,7 +141,7 @@ if ('serviceWorker' in navigator) {
 // --- Верхние окна ---
 const settingsModal = document.getElementById('settingsModal');
 const scheduleModal = document.getElementById('scheduleModal');
-initScheduleUI(); // инициализация расписания
+//initScheduleUI(); // инициализация расписания
 
 document.getElementById('settingsBtn').onclick = () => {
   settingsModal.style.display = 'flex';
@@ -290,6 +290,7 @@ if ('serviceWorker' in navigator) {
       .catch(err => console.error('SW ошибка', err));
   });
 }
+
 
 
 
