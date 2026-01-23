@@ -141,6 +141,7 @@ if ('serviceWorker' in navigator) {
 // --- Верхние окна ---
 const settingsModal = document.getElementById('settingsModal');
 const scheduleModal = document.getElementById('scheduleModal');
+initScheduleUI(); // инициализация расписания
 
 document.getElementById('settingsBtn').onclick = () => {
   settingsModal.style.display = 'flex';
@@ -149,6 +150,16 @@ document.getElementById('settingsBtn').onclick = () => {
 /*document.getElementById('scheduleBtn').onclick = () => {
   scheduleModal.style.display = 'flex';
 };*/ //это тоже сдвоено 
+
+//функция инициализация расписания
+function initScheduleUI() {
+  // режим
+  document
+    .querySelector(`input[name="scheduleMode"][value="${schedule.mode}"]`)
+    .checked = true;
+
+  renderSchedule();
+}
 
 function closeSettings() {
   settingsModal.style.display = 'none';
@@ -179,6 +190,7 @@ document.getElementById("scheduleBtn").onclick = () => {
 document.getElementById("closeScheduleBtn").onclick = () => {
   scheduleModal.style.display = "none";
 };
+
 function renderSchedule() {
   document.getElementById("wateringCount").innerText = schedule.times.length;
 
@@ -208,7 +220,9 @@ function renderSchedule() {
   });
 
   document.getElementById("intervalHours").value = schedule.intervalHours;
-  document.getElementById("intervalStart").value = schedule.startTime;
+  document.getElementById("intervalStart").value =
+    schedule.startTime || schedule.sleep.to;
+
   document.getElementById("sleepFrom").value = schedule.sleep.from;
   document.getElementById("sleepTo").value = schedule.sleep.to;
 
@@ -276,5 +290,6 @@ if ('serviceWorker' in navigator) {
       .catch(err => console.error('SW ошибка', err));
   });
 }
+
 
 
