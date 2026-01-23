@@ -157,7 +157,7 @@ function closeSchedule() {
 let schedule = {
   mode: "time",
   times: ["08:00", "18:00"],
-  intervalHours: 6,
+  intervalHours: 3,
   startTime: "06:00",
   sleep: {
     from: "22:00",
@@ -273,6 +273,7 @@ if ('serviceWorker' in navigator) {
       .catch(err => console.error('SW ошибка', err));
   });
 }
+
 
 
 
