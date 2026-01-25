@@ -1,18 +1,18 @@
 // Фейковые данные для теста, потом заменим на API ESP32
-пусть насосы = [0, 0, 0, 0, 0];
-пусть autoMode = false;
-пусть влажность = [42, 35, 61, 28, 55];
-пусть батарея = 100;
-пусть Вода = 0; // в процентах
+let pumps = [0, 0, 0, 0, 0];
+let autoMode = false;
+let moistureLevels = [42, 35, 61, 28, 55];
+let battery = 100;
+let water = 0; // в процентах
 
 // ---- Таймеры насосов ----
-Конст PUMP_MAX_TIME = 30 * 1000; // 30 секунд
+const PUMP_MAX_TIME = 30 * 1000; // 30 секунд
 let pumpTimers = [null, null, null, null, null];
 
 // ---- Модальное окно ----
-const modal = документ.getElementById('appModal');
+const modal = document.getElementById('appModal');
 const modalText = document.getElementById('modalText');
-const modalOk = документ.getElementById('modalOk');
+const modalOk = document.getElementById('modalOk');
 const modalCancel = document.getElementById('modalCancel');
 
 function showModal(message, onOk, onCancel) {
@@ -20,7 +20,7 @@ function showModal(message, onOk, onCancel) {
   modal.style.display = 'flex';
 
   modalOk.onclick = () => {
- modal.style.display = 'нет';
+    modal.style.display = 'none';
     if (onOk) onOk();
   };
 
@@ -29,6 +29,7 @@ function showModal(message, onOk, onCancel) {
     if (onCancel) onCancel();
   };
 } 
+
 // ---- UI обновление ----
 function updateUI() {
   document.getElementById('battery').innerText = battery;
@@ -40,7 +41,7 @@ function updateUI() {
   pumps.forEach((state, i) => {
   const btn = document.getElementById(`pump${i + 1}Btn`);
   if (!btn) return;
-пример авто-полива ---- if (autoMode & moistureLevels[2] < 30) { togglePump(3, true); // ВКЛ автоматически}
+// пример авто-полива ---- if (autoMode && moistureLevels[2] < 30) {  togglePump(3, true); // ВКЛ автоматически}
   btn.innerText = state
     ? `Выключить насос ${i + 1}`
     : `Включить насос ${i + 1}`;
@@ -55,7 +56,7 @@ function togglePump(id, forceState = null) {
 
   // если forceState передан — используем его
   if (forceState !== null) {
-    pumps[index] = forceState? 1 : 0;
+    pumps[index] = forceState ? 1 : 0;
   } else {
     pumps[index] = pumps[index] ? 0 : 1;
   }
@@ -130,15 +131,19 @@ document.getElementById('pump5Btn').onclick = () => togglePump(5);
 document.getElementById('autoMode').onclick = toggleAutoModeModal;
 
 // ---- Инициализация ----
-обновлениеUI();
+updateUI();
+
+// ---- Регистрация service worker ----
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
 
 // --- Верхние окна ---
 const settingsModal = document.getElementById('settingsModal');
-const scheduleModal = документ.getElementById('scheduleModal');
+const scheduleModal = document.getElementById('scheduleModal');
 
-Документ.getElementById('settingsBtn').onclick = () => {
+document.getElementById('settingsBtn').onclick = () => {
   settingsModal.style.display = 'flex';
-
 };
 
 function closeSettings() {
@@ -181,7 +186,7 @@ function renderSchedule() {
 
     row.innerHTML = `
       <input type="time" value="${time}">
- <кнопка>✕</кнопка>
+      <button>✕</button>
     `;
 
     row.querySelector("input").onchange = e => {
@@ -206,7 +211,7 @@ function renderSchedule() {
 
   updateModeUI();
 }
-Документ.querySelectorAll("input[name='scheduleMode'])").forEach (радио) => {
+document.querySelectorAll("input[name='scheduleMode']").forEach(radio => {
   radio.onchange = e => {
     schedule.mode = e.target.value;
     updateModeUI();
@@ -214,7 +219,7 @@ function renderSchedule() {
 });
 
 function updateModeUI() {
-  Документ.getElementById("timeMode").classList.Переключение(
+  document.getElementById("timeMode").classList.toggle(
     "disabled",
     schedule.mode !== "time"
   );
@@ -253,17 +258,18 @@ document.getElementById("intervalStart").onchange = e => {
   renderSchedule();
 };
 document.getElementById("saveScheduleBtn").onclick = () => {
-  консоль.log("Сохранено:", schedule);
+  console.log("Сохранено:", schedule);
   scheduleModal.style.display = "none";
 };
 
 
 // ===============================
-СЕРВИСНЫЙ РАБОТНИК — ВСЕГДА В КОНЦЕ
+// SERVICE WORKER — ВСЕГДА В КОНЦЕ
 // ===============================
 if ('serviceWorker' in navigator) {
-  Окно.addEventListener('загрузить', () => {
+  window.addEventListener('load', () => {
     navigator.serviceWorker.register('service-worker.js')
       .then(reg => console.log('SW зарегистрирован', reg.scope))
       .catch(err => console.error('SW ошибка', err));
   });
+}
