@@ -1,38 +1,26 @@
 // Фейковые данные для теста, потом заменим на API ESP32
-let pumps = [0, 0, 0, 0, 0];
-let autoMode = false;
-let moistureLevels = [42, 35, 61, 28, 55];
-let battery = 100;
-let water = 0; // в процентах
+пусть насосы = [0, 0, 0, 0, 0];
+пусть autoMode = false;
+пусть влажность = [42, 35, 61, 28, 55];
+пусть батарея = 100;
+пусть Вода = 0; // в процентах
 
 // ---- Таймеры насосов ----
-const PUMP_MAX_TIME = 30 * 1000; // 30 секунд
+Конст PUMP_MAX_TIME = 30 * 1000; // 30 секунд
 let pumpTimers = [null, null, null, null, null];
 
 // ---- Модальное окно ----
-const modal = document.getElementById('appModal');
+const modal = документ.getElementById('appModal');
 const modalText = document.getElementById('modalText');
-const modalOk = document.getElementById('modalOk');
+const modalOk = документ.getElementById('modalOk');
 const modalCancel = document.getElementById('modalCancel');
 
-function openModal(id) {
-  const modal = document.getElementById(id);
-  if (!modal) return;
-  modal.classList.add('show');
-}
-
-function closeModal(id) {
-  const modal = document.getElementById(id);
-  if (!modal) return;
-  modal.classList.remove('show');
-}
-
-/*function showModal(message, onOk, onCancel) {
+function showModal(message, onOk, onCancel) {
   modalText.textContent = message;
   modal.style.display = 'flex';
 
   modalOk.onclick = () => {
-    modal.style.display = 'none';
+ modal.style.display = 'нет';
     if (onOk) onOk();
   };
 
@@ -40,22 +28,7 @@ function closeModal(id) {
     modal.style.display = 'none';
     if (onCancel) onCancel();
   };
-} */
-function showModal(message, onOk, onCancel) {
-  modalText.textContent = message;
-  modal.classList.add('show');
-
-  modalOk.onclick = () => {
-    modal.classList.remove('show');
-    if (onOk) onOk();
-  };
-
-  modalCancel.onclick = () => {
-    modal.classList.remove('show');
-    if (onCancel) onCancel();
-  };
-}
-
+} 
 // ---- UI обновление ----
 function updateUI() {
   document.getElementById('battery').innerText = battery;
@@ -67,7 +40,7 @@ function updateUI() {
   pumps.forEach((state, i) => {
   const btn = document.getElementById(`pump${i + 1}Btn`);
   if (!btn) return;
-// пример авто-полива ---- if (autoMode && moistureLevels[2] < 30) {  togglePump(3, true); // ВКЛ автоматически}
+пример авто-полива ---- if (autoMode & moistureLevels[2] < 30) { togglePump(3, true); // ВКЛ автоматически}
   btn.innerText = state
     ? `Выключить насос ${i + 1}`
     : `Включить насос ${i + 1}`;
@@ -82,7 +55,7 @@ function togglePump(id, forceState = null) {
 
   // если forceState передан — используем его
   if (forceState !== null) {
-    pumps[index] = forceState ? 1 : 0;
+    pumps[index] = forceState? 1 : 0;
   } else {
     pumps[index] = pumps[index] ? 0 : 1;
   }
@@ -157,39 +130,24 @@ document.getElementById('pump5Btn').onclick = () => togglePump(5);
 document.getElementById('autoMode').onclick = toggleAutoModeModal;
 
 // ---- Инициализация ----
-updateUI();
-
-// ---- Регистрация service worker ----
-/*if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js');
-}*/
+обновлениеUI();
 
 // --- Верхние окна ---
 const settingsModal = document.getElementById('settingsModal');
-const scheduleModal = document.getElementById('scheduleModal');
+const scheduleModal = документ.getElementById('scheduleModal');
 
-/*document.getElementById('settingsBtn').onclick = () => {
+Документ.getElementById('settingsBtn').onclick = () => {
   settingsModal.style.display = 'flex';
-};*/
-document.getElementById('settingsBtn').onclick = () => {
-  openModal('settingsModal');
-};
-document.getElementById('scheduleBtn').onclick = () => {
-  openModal('scheduleModal');
-  renderSchedule();
+
 };
 
-document.getElementById('closeScheduleBtn').onclick = () => {
-  closeModal('scheduleModal');
-};
-
-/*function closeSettings() {
+function closeSettings() {
   settingsModal.style.display = 'none';
-}*/
+}
 
-/*function closeSchedule() {
+function closeSchedule() {
   scheduleModal.style.display = 'none';
-}*/
+}
 
 let schedule = {
   mode: "time",
@@ -201,32 +159,16 @@ let schedule = {
     to: "06:00"
   }
 };
-// закрытие по кнопкам cancel
-document.addEventListener('click', e => {
-  if (e.target.classList.contains('cancel') || e.target.dataset.close !== undefined) {
-    const modal = e.target.closest('.modal');
-    if (modal) modal.classList.remove('show');
-  }
-});
 
-// закрытие по клику на фон
-document.querySelectorAll('.modal').forEach(modal => {
-  modal.addEventListener('click', e => {
-    if (e.target === modal) modal.classList.remove('show');
-  });
-});
-
-/*document.getElementById("scheduleBtn").onclick = () => {
+document.getElementById("scheduleBtn").onclick = () => {
   scheduleModal.style.display = "flex";
   renderSchedule();
-};*/
+};
 
-/*document.getElementById("closeScheduleBtn").onclick = () => {
-  scheduleModal.style.display = "none";
-};*/
 document.getElementById("closeScheduleBtn").onclick = () => {
-closeModal('scheduleModal');
- }; 
+  scheduleModal.style.display = "none";
+};
+
 function renderSchedule() {
   document.getElementById("wateringCount").innerText = schedule.times.length;
 
@@ -239,7 +181,7 @@ function renderSchedule() {
 
     row.innerHTML = `
       <input type="time" value="${time}">
-      <button>✕</button>
+ <кнопка>✕</кнопка>
     `;
 
     row.querySelector("input").onchange = e => {
@@ -264,7 +206,7 @@ function renderSchedule() {
 
   updateModeUI();
 }
-document.querySelectorAll("input[name='scheduleMode']").forEach(radio => {
+Документ.querySelectorAll("input[name='scheduleMode'])").forEach (радио) => {
   radio.onchange = e => {
     schedule.mode = e.target.value;
     updateModeUI();
@@ -272,7 +214,7 @@ document.querySelectorAll("input[name='scheduleMode']").forEach(radio => {
 });
 
 function updateModeUI() {
-  document.getElementById("timeMode").classList.toggle(
+  Документ.getElementById("timeMode").classList.Переключение(
     "disabled",
     schedule.mode !== "time"
   );
@@ -311,25 +253,17 @@ document.getElementById("intervalStart").onchange = e => {
   renderSchedule();
 };
 document.getElementById("saveScheduleBtn").onclick = () => {
-  console.log("Сохранено:", schedule);
+  консоль.log("Сохранено:", schedule);
   scheduleModal.style.display = "none";
 };
 
 
 // ===============================
-// SERVICE WORKER — ВСЕГДА В КОНЦЕ
+СЕРВИСНЫЙ РАБОТНИК — ВСЕГДА В КОНЦЕ
 // ===============================
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
+  Окно.addEventListener('загрузить', () => {
     navigator.serviceWorker.register('service-worker.js')
       .then(reg => console.log('SW зарегистрирован', reg.scope))
       .catch(err => console.error('SW ошибка', err));
   });
-}
-
-
-
-
-
-
-
