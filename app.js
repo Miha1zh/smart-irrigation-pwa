@@ -15,7 +15,19 @@ const modalText = document.getElementById('modalText');
 const modalOk = document.getElementById('modalOk');
 const modalCancel = document.getElementById('modalCancel');
 
-function showModal(message, onOk, onCancel) {
+function openModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  modal.classList.add('show');
+}
+
+function closeModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  modal.classList.remove('show');
+}
+
+/*function showModal(message, onOk, onCancel) {
   modalText.textContent = message;
   modal.style.display = 'flex';
 
@@ -28,7 +40,21 @@ function showModal(message, onOk, onCancel) {
     modal.style.display = 'none';
     if (onCancel) onCancel();
   };
-} 
+} */
+function showModal(message, onOk, onCancel) {
+  modalText.textContent = message;
+  modal.classList.add('show');
+
+  modalOk.onclick = () => {
+    modal.classList.remove('show');
+    if (onOk) onOk();
+  };
+
+  modalCancel.onclick = () => {
+    modal.classList.remove('show');
+    if (onCancel) onCancel();
+  };
+}
 
 // ---- UI обновление ----
 function updateUI() {
@@ -134,25 +160,36 @@ document.getElementById('autoMode').onclick = toggleAutoModeModal;
 updateUI();
 
 // ---- Регистрация service worker ----
-if ('serviceWorker' in navigator) {
+/*if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
-}
+}*/
 
 // --- Верхние окна ---
 const settingsModal = document.getElementById('settingsModal');
 const scheduleModal = document.getElementById('scheduleModal');
 
-document.getElementById('settingsBtn').onclick = () => {
+/*document.getElementById('settingsBtn').onclick = () => {
   settingsModal.style.display = 'flex';
+};*/
+document.getElementById('settingsBtn').onclick = () => {
+  openModal('settingsModal');
+};
+document.getElementById('scheduleBtn').onclick = () => {
+  openModal('scheduleModal');
+  renderSchedule();
 };
 
-function closeSettings() {
-  settingsModal.style.display = 'none';
-}
+document.getElementById('closeScheduleBtn').onclick = () => {
+  closeModal('scheduleModal');
+};
 
-function closeSchedule() {
+/*function closeSettings() {
+  settingsModal.style.display = 'none';
+}*/
+
+/*function closeSchedule() {
   scheduleModal.style.display = 'none';
-}
+}*/
 
 let schedule = {
   mode: "time",
@@ -164,16 +201,32 @@ let schedule = {
     to: "06:00"
   }
 };
+// закрытие по кнопкам cancel
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('cancel') || e.target.dataset.close !== undefined) {
+    const modal = e.target.closest('.modal');
+    if (modal) modal.classList.remove('show');
+  }
+});
 
-document.getElementById("scheduleBtn").onclick = () => {
+// закрытие по клику на фон
+document.querySelectorAll('.modal').forEach(modal => {
+  modal.addEventListener('click', e => {
+    if (e.target === modal) modal.classList.remove('show');
+  });
+});
+
+/*document.getElementById("scheduleBtn").onclick = () => {
   scheduleModal.style.display = "flex";
   renderSchedule();
-};
+};*/
 
-document.getElementById("closeScheduleBtn").onclick = () => {
+/*document.getElementById("closeScheduleBtn").onclick = () => {
   scheduleModal.style.display = "none";
-};
-
+};*/
+document.getElementById("closeScheduleBtn").onclick = () => {
+closeModal('scheduleModal');
+ }; 
 function renderSchedule() {
   document.getElementById("wateringCount").innerText = schedule.times.length;
 
@@ -273,6 +326,7 @@ if ('serviceWorker' in navigator) {
       .catch(err => console.error('SW ошибка', err));
   });
 }
+
 
 
 
