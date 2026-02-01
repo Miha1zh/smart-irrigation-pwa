@@ -67,7 +67,7 @@ header {
 }
 
 .modal-content {
-  animation: modalIn 0.15s ease-out; // анимация окон
+  animation: modalIn 0.15s ease-out forwards; // анимация окон
   background: #1f1f1f;
   padding: 20px;
   border-radius: 10px;
@@ -268,6 +268,7 @@ header {
 .schedule input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   }
+
 
 
 
