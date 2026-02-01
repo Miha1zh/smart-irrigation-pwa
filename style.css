@@ -240,9 +240,21 @@ header {
   font-size: 16px; /* важно для iOS, чтобы не зумило */
 }
 
+/* Универсальные инпуты (для модалок и форм) */
+.modal-content input {
+  background-color: #2a2a2a;
+  color: #ffffff;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 16px; /* важно для мобилок */
+}
+
+
 .schedule input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   }
+
 
 
 
