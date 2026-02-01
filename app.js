@@ -9,7 +9,7 @@ let water = 0; // в процентах
 const PUMP_MAX_TIME = 30 * 1000; // 30 секунд
 let pumpTimers = [null, null, null, null, null];
 
-// ---- Модальное окно ----
+// ---- Модальное окно ----==========================================
 const modal = document.getElementById('appModal');
 const modalText = document.getElementById('modalText');
 const modalOk = document.getElementById('modalOk');
@@ -29,6 +29,68 @@ function showModal(message, onOk, onCancel) {
     if (onCancel) onCancel();
   };
 } 
+//============================================================================
+
+// ---- Универсальное Модальное окно ----
+const Modal = (() => {
+  const root = document.getElementById("modalRoot");
+  const titleEl = document.getElementById("modalTitle");
+  const bodyEl = document.getElementById("modalBody");
+  const okBtn = document.getElementById("modalOk");
+  const cancelBtn = document.getElementById("modalCancel");
+
+  let resolveFn = null;
+
+  function close(result) {
+    root.classList.add("hidden");
+    okBtn.onclick = null;
+    cancelBtn.onclick = null;
+    resolveFn?.(result);
+  }
+
+  function open({
+    title = "",
+    content = "",
+    okText = "OK",
+    cancelText = "Отмена",
+    showCancel = true
+  }) {
+    titleEl.textContent = title;
+    bodyEl.innerHTML = content;
+
+    okBtn.textContent = okText;
+    cancelBtn.textContent = cancelText;
+    cancelBtn.style.display = showCancel ? "inline-block" : "none";
+
+    root.classList.remove("hidden");
+
+    return new Promise(resolve => {
+      resolveFn = resolve;
+      okBtn.onclick = () => close(true);
+      cancelBtn.onclick = () => close(false);
+    });
+  }
+
+  return {
+    alert(message, title = "Сообщение") {
+      return open({
+        title,
+        content: `<p>${message}</p>`,
+        showCancel: false,
+        okText: "Понятно"
+      });
+    },
+
+    confirm(message, title = "Подтверждение") {
+      return open({
+        title,
+        content: `<p>${message}</p>`
+      });
+    },
+
+    open
+  };
+})();
 
 // ---- UI обновление ----
 function updateUI() {
@@ -93,31 +155,41 @@ function togglePump(id, forceState = null) {
   // TODO: fetch(`/api/pump/${id}/${pumps[index] ? 'on' : 'off'}`)
 }
 
+// ---- Модальное окно Настройки ----
+document.getElementById('settingsBtn').onclick = () => {
+  Modal.open({
+    title: "Настройки",
+    content: `
+      <p>Здесь будут настройки системы</p>
+      <label>
+        Порог влажности:
+        <input type="number" value="30">
+      </label>
+    `,
+    okText: "Сохранить"
+  });
+};
 
 // ---- Управление авто/ручной режим ----
-function toggleAutoModeModal() {
+async function toggleAutoModeModal() {
   const checkbox = document.getElementById('autoMode');
 
   if (!checkbox.checked) {
-    // ПЫТАЕМСЯ ВЫКЛЮЧИТЬ → подтверждение
-    showModal(
-      'Выключить автоматический режим?',
-      () => {
-        autoMode = false;
-        checkbox.checked = false;
-        console.log('Автоматический режим → ВЫКЛ');
-      },
-      () => {
-        checkbox.checked = true;
-      }
+    const ok = await Modal.confirm(
+      "Выключить автоматический режим?",
+      "Автополив"
     );
-  } else {
-    // ВКЛЮЧЕНИЕ — БЕЗ ПОДТВЕРЖДЕНИЯ
-    autoMode = true;
-    console.log('Автоматический режим → ВКЛ');
-  }
 
-  // TODO: fetch(`/api/mode/${autoMode ? 'auto' : 'manual'}`)
+    if (ok) {
+      autoMode = false;
+      checkbox.checked = false;
+    } else {
+      checkbox.checked = true;
+    }
+  } else {
+    autoMode = true;
+  }
+    // TODO: fetch(`/api/mode/${autoMode ? 'auto' : 'manual'}`)
 }
 
 // ---- Регистрация обработчиков кнопок насосов ----
@@ -273,3 +345,4 @@ if ('serviceWorker' in navigator) {
       .catch(err => console.error('SW ошибка', err));
   });
 }
+
