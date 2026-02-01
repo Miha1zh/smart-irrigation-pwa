@@ -15,18 +15,6 @@ const modalText = document.getElementById('modalText');
 const modalOk = document.getElementById('modalOk');
 const modalCancel = document.getElementById('modalCancel');
 
-function openModal(id) {
-  const modal = document.getElementById(id);
-  if (!modal) return;
-  modal.classList.add('show');
-}
-
-function closeModal(id) {
-  const modal = document.getElementById(id);
-  if (!modal) return;
-  modal.classList.remove('show');
-}
-
 function showModal(message, onOk, onCancel) {
   modalText.textContent = message;
   modal.style.display = 'flex';
@@ -144,6 +132,11 @@ document.getElementById('autoMode').onclick = toggleAutoModeModal;
 
 // ---- Инициализация ----
 updateUI();
+
+
+
+
+
 
 // --- Верхние окна ---
 const settingsModal = document.getElementById('settingsModal');
@@ -280,5 +273,3 @@ if ('serviceWorker' in navigator) {
       .catch(err => console.error('SW ошибка', err));
   });
 }
-
-
