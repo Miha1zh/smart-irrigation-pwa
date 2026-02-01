@@ -88,6 +88,8 @@ header {
 /* Универсальные кнопки в модалках */
 .modal-buttons button {
   flex: 1;
+  align-items: center;
+  justify-content: center;
   padding: 12px;
   border: none;
   border-radius: 8px;
@@ -241,6 +243,7 @@ header {
 .schedule input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   }
+
 
 
 
