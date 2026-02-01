@@ -43,9 +43,12 @@ const Modal = (() => {
 
   function close(result) {
     root.style.display = "none";
-    okBtn.onclick = null;
-    cancelBtn.onclick = null;
-    resolveFn?.(result);
+    root.querySelector('.modal-content').style.opacity = ""; // сброс стилей
+   root.querySelector('.modal-content').style.transform = ""; // сброс стилей
+   root.querySelector('.modal-content').style.animation = ""; // сброс стилей
+   okBtn.onclick = null;
+   cancelBtn.onclick = null;
+   resolveFn?.(result);    
   }
 
   function open({
@@ -62,7 +65,8 @@ const Modal = (() => {
     cancelBtn.textContent = cancelText;
     cancelBtn.style.display = showCancel ? "inline-flex" : "none";
 
-    root.style.display = "flex";
+     root.style.display = "flex";  // <--- тут показываем окно
+     root.querySelector('.modal-content').style.animation = "modalIn 0.15s ease-out forwards"; // <--- запускаем анимацию
 
     return new Promise(resolve => {
       resolveFn = resolve;
@@ -347,6 +351,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
