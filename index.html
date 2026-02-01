@@ -17,7 +17,7 @@
   <meta name="apple-mobile-web-app-title" content="Полив">
   <link rel="apple-touch-icon" href="apple-touch-icon-irrigation.png">
 
-  <!-- Favicons -->
+  <!-- Иконы -->
   <link rel="icon" type="image/png" sizes="32x32" href="irrigation.png">
   <link rel="icon" type="image/png" sizes="96x96" href="irrigation-96x96.png">
 
@@ -70,23 +70,15 @@
   </div>
 </div>
 
-<!-- Модальное окно -->
-<div id="appModal" class="modal">
+<!-- ===== Универсальное Модальное окно ===== -->
+<div id="modalRoot" class="modal hidden">
   <div class="modal-content">
-    <p id="modalText">Текст</p>
+    <h3 id="modalTitle"></h3>
+    <div id="modalBody"></div>
     <div class="modal-buttons">
       <button class="save" id="modalOk">OK</button>
       <button class="cancel" id="modalCancel">Отмена</button>
     </div>
-  </div>
-</div>
-
-<!--модальное око Настройки -->
-<div id="settingsModal" class="modal">
-  <div class="modal-content">
-    <h3>Настройки</h3>
-    <p>Здесь будут настройки системы</p>
-    <button onclick="closeSettings()">Закрыть</button>
   </div>
 </div>
 
@@ -158,3 +150,4 @@
  <!-- <script src="app.js"></script> -->
 </body>
 </html>
+
