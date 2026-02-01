@@ -162,9 +162,10 @@ document.getElementById('settingsBtn').onclick = () => {
     title: "Настройки",
     content: `
       <p>Здесь будут настройки системы</p>
-      <label>
+
+      <label style="display:block; margin-top:10px;">
         Порог влажности:
-        <input type="number" value="30">
+        <input type="number" value="30" style="width:100%; margin-top:5px;">
       </label>
     `,
     okText: "Сохранить"
@@ -351,4 +352,5 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
