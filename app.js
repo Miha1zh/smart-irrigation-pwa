@@ -42,7 +42,7 @@ const Modal = (() => {
   let resolveFn = null;
 
   function close(result) {
-    root.classList.add("hidden");
+    root.style.display = "none";
     okBtn.onclick = null;
     cancelBtn.onclick = null;
     resolveFn?.(result);
@@ -60,9 +60,9 @@ const Modal = (() => {
 
     okBtn.textContent = okText;
     cancelBtn.textContent = cancelText;
-    cancelBtn.style.display = showCancel ? "inline-block" : "none";
+    cancelBtn.style.display = showCancel ? "inline-flex" : "none";
 
-    root.classList.remove("hidden");
+    root.style.display = "flex";
 
     return new Promise(resolve => {
       resolveFn = resolve;
@@ -91,6 +91,7 @@ const Modal = (() => {
     open
   };
 })();
+
 
 // ---- UI обновление ----
 function updateUI() {
@@ -350,3 +351,4 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
