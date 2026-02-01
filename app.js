@@ -207,26 +207,21 @@ document.getElementById('autoMode').onclick = toggleAutoModeModal;
 // ---- Инициализация ----
 updateUI();
 
-
-
-
-
-
 // --- Верхние окна ---
-const settingsModal = document.getElementById('settingsModal');
+//const settingsModal = document.getElementById('settingsModal');
 const scheduleModal = document.getElementById('scheduleModal');
 
-document.getElementById('settingsBtn').onclick = () => {
+/*document.getElementById('settingsBtn').onclick = () => {
   settingsModal.style.display = 'flex';
 };
 
 function closeSettings() {
   settingsModal.style.display = 'none';
-}
+}*/
 
 function closeSchedule() {
   scheduleModal.style.display = 'none';
-}
+} //вот мне кажется что это лишнее
 
 let schedule = {
   mode: "time",
@@ -352,5 +347,6 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
