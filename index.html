@@ -37,7 +37,7 @@
     <button id="scheduleBtn" class="top-btn">⏰</button>
   </div>
 </header>
-  
+
 <div class="status">
   <p>💧 Вода: <span id="water">0</span>%</p>
   <p>🔋 Батарея: <span id="battery">0</span>%</p>
@@ -70,55 +70,31 @@
   </div>
 </div>
 
-<!-- Модальное окно отключение автополива -->
-  <div id="appModal" class="modal">
+<!-- Модальное окно -->
+<div id="appModal" class="modal">
   <div class="modal-content">
     <p id="modalText">Текст</p>
-
     <div class="modal-buttons">
       <button class="save" id="modalOk">OK</button>
       <button class="cancel" id="modalCancel">Отмена</button>
     </div>
   </div>
 </div>
-  
+
 <!--модальное око Настройки -->
-  <div id="settingsModal" class="modal">
-  <div class="modal-content">
-    <h3 class="modal-title">Настройки</h3>
-
-    <div class="modal-body">
-      <p>Здесь будут настройки системы</p>
-    </div>
-
-    <div class="modal-buttons">
-       <!--<button class="cancel" data-close>Закрыть</button>--><!--эта строка логала, я поменял на следующую-->
-      <button class="cancel" id="closeSettingsBtn">Закрыть</button> 
-    </div>
-  </div>
-</div>
-  <!--
 <div id="settingsModal" class="modal">
   <div class="modal-content">
     <h3>Настройки</h3>
     <p>Здесь будут настройки системы</p>
     <button onclick="closeSettings()">Закрыть</button>
   </div>
-</div> 
-  -->
+</div>
 
 <!-- ===== Модальное окно: Расписание ===== -->
 <div id="scheduleModal" class="modal">
   <div class="modal-content schedule">
 
-    <h2 class="modal-title">⏰ Расписание полива</h2>
-    <div class="modal-body">
-  <!--
-<div id="scheduleModal" class="modal">
-  <div class="modal-content schedule">
-
     <h2>⏰ Расписание полива</h2>
-  -->
 
     <!-- ===== Режим по времени ===== -->
     <div class="schedule-section">
@@ -170,44 +146,15 @@
         <input type="time" id="sleepTo" value="06:00">
       </label>
     </div>
-  </div>    
 
     <div class="modal-buttons">
      <button class="save" id="saveScheduleBtn">Сохранить</button> 
-      <button class="cancel" id="closeScheduleBtn">Отмена</button> 
-    </div> 
+      <button class="cancel" id="closeScheduleBtn">Закрыть</button> 
+    </div>
 
   </div>
  </div>
-  
+
  <!-- <script src="app.js"></script> -->
 </body>
 </html>
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
