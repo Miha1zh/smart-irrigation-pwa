@@ -67,12 +67,26 @@ header {
 }
 
 .modal-content {
+  animation: modalIn 0.15s ease-out; // анимация окон
   background: #1f1f1f;
   padding: 20px;
   border-radius: 10px;
   width: 90%;
   max-width: 320px;
   text-align: center;
+  max-height: 90vh; // чтоб модалки не вылазили за пределы окна
+  overflow-y: auto;  // чтоб модалки не вылазили за пределы окна
+}
+//анимация окон  типа функция
+@keyframes modalIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .modal-content p {
@@ -254,6 +268,7 @@ header {
 .schedule input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   }
+
 
 
 
