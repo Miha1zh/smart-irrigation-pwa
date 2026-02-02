@@ -66,7 +66,7 @@ const Modal = (() => {
     cancelBtn.style.display = showCancel ? "inline-flex" : "none";
 
      root.style.display = "flex";  // <--- тут показываем окно
-     root.querySelector('.modal-content').style.animation =  "modalIn 0.25s cubic-bezier(0.35, 1.5, 0.5, 1) forwards"; // <--- запускаем анимацию
+     root.querySelector('.modal-content').style.animation =  "modalIn 0.25s cubic-bezier(1.35, 1.5, 0.5, 1) forwards"; // <--- запускаем анимацию
 
     return new Promise(resolve => {
       resolveFn = resolve;
@@ -351,6 +351,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
