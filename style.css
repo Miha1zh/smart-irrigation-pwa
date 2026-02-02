@@ -64,6 +64,7 @@ header {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  overflow: hidden; /* чтоб модалка не вылазила за пределы экрана */
 }
 
 .modal-content {
@@ -73,6 +74,9 @@ header {
   width: 90%;
   max-width: 320px;
   text-align: center;
+  max-height: calc(100vh - 40px); /* чтоб модалка не вылазила за пределы экрана */
+  overflow-y: auto;               /* чтоб модалка не вылазила за пределы экрана */
+  box-sizing: border-box;         /* чтоб модалка не вылазила за пределы экрана */
 }
 
 .modal-content p {
@@ -83,6 +87,10 @@ header {
 .modal-buttons {
   display: flex;
   gap: 10px;
+  position: sticky;        /* чтоб модалка не вылазила за пределы экрана */
+  bottom: 0;               /* чтоб модалка не вылазила за пределы экрана */
+ /* background: #1f1f1f;     чтоб модалка не вылазила за пределы экрана */
+  padding-top: 10px;       /*    чтоб модалка не вылазила за пределы экрана */
 }
 
 /* Универсальные кнопки в модалках */
@@ -254,3 +262,4 @@ header {
 .schedule input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   }
+
