@@ -342,7 +342,7 @@ document.getElementById("saveScheduleBtn").onclick = () => {
 // ===============================
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
+    navigator.serviceWorker.register('service-worker.js')
       .then(reg => console.log('SW зарегистрирован', reg.scope))
       .catch(err => console.error('SW ошибка', err));
   });
@@ -352,4 +352,5 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
