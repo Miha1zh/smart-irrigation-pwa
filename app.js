@@ -66,7 +66,15 @@ const Modal = (() => {
     cancelBtn.style.display = showCancel ? "inline-flex" : "none";
 
      root.style.display = "flex";  // <--- тут показываем окно
-     root.querySelector('.modal-content').style.animation =  "modalIn 0.25s cubic-bezier(1.35, 1.5, 0.5, 1) forwards"; // <--- запускаем анимацию
+     // задаем начальное состояние перед анимацией
+     const contentEl = root.querySelector('.modal-content');
+     contentEl.style.opacity = 0;
+     contentEl.style.transform = "scale(0.8)";
+
+      // запускаем анимацию через небольшой таймаут
+      setTimeout(() => {
+      contentEl.style.animation = "modalIn 0.35s cubic-bezier(1.35, 1.5, 0.5, 1) forwards";
+      }, 20); // 20ms достаточно, чтобы браузер зафиксировал начальное состояние
 
     return new Promise(resolve => {
       resolveFn = resolve;
@@ -351,6 +359,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
