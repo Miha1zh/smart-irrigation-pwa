@@ -207,11 +207,6 @@ document.getElementById('autoMode').onclick = toggleAutoModeModal;
 // ---- Инициализация ----
 updateUI();
 
-
-
-
-
-
 // --- Верхние окна ---
 //const settingsModal = document.getElementById('settingsModal');
 const scheduleModal = document.getElementById('scheduleModal');
@@ -352,6 +347,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
