@@ -43,12 +43,9 @@ const Modal = (() => {
 
   function close(result) {
     root.style.display = "none";
-    root.querySelector('.modal-content').style.opacity = ""; // сброс стилей
-   root.querySelector('.modal-content').style.transform = ""; // сброс стилей
-   root.querySelector('.modal-content').style.animation = ""; // сброс стилей
-   okBtn.onclick = null;
-   cancelBtn.onclick = null;
-   resolveFn?.(result);    
+    okBtn.onclick = null;
+    cancelBtn.onclick = null;
+    resolveFn?.(result);
   }
 
   function open({
@@ -65,16 +62,7 @@ const Modal = (() => {
     cancelBtn.textContent = cancelText;
     cancelBtn.style.display = showCancel ? "inline-flex" : "none";
 
-     root.style.display = "flex";  // <--- тут показываем окно
-     // задаем начальное состояние перед анимацией
-     const contentEl = root.querySelector('.modal-content');
-     contentEl.style.opacity = 0;
-     contentEl.style.transform = "scale(0.8)";
-
-      // запускаем анимацию через небольшой таймаут
-      setTimeout(() => {
-      contentEl.style.animation = "modalIn 0.35s cubic-bezier(1.35, 1.5, 0.5, 1) forwards";
-      }, 20); // 20ms достаточно, чтобы браузер зафиксировал начальное состояние
+    root.style.display = "flex";
 
     return new Promise(resolve => {
       resolveFn = resolve;
@@ -219,6 +207,11 @@ document.getElementById('autoMode').onclick = toggleAutoModeModal;
 // ---- Инициализация ----
 updateUI();
 
+
+
+
+
+
 // --- Верхние окна ---
 //const settingsModal = document.getElementById('settingsModal');
 const scheduleModal = document.getElementById('scheduleModal');
@@ -359,11 +352,3 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
-
-
-
-
-
-
-
-
