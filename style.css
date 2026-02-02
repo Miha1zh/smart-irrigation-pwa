@@ -73,25 +73,6 @@ header {
   width: 90%;
   max-width: 320px;
   text-align: center;
-  max-height: 90vh;
-  overflow-y: auto;
-
-  transform: scale(0.8); /* начальное состояние */
-  opacity: 0;             /* начальное состояние */
-}
-
-/* ключевые кадры для анимации */
-@keyframes modalIn {
-  from {
-    0%   { transform: scale(0.8); opacity: 0; }
-    60%  { transform: scale(1.1); opacity: 1; }
-    100% { transform: scale(1); opacity: 1; }
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
 }
 
 .modal-content p {
@@ -273,26 +254,3 @@ header {
 .schedule input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
