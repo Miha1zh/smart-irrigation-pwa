@@ -79,7 +79,9 @@ header {
 //анимация окон  типа функция
 @keyframes modalIn {
   from {
-    transform: scale(0.95);
+    0%   { transform: scale(0.95); opacity: 0; }
+    60%  { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
     opacity: 0;
   }
   to {
@@ -267,6 +269,7 @@ header {
 .schedule input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   }
+
 
 
 
