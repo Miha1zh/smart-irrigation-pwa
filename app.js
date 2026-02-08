@@ -172,6 +172,26 @@ document.getElementById('settingsBtn').onclick = () => {
   });
 };
 
+// ---- закрытие приложения через модальное окно ----
+document.getElementById('exitBtn').onclick = async () => {
+  const ok = await Modal.open({
+    title: 'Выход',
+    content: '<p>Закрыть приложение?</p>',
+    okText: 'Выйти',
+    cancelText: 'Отмена'
+  });
+
+  if (!ok) return;
+
+  // PWA (установленное приложение)
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+    window.close();
+  } else {
+    // обычный браузер
+    window.location.href = 'about:blank';
+  }
+};
+
 // ---- Управление авто/ручной режим ----
 async function toggleAutoModeModal() {
   const checkbox = document.getElementById('autoMode');
@@ -348,6 +368,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
