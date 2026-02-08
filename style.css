@@ -178,6 +178,17 @@ header {
   transform: scale(0.92);
 }
 
+.top-btn.danger {
+  background: #331f1f;
+  color: #ff6b6b;
+  box-shadow: 0 0 8px rgba(255, 80, 80, 0.4);
+}
+
+.top-btn.danger:active {
+  transform: scale(0.9);
+}
+
+
 /* ===== Расписание ===== */
 
 .schedule {
@@ -262,5 +273,6 @@ header {
 .schedule input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(1);
   }
+
 
 
