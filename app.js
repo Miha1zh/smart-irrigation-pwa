@@ -1,7 +1,7 @@
 // Фейковые данные для теста, потом заменим на API ESP32
-let pumps = [0, 0, 0, 0, 0];
+let pumps = [0, 0, 0, 0, 0, 0];
 let autoMode = false;
-let moistureLevels = [42, 35, 61, 28, 55];
+let moistureLevels = [10, 35, 61, 28, 55, 111];
 let battery = 100;
 let water = 0; // в процентах
 
@@ -347,6 +347,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
