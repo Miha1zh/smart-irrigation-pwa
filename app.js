@@ -312,6 +312,12 @@ async function toggleAutoModeModal() {
   console.log(autoMode);
 }
 console.log(autoMode);
+// ===========================
+// Автообновление каждые 5 секунд
+// ===========================
+refreshData();               // стартовое обновление
+setInterval(refreshData, 5000); // регулярное обновление
+console.log(autoMode);
 // ---- Регистрация обработчиков кнопок насосов ----
 document.getElementById('pump1Btn').onclick = () => togglePump(1);
 document.getElementById('pump2Btn').onclick = () => togglePump(2);
@@ -332,11 +338,7 @@ document.getElementById('autoMode').onclick = toggleAutoModeModal;
 
 // ---- Инициализация ----
 //updateUI(); // думаю это не нужно, поскольку эта функция вызывается из следующей дальше - refreshData()
-// ===========================
-// Автообновление каждые 5 секунд
-// ===========================
-refreshData();               // стартовое обновление
-setInterval(refreshData, 5000); // регулярное обновление
+
 
 // --- Верхние окна ---
 //const settingsModal = document.getElementById('settingsModal');
@@ -478,6 +480,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
