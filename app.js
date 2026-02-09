@@ -311,7 +311,7 @@ async function toggleAutoModeModal() {
   updateUI(); // вот не знаю в начальной версии не было. Думаю что будет возвращатся в начальное положение пока данные не будут браться из контроллера
   console.log(autoMode);
 }
-
+console.log(autoMode);
 // ---- Регистрация обработчиков кнопок насосов ----
 document.getElementById('pump1Btn').onclick = () => togglePump(1);
 document.getElementById('pump2Btn').onclick = () => togglePump(2);
@@ -328,7 +328,7 @@ document.getElementById('pump6Btn').onclick = () => togglePump(6); // пробу
 
 
 // ---- Переключатель авто/ручной режим ----
-//document.getElementById('autoMode').onclick = toggleAutoModeModal;
+document.getElementById('autoMode').onclick = toggleAutoModeModal;
 
 // ---- Инициализация ----
 //updateUI(); // думаю это не нужно, поскольку эта функция вызывается из следующей дальше - refreshData()
@@ -337,8 +337,6 @@ document.getElementById('pump6Btn').onclick = () => togglePump(6); // пробу
 // ===========================
 refreshData();               // стартовое обновление
 setInterval(refreshData, 5000); // регулярное обновление
-// ---- Переключатель авто/ручной режим ----
-document.getElementById('autoMode').onclick = toggleAutoModeModal;
 
 // --- Верхние окна ---
 //const settingsModal = document.getElementById('settingsModal');
@@ -480,6 +478,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
