@@ -182,8 +182,22 @@ async function refreshData() {
   moistureLevels = status.moistureLevels;
   battery = status.battery;
   water = status.water;
-console.log(autoMode); 
+        console.log('refreshData → autoMode:', autoMode); 
   updateUI();
+}
+
+// ===============================
+// Инициализация приложения
+// ===============================
+async function initApp() {
+  console.log('До загрузки данных, autoMode:', autoMode);
+
+  // Ждём, пока данные загрузятся
+  await refreshData();
+
+  console.log('После загрузки данных, autoMode:', autoMode);
+
+  // Тут можно вызвать другие инициализации (модалки, расписание и т.д.)
 }
 
 // ---- Управление насосами  ---- можно вызвать вручную, автоматически, из будущего API
@@ -315,9 +329,9 @@ console.log('До',autoMode);
 // ===========================
 // Автообновление каждые 5 секунд
 // ===========================
-refreshData();               // стартовое обновление
+initApp();     // стартовое обновление
 setInterval(refreshData, 5000); // регулярное обновление
-console.log('После',autoMode);
+console.log('После :',autoMode);
 // ---- Регистрация обработчиков кнопок насосов ----
 document.getElementById('pump1Btn').onclick = () => togglePump(1);
 document.getElementById('pump2Btn').onclick = () => togglePump(2);
@@ -480,6 +494,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
