@@ -225,9 +225,6 @@ function togglePump(id, forceState = null) {
   }
 
   console.log(`Насос ${id} → ${pumps[index] ? "ВКЛ" : "ВЫКЛ"}`);
-
-  //**********************************************!!!
-  updateUI(); // вот не знаю в начальной версии не было. Думаю что будет возвращатся в начальное положение пока данные не будут браться из контроллера
   
  //******* сохранение данных **********
   dataSource.saveStatus({
@@ -238,6 +235,9 @@ function togglePump(id, forceState = null) {
   water
 });
   // тут позже можно добавить: fetch(`/api/pump/${id}/${pumps[index] ? 'on' : 'off'}`)
+
+  //**********************************************!!!
+  updateUI(); // вот не знаю в начальной версии не было. Думаю что будет возвращатся в начальное положение пока данные не будут браться из контроллера
 }
 
 // ---- Модальное окно Настройки ----
@@ -297,9 +297,6 @@ async function toggleAutoModeModal() {
   }
     console.log('Авто режим →', autoMode ? 'ВКЛ' : 'ВЫКЛ');
 
-  //**********************************************!!!
-  updateUI(); // вот не знаю в начальной версии не было. Думаю что будет возвращатся в начальное положение пока данные не будут браться из контроллера
-
    //******* сохранение данных **********
   dataSource.saveStatus({
   pumps,
@@ -309,6 +306,9 @@ async function toggleAutoModeModal() {
   water
 });
   // TODO: fetch(`/api/mode/${autoMode ? 'auto' : 'manual'}`)
+  
+  //**********************************************!!!
+  updateUI(); // вот не знаю в начальной версии не было. Думаю что будет возвращатся в начальное положение пока данные не будут браться из контроллера
 }
 
 // ---- Регистрация обработчиков кнопок насосов ----
@@ -327,7 +327,7 @@ document.getElementById('pump6Btn').onclick = () => togglePump(6); // пробу
 
 
 // ---- Переключатель авто/ручной режим ----
-document.getElementById('autoMode').onclick = toggleAutoModeModal;
+//document.getElementById('autoMode').onclick = toggleAutoModeModal;
 
 // ---- Инициализация ----
 //updateUI(); // думаю это не нужно, поскольку эта функция вызывается из следующей дальше - refreshData()
@@ -336,7 +336,8 @@ document.getElementById('autoMode').onclick = toggleAutoModeModal;
 // ===========================
 refreshData();               // стартовое обновление
 setInterval(refreshData, 5000); // регулярное обновление
-
+// ---- Переключатель авто/ручной режим ----
+document.getElementById('autoMode').onclick = toggleAutoModeModal;
 
 // --- Верхние окна ---
 //const settingsModal = document.getElementById('settingsModal');
@@ -478,6 +479,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
