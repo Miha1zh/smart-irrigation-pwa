@@ -17,6 +17,7 @@ let kolPump = 0;
 async function initData() {
   try {
     const data = await fetch('/api/status').then(r => r.json());
+    kolPump = data.kolPump;
     pumps = data.pumps;
     autoMode = data.autoMode;
     moistureLevels = data.moistureLevels;
@@ -24,6 +25,7 @@ async function initData() {
     water = data.water;
   } catch (e) {
     console.warn("API недоступен, используем фейковые данные");
+    kolPump = 6;
     pumps = [0,0,0,0,0,0];
     autoMode = false;
     moistureLevels = [42,35,61,28,55,1111];
@@ -398,6 +400,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
