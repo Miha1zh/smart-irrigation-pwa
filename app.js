@@ -1,9 +1,36 @@
 // Фейковые данные для теста, потом заменим на API ESP32
-let pumps = [0, 0, 0, 0, 0, 0];
+//let pumps = [0, 0, 0, 0, 0, 0];
+//let autoMode = false;
+//let moistureLevels = [10, 35, 61, 28, 55, 111];
+//let battery = 100;
+//let water = 0; // в процентах
+
+let pumps = [];
 let autoMode = false;
-let moistureLevels = [10, 35, 61, 28, 55, 111];
-let battery = 100;
-let water = 0; // в процентах
+let moistureLevels = [];
+let battery = 0;
+let water = 0;
+
+// при старте приложения
+async function initData() {
+  try {
+    const data = await fetch('/api/status').then(r => r.json());
+    pumps = data.pumps;
+    autoMode = data.autoMode;
+    moistureLevels = data.moistureLevels;
+    battery = data.battery;
+    water = data.water;
+  } catch (e) {
+    console.warn("API недоступен, используем фейковые данные");
+    pumps = [0,0,0,0,0];
+    autoMode = false;
+    moistureLevels = [42,35,61,28,55];
+    battery = 100;
+    water = 0;
+  }
+
+  updateUI();
+}
 
 // ---- Таймеры насосов ----
 const PUMP_MAX_TIME = 30 * 1000; // 30 секунд
@@ -226,7 +253,8 @@ document.getElementById('pump6Btn').onclick = () => togglePump(6); // пробу
 document.getElementById('autoMode').onclick = toggleAutoModeModal;
 
 // ---- Инициализация ----
-updateUI();
+//updateUI();
+initData();
 
 // --- Верхние окна ---
 //const settingsModal = document.getElementById('settingsModal');
@@ -368,6 +396,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
