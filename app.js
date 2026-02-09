@@ -182,7 +182,7 @@ async function refreshData() {
   moistureLevels = status.moistureLevels;
   battery = status.battery;
   water = status.water;
-
+console.log(autoMode); 
   updateUI();
 }
 
@@ -480,6 +480,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
