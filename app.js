@@ -311,13 +311,13 @@ async function toggleAutoModeModal() {
   updateUI(); // вот не знаю в начальной версии не было. Думаю что будет возвращатся в начальное положение пока данные не будут браться из контроллера
   console.log(autoMode);
 }
-console.log(autoMode);
+console.log('До',autoMode);
 // ===========================
 // Автообновление каждые 5 секунд
 // ===========================
 refreshData();               // стартовое обновление
 setInterval(refreshData, 5000); // регулярное обновление
-console.log(autoMode);
+console.log('После',autoMode);
 // ---- Регистрация обработчиков кнопок насосов ----
 document.getElementById('pump1Btn').onclick = () => togglePump(1);
 document.getElementById('pump2Btn').onclick = () => togglePump(2);
@@ -480,6 +480,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
