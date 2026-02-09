@@ -23,9 +23,9 @@ async function initData() {
     water = data.water;
   } catch (e) {
     console.warn("API недоступен, используем фейковые данные");
-    pumps = [0,0,0,0,0];
+    pumps = [0,0,0,0,0,0];
     autoMode = false;
-    moistureLevels = [42,35,61,28,55];
+    moistureLevels = [42,35,61,28,55,1111];
     battery = 100;
     water = 0;
   }
@@ -397,6 +397,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
