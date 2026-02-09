@@ -11,7 +11,8 @@ let moistureLevels = [];
 let battery = 0;
 let water = 0;
 
-// при старте приложения
+// при старте приложения читаем данные из API, если не доступно то присваиваю значения ниже, 
+//потом нужно будет убрать эти данные, и сделать модалку с предупреждением что нет связи с контроллером 
 async function initData() {
   try {
     const data = await fetch('/api/status').then(r => r.json());
@@ -396,6 +397,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
