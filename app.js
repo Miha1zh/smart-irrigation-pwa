@@ -10,12 +10,14 @@ let autoMode = false;
 let moistureLevels = [];
 let battery = 0;
 let water = 0;
+let KolPump=0; // количество насосов (кнопок)
 
 // при старте приложения читаем данные из API, если не доступно то присваиваю значения ниже, 
 //потом нужно будет убрать эти данные, и сделать модалку с предупреждением что нет связи с контроллером 
 async function initData() {
   try {
     const data = await fetch('/api/status').then(r => r.json());
+    KolPump = data.KolPump;
     pumps = data.pumps;
     autoMode = data.autoMode;
     moistureLevels = data.moistureLevels;
@@ -23,6 +25,7 @@ async function initData() {
     water = data.water;
   } catch (e) {
     console.warn("API недоступен, используем фейковые данные");
+    KolPump=5;
     pumps = [0,0,0,0,0,0];
     autoMode = false;
     moistureLevels = [42,35,61,28,55,1111];
@@ -242,13 +245,13 @@ async function toggleAutoModeModal() {
     // TODO: fetch(`/api/mode/${autoMode ? 'auto' : 'manual'}`)
 }
 
-// ---- Регистрация обработчиков кнопок насосов ----
-document.getElementById('pump1Btn').onclick = () => togglePump(1);
-document.getElementById('pump2Btn').onclick = () => togglePump(2);
-document.getElementById('pump3Btn').onclick = () => togglePump(3);
-document.getElementById('pump4Btn').onclick = () => togglePump(4);
-document.getElementById('pump5Btn').onclick = () => togglePump(5);
-document.getElementById('pump6Btn').onclick = () => togglePump(6); // пробую добавить шестую кнопку, еще исправления в хтмл и тут во 2 и 4 строках
+// ===========================
+// Регистрация кнопок насосов
+// ===========================
+for (let i = 1; i <= KolPump; i++) {
+  document.getElementById(`pump${i}Btn`).onclick = () => togglePump(i);
+}
+
 
 // ---- Переключатель авто/ручной режим ----
 document.getElementById('autoMode').onclick = toggleAutoModeModal;
@@ -397,6 +400,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
