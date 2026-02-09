@@ -5,33 +5,35 @@
 //let battery = 100;
 //let water = 0; // в процентах
 
+// ===========================
+// Основные переменные
+// ===========================
 let pumps = [];
 let autoMode = false;
 let moistureLevels = [];
 let battery = 0;
 let water = 0;
 
-// при старте приложения читаем данные из API, если не доступно то присваиваю значения ниже, 
-//потом нужно будет убрать эти данные, и сделать модалку с предупреждением что нет связи с контроллером 
-async function initData() {
-  try {
-    const data = await fetch('/api/status').then(r => r.json());
-    pumps = data.pumps;
-    autoMode = data.autoMode;
-    moistureLevels = data.moistureLevels;
-    battery = data.battery;
-    water = data.water;
-  } catch (e) {
-    console.warn("API недоступен, используем фейковые данные");
-    pumps = [0,0,0,0,0,0];
-    autoMode = false;
-    moistureLevels = [42,35,61,28,55,1111];
-    battery = 100;
-    water = 0;
+// ===========================
+// Источник данных (dataSource)
+// ===========================
+const dataSource = {
+  async getStatus() {
+    try {
+      // здесь будет fetch к ESP32
+      // для теста пока используем заглушку
+      return await fetch('/api/status').then(r => r.json());
+    } catch {
+      return {
+        pumps: [0,0,0,0,0],
+        autoMode: false,
+        moistureLevels: [42,35,61,28,55],
+        battery: 100,
+        water: 0
+      };
+    }
   }
-
-  updateUI();
-}
+};
 
 // ---- Таймеры насосов ----
 const PUMP_MAX_TIME = 30 * 1000; // 30 секунд
@@ -139,6 +141,25 @@ function updateUI() {
 
   btn.classList.toggle('active', !!state);
                             });
+//  const checkbox = document.getElementById('autoMode'); //обновление галочки автополив
+//  checkbox.checked = autoMode;   // добавить это когда данные будут обновлятся из контроллера 
+                                   //в противном случае при каждом запуске этой функции будет переходить в начальное значение т.е. пусто
+                                   // нужно будет еще при установке галочки сразу передавть значение на контроллер
+}
+
+// ===========================
+// Инициализация данных
+// ===========================
+async function refreshData() {
+  const status = await dataSource.getStatus();
+
+  pumps = status.pumps;
+  autoMode = status.autoMode;
+  moistureLevels = status.moistureLevels;
+  battery = status.battery;
+  water = status.water;
+
+  updateUI();
 }
 
 // ---- Управление насосами  ---- можно вызвать вручную, автоматически, из будущего API
@@ -181,7 +202,10 @@ function togglePump(id, forceState = null) {
 
   console.log(`Насос ${id} → ${pumps[index] ? "ВКЛ" : "ВЫКЛ"}`);
 
-  // TODO: fetch(`/api/pump/${id}/${pumps[index] ? 'on' : 'off'}`)
+//**********************************************!!!
+  updateUI(); // вот не знаю в начальной версии не было. Думаю что будет возвращатся в начальное положение пока данные не будут браться из контроллера
+  
+  // тут позже можно добавить: fetch(`/api/pump/${id}/${pumps[index] ? 'on' : 'off'}`)
 }
 
 // ---- Модальное окно Настройки ----
@@ -239,6 +263,11 @@ async function toggleAutoModeModal() {
   } else {
     autoMode = true;
   }
+    console.log('Авто режим →', autoMode ? 'ВКЛ' : 'ВЫКЛ');
+  
+  //**********************************************!!!
+  updateUI(); // вот не знаю в начальной версии не было. Думаю что будет возвращатся в начальное положение пока данные не будут браться из контроллера
+  
     // TODO: fetch(`/api/mode/${autoMode ? 'auto' : 'manual'}`)
 }
 
@@ -249,14 +278,25 @@ document.getElementById('pump3Btn').onclick = () => togglePump(3);
 document.getElementById('pump4Btn').onclick = () => togglePump(4);
 document.getElementById('pump5Btn').onclick = () => togglePump(5);
 document.getElementById('pump6Btn').onclick = () => togglePump(6); // пробую добавить шестую кнопку, еще исправления в хтмл и тут во 2 и 4 строках
+// ===========================
+// Регистрация кнопок насосов. Можно вот так коротко
+// ===========================
+/*for (let i = 1; i <= 5; i++) {
+  document.getElementById(`pump${i}Btn`).onclick = () => togglePump(i);
+}*/
 
 
 // ---- Переключатель авто/ручной режим ----
 document.getElementById('autoMode').onclick = toggleAutoModeModal;
 
 // ---- Инициализация ----
-//updateUI();
-initData();
+//updateUI(); // думаю это не нужно, поскольку эта функция вызывается из следующей дальше - refreshData()
+// ===========================
+// Автообновление каждые 5 секунд
+// ===========================
+refreshData();               // стартовое обновление
+setInterval(refreshData, 5000); // регулярное обновление
+
 
 // --- Верхние окна ---
 //const settingsModal = document.getElementById('settingsModal');
@@ -398,6 +438,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
