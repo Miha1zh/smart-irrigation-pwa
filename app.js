@@ -17,23 +17,47 @@ let water = 0;
 // ===========================
 // Источник данных (dataSource)
 // ===========================
+const STORAGE_KEY = "irrigation.status";
+
 const dataSource = {
   async getStatus() {
-    try {
-      // здесь будет fetch к ESP32
-      // для теста пока используем заглушку
-      return await fetch('/api/status').then(r => r.json());
-    } catch {
-      return {
-        pumps: [0,0,0,0,0],
-        autoMode: false,
-        moistureLevels: [42,35,61,28,55],
-        battery: 100,
-        water: 0
-      };
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if (saved) {
+      return JSON.parse(saved);
     }
+
+    // начальные данные (один раз)
+    const initialStatus = {
+      pumps: [0, 0, 0, 0, 0],
+      autoMode: false,
+      moistureLevels: [42, 35, 61, 28, 55],
+      battery: 100,
+      water: 0
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(initialStatus));
+    return initialStatus;
+  },
+
+  async saveStatus(status) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(status));
   }
 };
+/*const dataSource = {
+  async getStatus() {
+    return fetch('/api/status').then(r => r.json());
+  },
+
+  async saveStatus(status) {
+    return fetch('/api/status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(status)
+    });
+  }
+};
+*/ // на это поменять блок который сверху до (// Источник данных (dataSource) ), когда появится контроллер
 
 // ---- Таймеры насосов ----
 const PUMP_MAX_TIME = 30 * 1000; // 30 секунд
@@ -201,11 +225,19 @@ function togglePump(id, forceState = null) {
   }
 
   console.log(`Насос ${id} → ${pumps[index] ? "ВКЛ" : "ВЫКЛ"}`);
-
+  
+ //******* сохранение данных **********
+  dataSource.saveStatus({
+  pumps,
+  autoMode,
+  moistureLevels,
+  battery,
+  water
+});
+  // тут позже можно добавить: fetch(`/api/pump/${id}/${pumps[index] ? 'on' : 'off'}`)
+  
 //**********************************************!!!
   updateUI(); // вот не знаю в начальной версии не было. Думаю что будет возвращатся в начальное положение пока данные не будут браться из контроллера
-  
-  // тут позже можно добавить: fetch(`/api/pump/${id}/${pumps[index] ? 'on' : 'off'}`)
 }
 
 // ---- Модальное окно Настройки ----
@@ -264,11 +296,19 @@ async function toggleAutoModeModal() {
     autoMode = true;
   }
     console.log('Авто режим →', autoMode ? 'ВКЛ' : 'ВЫКЛ');
+
+   //******* сохранение данных **********
+  dataSource.saveStatus({
+  pumps,
+  autoMode,
+  moistureLevels,
+  battery,
+  water
+});
+  // TODO: fetch(`/api/mode/${autoMode ? 'auto' : 'manual'}`)
   
   //**********************************************!!!
   updateUI(); // вот не знаю в начальной версии не было. Думаю что будет возвращатся в начальное положение пока данные не будут браться из контроллера
-  
-    // TODO: fetch(`/api/mode/${autoMode ? 'auto' : 'manual'}`)
 }
 
 // ---- Регистрация обработчиков кнопок насосов ----
@@ -438,6 +478,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
