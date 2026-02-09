@@ -248,7 +248,7 @@ async function toggleAutoModeModal() {
 // ===========================
 // Регистрация кнопок насосов
 // ===========================
-for (let i = 1; i <= 5; i++) {
+for (let i = 1; i <= kolPump; i++) {
   document.getElementById(`pump${i}Btn`).onclick = () => togglePump(i);
 }
 
@@ -400,6 +400,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
