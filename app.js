@@ -10,14 +10,12 @@ let autoMode = false;
 let moistureLevels = [];
 let battery = 0;
 let water = 0;
-let KolPump=0; // количество насосов (кнопок)
 
 // при старте приложения читаем данные из API, если не доступно то присваиваю значения ниже, 
 //потом нужно будет убрать эти данные, и сделать модалку с предупреждением что нет связи с контроллером 
 async function initData() {
   try {
     const data = await fetch('/api/status').then(r => r.json());
-    KolPump = data.KolPump;
     pumps = data.pumps;
     autoMode = data.autoMode;
     moistureLevels = data.moistureLevels;
@@ -25,7 +23,6 @@ async function initData() {
     water = data.water;
   } catch (e) {
     console.warn("API недоступен, используем фейковые данные");
-    KolPump=5;
     pumps = [0,0,0,0,0,0];
     autoMode = false;
     moistureLevels = [42,35,61,28,55,1111];
@@ -248,7 +245,7 @@ async function toggleAutoModeModal() {
 // ===========================
 // Регистрация кнопок насосов
 // ===========================
-for (let i = 1; i <= KolPump; i++) {
+for (let i = 1; i <= 5; i++) {
   document.getElementById(`pump${i}Btn`).onclick = () => togglePump(i);
 }
 
@@ -274,7 +271,7 @@ function closeSettings() {
 
 function closeSchedule() {
   scheduleModal.style.display = 'none';
-} //вот мне кажется что это лишнее
+} 
 
 let schedule = {
   mode: "time",
@@ -400,6 +397,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
