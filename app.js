@@ -400,7 +400,7 @@ function renderSchedule() {
   //document.getElementById("wateringCount").innerText = schedule.times.length;
   const innerText = document.getElementById("wateringCount");
   if (innerText) innerText.innerText = schedule.times.length;
-  console.log("ввввввввввввввввввв:", schedule.times.length);
+  console.log("ввввввввввввввввввв:", schedule.times);
 
   const list = document.getElementById("timeList");
   list.innerHTML = "";
@@ -515,6 +515,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
