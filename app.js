@@ -31,7 +31,7 @@ const COMMANDS_KEY = "irrigation.commands";
 const dataSource = {
    // ---- получить состояние (как будто от ESP32)
   async getStatus() {
-    const saved = localStorage.getItem(STORAGE_KEY1);
+    const saved = localStorage.getItem(STORAGE_KEY);
 
     if (saved) {
       return JSON.parse(saved);
@@ -511,6 +511,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
