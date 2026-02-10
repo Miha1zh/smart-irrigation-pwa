@@ -241,7 +241,7 @@ async function refreshData() {
   const checkbox = document.getElementById('autoMode');
   if (checkbox) checkbox.checked = autoMode; // <--- вот что нужно
   updateUI();
-  renderSchedule(); // обновление модалки расписание
+  //renderSchedule(); // обновление модалки расписание  Думаю не нежно ее обновлять каздые пять секунд
 }
 
 // ---- Управление насосами  ---- можно вызвать вручную, автоматически, из будущего API
@@ -515,6 +515,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
