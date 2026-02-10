@@ -41,7 +41,7 @@ const dataSource = {
     const initialStatus = {
       pumps: [0, 0, 0, 0, 0],
       autoMode: false,
-      moistureLevels: [42, 35, 61, 28, 55],
+      moistureLevels: [33, 33, 61, 28, 55],
       battery: 100,
       water: 0,
       
@@ -511,6 +511,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
