@@ -13,7 +13,7 @@ let water = 0;
 let schedule = {
   mode: "time",
   times: ["08:00", "18:00"],
-  intervalHours: 3,
+  intervalHours: 0,
   startTime: "07:00",
   sleep: {
     from: "22:00",
@@ -515,6 +515,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
