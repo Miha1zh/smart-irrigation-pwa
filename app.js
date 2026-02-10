@@ -53,8 +53,8 @@ const dataSource = {
       sleep: {
       from: "21:59",
       to: "05:59"
-            }
-                }
+            };
+                };
     };
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(initialStatus));
@@ -511,6 +511,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
