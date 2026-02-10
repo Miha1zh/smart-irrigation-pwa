@@ -79,9 +79,9 @@ const dataSource = {
 };
 */ // на это поменять блок который сверху до (// Источник данных (dataSource) ), когда появится контроллер
 
-// ---- Таймеры насосов ----
-const PUMP_MAX_TIME = 30 * 1000; // 30 секунд
-let pumpTimers = [null, null, null, null, null];
+// ---- Таймеры насосов ---- не нужен будет реализован на контроллере
+//const PUMP_MAX_TIME = 30 * 1000; // 30 секунд
+//let pumpTimers = [null, null, null, null, null];
 
 // ---- Модальное окно ----==========================================
 const modal = document.getElementById('appModal');
@@ -479,6 +479,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
