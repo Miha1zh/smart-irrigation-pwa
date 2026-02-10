@@ -390,8 +390,7 @@ function closeSchedule() {
 document.getElementById("scheduleBtn").onclick = () => {
   //scheduleDraft = JSON.parse(JSON.stringify(schedule));  // создаём черновик
   scheduleModal.style.display = "flex";
-  renderSchedule().then(() => {     // обновление при открытии модалки с паузой пока не закончится обновление
-                              });
+  renderSchedule();
 };
 
 document.getElementById("closeScheduleBtn").onclick = closeSchedule; // вызов функции закрытия модалки расписание
@@ -512,6 +511,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
