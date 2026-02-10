@@ -396,7 +396,9 @@ document.getElementById("scheduleBtn").onclick = () => {
 document.getElementById("closeScheduleBtn").onclick = closeSchedule; // вызов функции закрытия модалки расписание
 
 function renderSchedule() {
-  document.getElementById("wateringCount").innerText = schedule.times.length;
+  //document.getElementById("wateringCount").innerText = schedule.times.length;
+  const innerText = document.getElementById("wateringCount");
+  if (innerText) innerText.innerText = schedule.times.length;
 
   const list = document.getElementById("timeList");
   list.innerHTML = "";
@@ -511,6 +513,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
