@@ -37,7 +37,7 @@ const dataSource = {
  // ---- сохранить состояние (делает "контроллер") потом заменить : getStatus   → fetch('/api/status')
   async saveStatus(status) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(status));
-  }
+  },
   // ---- отправить команду (делает UI)   потом заменить :  sendCommand → fetch('/api/cmd')
   async sendCommand(command) {
     const list = JSON.parse(localStorage.getItem(COMMANDS_KEY) || "[]");
@@ -479,6 +479,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
