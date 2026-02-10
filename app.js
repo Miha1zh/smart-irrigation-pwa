@@ -14,7 +14,7 @@ let schedule = {
   mode: "time",
   times: ["08:00", "18:00"],
   intervalHours: 3,
-  startTime: "06:00",
+  startTime: "07:00",
   sleep: {
     from: "22:00",
     to: "06:00"
@@ -511,6 +511,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
