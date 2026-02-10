@@ -232,11 +232,10 @@ async function refreshData() {
   battery = status.battery;
   water = status.water;
 
-  schedule_by_time = status.schedule_by_time;
-  schedule_by_interval = status.schedule_by_interval;
-  sleep_mode = status.sleep_mode;
+  schedule = status.schedule;
   
         console.log('refreshData → autoMode:', autoMode); 
+        console.log('schedule:', schedule); 
   // синхронизация DOM
   const checkbox = document.getElementById('autoMode');
   if (checkbox) checkbox.checked = autoMode; // <--- вот что нужно
@@ -515,6 +514,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
