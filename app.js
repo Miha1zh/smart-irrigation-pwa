@@ -8,6 +8,23 @@ let battery = 0;
 let water = 0;
 
 // ===========================
+// Переменные расписания
+// ===========================
+let schedule_by_time = {
+  enabled: false,
+  times: []
+};
+let schedule_by_interval = {
+  enabled: true,
+  time_interval: 3,
+  time_start: "06:00"
+};
+let sleep_mode = {
+  nachalo: "22:00",
+  konec: "06:00"
+};
+
+// ===========================
 // Источник данных (dataSource)
 // ===========================
 const STORAGE_KEY = "irrigation.status";
@@ -479,6 +496,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
