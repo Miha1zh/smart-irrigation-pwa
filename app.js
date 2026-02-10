@@ -10,19 +10,17 @@ let water = 0;
 // ===========================
 // Переменные расписания
 // ===========================
-let schedule_by_time = {
-  enabled: false,
-  times: []
-};
-let schedule_by_interval = {
-  enabled: true,
-  time_interval: 3,
-  time_start: "06:00"
-};
-let sleep_mode = {
-  nachalo: "22:00",
-  konec: "06:00"
-};
+let schedule = {
+  mode: "time",
+  times: ["08:00", "18:00"],
+  intervalHours: 3,
+  startTime: "06:00",
+  sleep: {
+    from: "22:00",
+    to: "06:00"
+  }
+}; // не знаю, может здесь нужна запятая
+//let scheduleDraft = null; // черновик расписани
 
 // ===========================
 // Источник данных (dataSource)
@@ -45,7 +43,18 @@ const dataSource = {
       autoMode: false,
       moistureLevels: [42, 35, 61, 28, 55],
       battery: 100,
-      water: 0
+      water: 0,
+      
+      schedule : {
+      mode: "time",
+      times: ["06:01", "13:33" ,"18:33"],
+      intervalHours: 3,
+      startTime: "06:01",
+      sleep: {
+      from: "21:59",
+      to: "05:59"
+            }
+                }
     };
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(initialStatus));
@@ -222,11 +231,17 @@ async function refreshData() {
   moistureLevels = status.moistureLevels;
   battery = status.battery;
   water = status.water;
+
+  schedule_by_time = status.schedule_by_time;
+  schedule_by_interval = status.schedule_by_interval;
+  sleep_mode = status.sleep_mode;
+  
         console.log('refreshData → autoMode:', autoMode); 
   // синхронизация DOM
   const checkbox = document.getElementById('autoMode');
   if (checkbox) checkbox.checked = autoMode; // <--- вот что нужно
   updateUI();
+  renderSchedule(); // обновление модалки расписание
 }
 
 // ---- Управление насосами  ---- можно вызвать вручную, автоматически, из будущего API
@@ -367,30 +382,18 @@ const scheduleModal = document.getElementById('scheduleModal');
 function closeSettings() {
   settingsModal.style.display = 'none';
 }*/
-
+//-----------функция закрытия модалки расписание----------
 function closeSchedule() {
   scheduleModal.style.display = 'none';
 } 
-
-let schedule = {
-  mode: "time",
-  times: ["08:00", "18:00"],
-  intervalHours: 3,
-  startTime: "06:00",
-  sleep: {
-    from: "22:00",
-    to: "06:00"
-  }
-};
-
+// потом эту конструкцию проверь на правильность------------------------????
 document.getElementById("scheduleBtn").onclick = () => {
+  //scheduleDraft = JSON.parse(JSON.stringify(schedule));  // создаём черновик
   scheduleModal.style.display = "flex";
   renderSchedule();
 };
 
-document.getElementById("closeScheduleBtn").onclick = () => {
-  scheduleModal.style.display = "none";
-};
+document.getElementById("closeScheduleBtn").onclick = closeSchedule; // вызов функции закрытия модалки расписание
 
 function renderSchedule() {
   document.getElementById("wateringCount").innerText = schedule.times.length;
@@ -410,10 +413,12 @@ function renderSchedule() {
     row.querySelector("input").onchange = e => {
       schedule.times[i] = e.target.value;
       schedule.times.sort();
+      //saveSchedule();
     };
 
     row.querySelector("button").onclick = () => {
       schedule.times.splice(i, 1);
+     // saveSchedule();
       renderSchedule();
     };
 
@@ -422,13 +427,14 @@ function renderSchedule() {
 
   document.getElementById("intervalHours").value = schedule.intervalHours;
   document.getElementById("intervalStart").value =
-    schedule.startTime || schedule.sleep.to;
+                                  schedule.startTime || schedule.sleep.to;
 
   document.getElementById("sleepFrom").value = schedule.sleep.from;
   document.getElementById("sleepTo").value = schedule.sleep.to;
-
+  //saveSchedule(); //--------------?????????  не уверен
   updateModeUI();
 }
+
 document.querySelectorAll("input[name='scheduleMode']").forEach(radio => {
   radio.onchange = e => {
     schedule.mode = e.target.value;
@@ -475,8 +481,17 @@ document.getElementById("intervalStart").onchange = e => {
 
   renderSchedule();
 };
+// ***** сохраняю данные  по клику на кнопку сохранить ******
 document.getElementById("saveScheduleBtn").onclick = () => {
   console.log("Сохранено:", schedule);
+  dataSource.saveStatus({  //  так понимаю, этот блок потом тоже заменить
+    pumps,
+    autoMode,
+    moistureLevels,
+    battery,
+    water,
+    schedule
+  });
   scheduleModal.style.display = "none";
 };
 
@@ -496,6 +511,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
