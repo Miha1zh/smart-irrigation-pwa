@@ -11,8 +11,10 @@ let water = 0;
 // Источник данных (dataSource)
 // ===========================
 const STORAGE_KEY = "irrigation.status";
+const COMMANDS_KEY = "irrigation.commands";
 
 const dataSource = {
+   // ---- получить состояние (как будто от ESP32)
   async getStatus() {
     const saved = localStorage.getItem(STORAGE_KEY);
 
@@ -32,9 +34,34 @@ const dataSource = {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(initialStatus));
     return initialStatus;
   },
-
+ // ---- сохранить состояние (делает "контроллер") потом заменить : getStatus   → fetch('/api/status')
   async saveStatus(status) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(status));
+  }
+  // ---- отправить команду (делает UI)   потом заменить :  sendCommand → fetch('/api/cmd')
+  async sendCommand(command) {
+    const list = JSON.parse(localStorage.getItem(COMMANDS_KEY) || "[]");
+    list.push(command);
+    localStorage.setItem(COMMANDS_KEY, JSON.stringify(list));
+  },
+
+  // --------------- обработка команд (ЭМУЛЯЦИЯ ESP32) --------------------
+  //  processCommands() — это имитация прошивки ESP32. Потом ты её просто удалишь и заменишь fetch().
+  async processCommands() {
+    const commands = JSON.parse(localStorage.getItem(COMMANDS_KEY) || "[]");
+    if (!commands.length) return;
+
+    const status = await this.getStatus();
+
+    for (const cmd of commands) {
+      if (cmd.type === "pump") {
+        const i = cmd.id - 1;
+        status.pumps[i] = status.pumps[i] ? 0 : 1;
+      }
+    }
+
+    await this.saveStatus(status);
+    localStorage.removeItem(COMMANDS_KEY);
   }
 };
 /*const dataSource = {
@@ -168,6 +195,9 @@ function updateUI() {
 // Инициализация данных
 // ===========================
 async function refreshData() {
+  // "контроллер" обрабатывает команды. Потом ты её просто удалишь и заменишь fetch().
+  await dataSource.processCommands();
+  // получаем фактическое состояние. Потом ты её просто удалишь и заменишь  getStatus   → fetch('/api/status')
   const status = await dataSource.getStatus();
 
   pumps = status.pumps;
@@ -183,55 +213,34 @@ async function refreshData() {
 }
 
 // ---- Управление насосами  ---- можно вызвать вручную, автоматически, из будущего API
-function togglePump(id, forceState = null) {
+function togglePump(id) {
   const index = id - 1;
 
-  // если forceState передан — используем его
-  if (forceState !== null) {
-    pumps[index] = forceState ? 1 : 0;
-  } else {
-    pumps[index] = pumps[index] ? 0 : 1;
-  }
+  // 1. ОПТИМИСТИЧНО меняем локальное состояние
+  pumps[index] = pumps[index] ? 0 : 1;
 
+  // 2. Обновляем кнопку (как у тебя было)
   const btn = document.getElementById(`pump${id}Btn`);
 
   if (pumps[index]) {
-    // ---- НАСОС ВКЛ ----
-    if (btn) {
-      btn.innerText = `Выключить насос ${id}`;
-      btn.classList.add('active');
-    }
-
-    // таймер безопасности ---- это нужно реализовать на контроллере а сюда передавать только сколько осталось секунд работать
-    clearTimeout(pumpTimers[index]);
-    pumpTimers[index] = setTimeout(() => {
-      console.warn(`Насос ${id} выключен по таймеру безопасности`);
-      togglePump(id, false);
-    }, PUMP_MAX_TIME);
-
+    btn.innerText = `Выключить насос ${id}`;
+    btn.classList.add('active');
   } else {
-    // ---- НАСОС ВЫКЛ ----
-    if (btn) {
-      btn.innerText = `Включить насос ${id}`;
-      btn.classList.remove('active');
-    }
-    clearTimeout(pumpTimers[index]);
-    pumpTimers[index] = null;
+    btn.innerText = `Включить насос ${id}`;
+    btn.classList.remove('active');
   }
-  console.log(`Насос ${id} → ${pumps[index] ? "ВКЛ" : "ВЫКЛ"}`);
-  
- //******* сохранение данных **********
-  dataSource.saveStatus({
-  pumps,
-  autoMode,
-  moistureLevels,
-  battery,
-  water
-});
-  // тут позже можно добавить: fetch(`/api/pump/${id}/${pumps[index] ? 'on' : 'off'}`)
+  console.log(`UI: насос ${id} → ${pumps[index] ? "ВКЛ" : "ВЫКЛ"}`);
 
-  //**********************************************!!!
-  updateUI(); // вот не знаю в начальной версии не было. Думаю что будет возвращатся в начальное положение пока данные не будут браться из контроллера
+  // 3. Отправляем КОМАНДУ (не состояние!) . Потом заменишь : sendCommand → fetch('/api/cmd')
+  dataSource.sendCommand({
+    type: "pump",
+    id,
+    action: pumps[index] ? "on" : "off",
+    ts: Date.now()
+  });
+
+  // 4. UI обновили — всё
+  updateUI();
 }
 
 // ---- Модальное окно Настройки ----
@@ -299,6 +308,7 @@ async function toggleAutoModeModal() {
   battery,
   water
 });
+  // просто замени блок сверху до //** на строчку ниже
   // TODO: fetch(`/api/mode/${autoMode ? 'auto' : 'manual'}`)
   
   //**********************************************!!!
@@ -469,6 +479,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
