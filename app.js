@@ -25,7 +25,6 @@ let schedule = {
 // ===========================
 // Источник данных (dataSource)
 // ===========================
-let dataSource = null;
 const STORAGE_KEY = "irrigation.status";
 const COMMANDS_KEY = "irrigation.commands";
 
@@ -512,6 +511,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
