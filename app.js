@@ -1,10 +1,3 @@
-// Фейковые данные для теста, потом заменим на API ESP32
-//let pumps = [0, 0, 0, 0, 0, 0];
-//let autoMode = false;
-//let moistureLevels = [10, 35, 61, 28, 55, 111];
-//let battery = 100;
-//let water = 0; // в процентах
-
 // ===========================
 // Основные переменные
 // ===========================
@@ -209,7 +202,7 @@ function togglePump(id, forceState = null) {
       btn.classList.add('active');
     }
 
-    // таймер безопасности
+    // таймер безопасности ---- это нужно реализовать на контроллере а сюда передавать только сколько осталось секунд работать
     clearTimeout(pumpTimers[index]);
     pumpTimers[index] = setTimeout(() => {
       console.warn(`Насос ${id} выключен по таймеру безопасности`);
@@ -222,11 +215,9 @@ function togglePump(id, forceState = null) {
       btn.innerText = `Включить насос ${id}`;
       btn.classList.remove('active');
     }
-
     clearTimeout(pumpTimers[index]);
     pumpTimers[index] = null;
   }
-
   console.log(`Насос ${id} → ${pumps[index] ? "ВКЛ" : "ВЫКЛ"}`);
   
  //******* сохранение данных **********
@@ -313,11 +304,11 @@ async function toggleAutoModeModal() {
   //**********************************************!!!
   updateUI(); // вот не знаю в начальной версии не было. Думаю что будет возвращатся в начальное положение пока данные не будут браться из контроллера
 }
-
 // ===========================
-// Автообновление каждые 5 секунд
+// ---- Инициализация ----
 // ===========================
 refreshData().then(() => {     // стартовое обновление с паузой пока не закончится обновление
+// Автообновление каждые 5 секунд
 setInterval(refreshData, 5000); // регулярное обновление
   });
 
@@ -335,13 +326,8 @@ document.getElementById('pump6Btn').onclick = () => togglePump(6); // пробу
   document.getElementById(`pump${i}Btn`).onclick = () => togglePump(i);
 }*/
 
-
 // ---- Переключатель авто/ручной режим ----
 document.getElementById('autoMode').onclick = toggleAutoModeModal;
-
-// ---- Инициализация ----
-//updateUI(); // думаю это не нужно, поскольку эта функция вызывается из следующей дальше - refreshData()
-
 
 // --- Верхние окна ---
 //const settingsModal = document.getElementById('settingsModal');
@@ -483,6 +469,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
