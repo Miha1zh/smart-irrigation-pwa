@@ -196,8 +196,6 @@ async function initApp() {
   await refreshData();
 
   console.log('После загрузки данных, autoMode:', autoMode);
-  // ---- Переключатель авто/ручной режим ----
-  document.getElementById('autoMode').onclick = toggleAutoModeModal;
 
   // Тут можно вызвать другие инициализации (модалки, расписание и т.д.)
 }
@@ -350,7 +348,7 @@ document.getElementById('pump6Btn').onclick = () => togglePump(6); // пробу
 
 
 // ---- Переключатель авто/ручной режим ----
-//document.getElementById('autoMode').onclick = toggleAutoModeModal;
+document.getElementById('autoMode').onclick = toggleAutoModeModal;
 
 // ---- Инициализация ----
 //updateUI(); // думаю это не нужно, поскольку эта функция вызывается из следующей дальше - refreshData()
@@ -496,6 +494,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
