@@ -186,20 +186,6 @@ async function refreshData() {
   updateUI();
 }
 
-// ===============================
-// Инициализация приложения
-// ===============================
-async function initApp() {
-  console.log('До загрузки данных, autoMode:', autoMode);
-
-  // Ждём, пока данные загрузятся
-  await refreshData();
-
-  console.log('После загрузки данных, autoMode:', autoMode);
-
-  // Тут можно вызвать другие инициализации (модалки, расписание и т.д.)
-}
-
 // ---- Управление насосами  ---- можно вызвать вручную, автоматически, из будущего API
 function togglePump(id, forceState = null) {
   const index = id - 1;
@@ -325,13 +311,16 @@ async function toggleAutoModeModal() {
   updateUI(); // вот не знаю в начальной версии не было. Думаю что будет возвращатся в начальное положение пока данные не будут браться из контроллера
   console.log(autoMode);
 }
-console.log('До',autoMode);
+
 // ===========================
 // Автообновление каждые 5 секунд
 // ===========================
-initApp();     // стартовое обновление
+     console.log('До',autoMode);
+refreshData().then(() => {     // стартовое обновление с паузой пока не закончится обновление
+     console.log('После загрузки данных:', autoMode);
 setInterval(refreshData, 5000); // регулярное обновление
-console.log('После :',autoMode);
+  });
+     console.log('После :',autoMode);
 // ---- Регистрация обработчиков кнопок насосов ----
 document.getElementById('pump1Btn').onclick = () => togglePump(1);
 document.getElementById('pump2Btn').onclick = () => togglePump(2);
@@ -494,6 +483,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
