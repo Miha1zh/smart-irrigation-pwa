@@ -183,6 +183,9 @@ async function refreshData() {
   battery = status.battery;
   water = status.water;
         console.log('refreshData → autoMode:', autoMode); 
+  // синхронизация DOM
+  const checkbox = document.getElementById('autoMode');
+  if (checkbox) checkbox.checked = autoMode; // <--- вот что нужно
   updateUI();
 }
 
@@ -483,6 +486,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
