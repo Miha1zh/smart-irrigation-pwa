@@ -525,9 +525,20 @@ function updateModeUI() {
     scheduleDraft.mode !== "interval"
   );
 }
-//scheduleDraft.intervalHours = +(document.getElementById("intervalHours").value); // добавил что считывалось значение интервала
+//----------------добавление нового времени--------------------------
 document.getElementById("addTimeBtn").onclick = () => {
-  scheduleDraft.times.push("12:00");
+  const newTime = "12:00";
+  // Проверка попадания в sleep
+  if (isInSleep(newTime)) {
+    showToast("⚠️Время полива попадает в период сна ⚠️");
+    return;
+  }
+  // Проверка на дубликат
+  if (scheduleDraft.times.includes(newTime)) {
+    showToast("⚠️Такое время уже есть ⚠️");
+    return;
+  }
+  scheduleDraft.times.push(newTime);
   scheduleDraft.times.sort();
   renderSchedule();
 };
@@ -609,6 +620,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
