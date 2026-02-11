@@ -530,12 +530,12 @@ document.getElementById("addTimeBtn").onclick = () => {
   const newTime = "12:00";
   // Проверка попадания в sleep
   if (isInSleep(newTime)) {
-    showToast("⚠️Время полива попадает в период сна ⚠️");
+    showToast("⚠️Время полива попадает в период сна, это какая-то хрень, так не может быть! ⚠️");
     return;
   }
   // Проверка на дубликат
   if (scheduleDraft.times.includes(newTime)) {
-    showToast("⚠️Такое время уже есть ⚠️");
+    showToast("⚠️Будет добавленно время 12:00, это время уже есть,  ⚠️");
     return;
   }
   scheduleDraft.times.push(newTime);
@@ -620,6 +620,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
