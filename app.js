@@ -469,13 +469,13 @@ function renderSchedule() {
             const newTime = e.target.value;
     // Проверка попадания в sleep
             if (isInSleep(newTime)) {              
-              showToast("Время полива попадает в период сна", "warning"); // показываю ошибку
+              showToast("⚠️ Время полива попадает в период сна", "warning"); // показываю ошибку
             e.target.value = scheduleDraft.times[i]; // возвращаем старое
             return;
                                      }
   // Проверка на дубликат
   if (isDuplicate(newTime, i)) {
-     showToast("Это время уже есть", "warning"); // показываю ошибку
+     showToast("⚠️ Это время уже есть", "warning"); // показываю ошибку
     e.target.value = scheduleDraft.times[i]; // возвращаем старое
     return;
   }
@@ -603,6 +603,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
