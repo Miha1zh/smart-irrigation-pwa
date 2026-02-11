@@ -234,8 +234,8 @@ async function refreshData() {
 
   schedule = status.schedule;
   
-        console.log('refreshData → autoMode:', autoMode); 
-        console.log('schedule:', schedule); 
+        //console.log('refreshData → autoMode:', autoMode); 
+        //console.log('schedule:', schedule); 
   // синхронизация DOM
   const checkbox = document.getElementById('autoMode');
   if (checkbox) checkbox.checked = autoMode; // <--- вот что нужно
@@ -514,6 +514,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
