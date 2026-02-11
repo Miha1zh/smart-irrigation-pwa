@@ -482,14 +482,21 @@ document.getElementById("sleepTo").onchange = e => {
 };
 
 // ----- обработчик изменения ячейки интервал --------------- это добавил, но убрал инициализацию ячейки в функции сохранения
+//----добавил тут еще мигание чтоб упозорнить внимание пользователя------
 document.getElementById("intervalHours").onchange = e => {
+  let originalVal = parseInt(input.value) ; // введённое пользователем значение
+  let correctedVal = originalVal; // корректное значение 1-12
       console.log("До обновления поля:", scheduleDraft.intervalHours);
-           if (e.target.value < 1) {scheduleDraft.intervalHours = 1;}   // добавил туту логику чтоб интервал был всегда в промежутке от 1 до 12
-              else if  (e.target.value> 12) {scheduleDraft.intervalHours = 12; }
+           if (e.target.value < 1) {scheduleDraft.intervalHours = 1; correctedVal = 1;}   // добавил туту логику чтоб интервал был всегда в промежутке от 1 до 12
+              else if  (e.target.value> 12) {scheduleDraft.intervalHours = 12; correctedVal = 12;}
                     else {scheduleDraft.intervalHours = e.target.value;}
       console.log("после обновления поля:", scheduleDraft.intervalHours);
   // сразу обновляем поле, чтобы пользователь видел корректное значение
   e.target.value = scheduleDraft.intervalHours;
+  // если значение было исправлено, показываем мигание
+  if (correctedVal !== originalVal) {input.classList.add("input-flash");
+   // удаляем класс после окончания анимации
+    setTimeout(() => input.classList.remove("input-flash"), 400); // совпадает с длительностью CSS                                  
 };
 
 // ----- обработчик изменения ячейки время начала при поливе по интервалу --------------- 
@@ -532,5 +539,6 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
