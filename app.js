@@ -475,7 +475,7 @@ function renderSchedule() {
                                      }
   // Проверка на дубликат
   if (isDuplicate(newTime, i)) {
-     showToast("Это время уже есть", "Дубликат"); // показываю ошибку
+     showToast("Это время уже есть", "warning"); // показываю ошибку
     e.target.value = scheduleDraft.times[i]; // возвращаем старое
     return;
   }
@@ -603,6 +603,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
