@@ -507,11 +507,11 @@ document.getElementById("intervalHours").onchange = e => {
 document.getElementById("intervalStart").onchange = e => {
   if (e.target.value < scheduleDraft.sleep.to) {
     scheduleDraft.startTime = scheduleDraft.sleep.to;
-  } else {
-    scheduleDraft.startTime = e.target.value;
-    e.target.classList.add("input-flash");  //  показываем мигание
+     e.target.classList.add("input-flash");  //  показываем мигание
     // удаляем класс после окончания анимации
     setTimeout(() => e.target.classList.remove("input-flash"), 400); // совпадает с длительностью CSS  
+  } else {
+    scheduleDraft.startTime = e.target.value;
   }
   renderSchedule();
 };
@@ -546,6 +546,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
