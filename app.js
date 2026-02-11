@@ -404,6 +404,26 @@ document.getElementById("scheduleBtn").onclick = () => {
 
 document.getElementById("closeScheduleBtn").onclick = closeSchedule; // вызов функции закрытия модалки расписание
 
+//----------------показ toast-уведомления -------------------
+function showToast(message, type = "warning", duration = 2500) {
+  const container = document.getElementById("toastContainer");
+
+  const toast = document.createElement("div");
+  toast.className = `toast ${type}`;
+  toast.textContent = message;
+
+  container.appendChild(toast);
+
+  // запуск анимации
+  setTimeout(() => toast.classList.add("show"), 10);
+
+  // автоудаление
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 250);
+  }, duration);
+}
+
 // ----------------Проверка попадания в период сна---------------------
 function isInSleep(time) {
   const [h, m] = time.split(":").map(Number);
@@ -444,9 +464,7 @@ function renderSchedule() {
             const newTime = e.target.value;
             // Проверка попадания в sleep
             if (isInSleep(newTime)) {              
-              setTimeout(() => {
-                            Modal.alert("Время полива попадает в период сна", "Предупреждение");      
-                               }, 500);
+              showToast("Время полива попадает в период сна", "warning"); // показываю ошибку
             e.target.value = scheduleDraft.times[i]; // возвращаем старое
             return;
                                      }
@@ -574,6 +592,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
