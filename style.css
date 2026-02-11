@@ -274,5 +274,15 @@ header {
   filter: invert(1);
   }
 
+.input-flash {
+  animation: flash 0.4s ease;
+}
+
+@keyframes flash {
+  0%   { background-color: #ff5252; }
+  50%  { background-color: #1f1f1f; } /* твой фон модалки */
+  100% { background-color: #ff5252; }
+}
+
 
 
