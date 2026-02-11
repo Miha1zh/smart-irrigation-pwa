@@ -390,7 +390,7 @@ function closeSchedule() {
 document.getElementById("scheduleBtn").onclick = () => {
   // Проставляем radio button чтоб галочка стояла как при последнем сохранении  а не по умолчанию
 const modeRadios = document.getElementsByName("scheduleMode");
-modeRadios.forEach(radio => {radio.checked = (radio.value === savedSchedule.mode);
+modeRadios.forEach(radio => {radio.checked = (radio.value === scheduleDraft.mode); // поменял scheduleMode на scheduleDraft
                             });
   scheduleDraft = JSON.parse(JSON.stringify(schedule));  // создаём черновик
   scheduleModal.style.display = "flex";
@@ -520,6 +520,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
