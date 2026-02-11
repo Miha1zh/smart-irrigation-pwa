@@ -420,7 +420,7 @@ function renderSchedule() {
     row.querySelector("button").onclick = () => {
       scheduleDraft.times.splice(i, 1);
      // saveSchedule();
-      renderSchedule();
+     // renderSchedule(); это было  и работало, попробую без него вдруг будет созранять intervalHours
     };
 
     list.appendChild(row);
@@ -514,6 +514,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
