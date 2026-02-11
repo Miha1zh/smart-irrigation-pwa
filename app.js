@@ -443,8 +443,8 @@ function renderSchedule() {
     row.querySelector("input").onchange = e => {
             const newTime = e.target.value;
             // Проверка попадания в sleep
-            if (isInSleep(newTime)) {
-            alert("Время попадает в период сна");
+            if (isInSleep(newTime)) {              
+              Modal.alert("Время полива попадает в период сна", "Предупреждение");              
             e.target.value = scheduleDraft.times[i]; // возвращаем старое
             return;
                                      }
@@ -572,6 +572,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
