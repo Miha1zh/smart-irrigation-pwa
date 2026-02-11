@@ -442,7 +442,6 @@ function renderSchedule() {
   document.getElementById("sleepFrom").value = scheduleDraft.sleep.from;
   document.getElementById("sleepTo").value = scheduleDraft.sleep.to;
   updateModeUI();
-  document.activeElement.blur(); // убираем фокус с элементов
 }
 
 document.querySelectorAll("input[name='scheduleMode']").forEach(radio => {
@@ -501,6 +500,7 @@ document.getElementById("intervalHours").onchange = e => {
    // удаляем класс после окончания анимации
     setTimeout(() => e.target.classList.remove("input-flash"), 400); // совпадает с длительностью CSS  
                                     }
+    document.activeElement.blur(); // убираем фокус с поля
 };
 
 // ----- обработчик изменения ячейки время начала при поливе по интервалу --------------- 
@@ -543,6 +543,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
