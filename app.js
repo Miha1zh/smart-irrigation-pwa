@@ -484,7 +484,7 @@ document.getElementById("sleepTo").onchange = e => {
 // ----- обработчик изменения ячейки интервал --------------- это добавил, но убрал инициализацию ячейки в функции сохранения
 //----добавил тут еще мигание чтоб упозорнить внимание пользователя------
 document.getElementById("intervalHours").onchange = e => {
-  let originalVal = parseInt(input.value) ; // введённое пользователем значение
+  let originalVal = e.target.value ; // введённое пользователем значение
   let correctedVal = originalVal; // корректное значение 1-12
       console.log("До обновления поля:", scheduleDraft.intervalHours);
            if (e.target.value < 1) {scheduleDraft.intervalHours = 1; correctedVal = 1;}   // добавил туту логику чтоб интервал был всегда в промежутке от 1 до 12
@@ -540,5 +540,6 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
