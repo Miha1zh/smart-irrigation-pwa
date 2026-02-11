@@ -484,9 +484,9 @@ document.getElementById("sleepTo").onchange = e => {
 // ----- обработчик изменения ячейки интервал --------------- это добавил, но убрал инициализацию ячейки в функции сохранения
 document.getElementById("intervalHours").onchange = e => {
       console.log("До обновления поля:", scheduleDraft.intervalHours);
-           if (e.target.value < 1) {scheduleDraft.intervalHours = 1;   // добавил туту логику чтоб интервал был всегда в промежутке от 1 до 12
-           } else { e.target.value> 12 ; scheduleDraft.intervalHours = 12; };  
-           scheduleDraft.intervalHours = e.target.value;
+           if (e.target.value < 1) {scheduleDraft.intervalHours = 1;}   // добавил туту логику чтоб интервал был всегда в промежутке от 1 до 12
+              else if  (e.target.value> 12) {scheduleDraft.intervalHours = 12; }
+                    else {scheduleDraft.intervalHours = e.target.value;}
       console.log("после обновления поля:", scheduleDraft.intervalHours);
 };
 // ----- обработчик изменения ячейки время начала при поливе по интервалу --------------- 
@@ -529,3 +529,4 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
