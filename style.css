@@ -276,7 +276,7 @@ header {
 
 /* мигание в поле интервал на модальном окне расписание */
 .input-flash {
-  animation: flash 0.4s ease;
+  animation: flash 0.5s ease;
 }
 
 @keyframes flash {
@@ -325,6 +325,7 @@ header {
 .toast.success {
   background: #1e6b2c;
 }
+
 
 
 
