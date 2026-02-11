@@ -442,6 +442,7 @@ function renderSchedule() {
   document.getElementById("sleepFrom").value = scheduleDraft.sleep.from;
   document.getElementById("sleepTo").value = scheduleDraft.sleep.to;
   updateModeUI();
+  document.activeElement.blur(); // убираем фокус с элементов
 }
 
 document.querySelectorAll("input[name='scheduleMode']").forEach(radio => {
@@ -542,6 +543,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
