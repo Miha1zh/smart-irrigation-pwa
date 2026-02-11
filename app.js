@@ -20,7 +20,7 @@ let schedule = {
     to: "06:00"
   }
 }; // не знаю, может здесь нужна запятая
-//let scheduleDraft = null; // черновик расписани
+let scheduleDraft = null; // черновик расписани
 
 // ===========================
 // Источник данных (dataSource)
@@ -387,7 +387,7 @@ function closeSchedule() {
 } 
 // потом эту конструкцию проверь на правильность------------------------????
 document.getElementById("scheduleBtn").onclick = () => {
-  //scheduleDraft = JSON.parse(JSON.stringify(schedule));  // создаём черновик
+  scheduleDraft = JSON.parse(JSON.stringify(schedule));  // создаём черновик
   scheduleModal.style.display = "flex";
   renderSchedule();
 };
@@ -396,15 +396,15 @@ document.getElementById("closeScheduleBtn").onclick = closeSchedule; // вызо
 
 //----------обновление модалки расписание---------------------
 function renderSchedule() {
-  //document.getElementById("wateringCount").innerText = schedule.times.length;
+  //document.getElementById("wateringCount").innerText = scheduleDraft.times.length;
   const innerText = document.getElementById("wateringCount");
-  if (innerText) innerText.innerText = schedule.times.length;
-  console.log("ввввввввввввввввввв:", schedule.times);
+  if (innerText) innerText.innerText = scheduleDraft.times.length;
+  console.log("ввввввввввввввввввв:", scheduleDraft);
 
   const list = document.getElementById("timeList");
   list.innerHTML = "";
 
-  schedule.times.forEach((time, i) => {
+  scheduleDraft.times.forEach((time, i) => {
     const row = document.createElement("div");
     row.className = "time-row";
 
@@ -414,13 +414,13 @@ function renderSchedule() {
     `;
 
     row.querySelector("input").onchange = e => {
-      schedule.times[i] = e.target.value;
-      schedule.times.sort();
+      scheduleDraft.times[i] = e.target.value;
+      scheduleDraft.times.sort();
       //saveSchedule();
     };
 
     row.querySelector("button").onclick = () => {
-      schedule.times.splice(i, 1);
+      scheduleDraft.times.splice(i, 1);
      // saveSchedule();
       renderSchedule();
     };
@@ -428,19 +428,19 @@ function renderSchedule() {
     list.appendChild(row);
   });
 
-  document.getElementById("intervalHours").value = schedule.intervalHours;
+  document.getElementById("intervalHours").value = scheduleDraft.intervalHours;
   document.getElementById("intervalStart").value =
-                                  schedule.startTime || schedule.sleep.to;
+                                  scheduleDraft.startTime || scheduleDraft.sleep.to;
 
-  document.getElementById("sleepFrom").value = schedule.sleep.from;
-  document.getElementById("sleepTo").value = schedule.sleep.to;
+  document.getElementById("sleepFrom").value = scheduleDraft.sleep.from;
+  document.getElementById("sleepTo").value = scheduleDraft.sleep.to;
   //saveSchedule(); //--------------?????????  не уверен
   updateModeUI();
 }
 
 document.querySelectorAll("input[name='scheduleMode']").forEach(radio => {
   radio.onchange = e => {
-    schedule.mode = e.target.value;
+    scheduleDraft.mode = e.target.value;
     updateModeUI();
   };
 });
@@ -448,44 +448,45 @@ document.querySelectorAll("input[name='scheduleMode']").forEach(radio => {
 function updateModeUI() {
   document.getElementById("timeMode").classList.toggle(
     "disabled",
-    schedule.mode !== "time"
+    scheduleDraft.mode !== "time"
   );
 
   document.getElementById("intervalMode").classList.toggle(
     "disabled",
-    schedule.mode !== "interval"
+    scheduleDraft.mode !== "interval"
   );
 }
 document.getElementById("addTimeBtn").onclick = () => {
-  schedule.times.push("12:00");
-  schedule.times.sort();
+  scheduleDraft.times.push("12:00");
+  scheduleDraft.times.sort();
   renderSchedule();
 };
 document.getElementById("sleepFrom").onchange = e => {
-  schedule.sleep.from = e.target.value;
+  scheduleDraft.sleep.from = e.target.value;
 };
 
 document.getElementById("sleepTo").onchange = e => {
-  schedule.sleep.to = e.target.value;
+  scheduleDraft.sleep.to = e.target.value;
 
-  if (schedule.startTime < schedule.sleep.to) {
-    schedule.startTime = schedule.sleep.to;
+  if (scheduleDraft.startTime < scheduleDraft.sleep.to) {
+    scheduleDraft.startTime = scheduleDraft.sleep.to;
   }
 
   renderSchedule();
 };
 
 document.getElementById("intervalStart").onchange = e => {
-  if (e.target.value < schedule.sleep.to) {
-    schedule.startTime = schedule.sleep.to;
+  if (e.target.value < scheduleDraft.sleep.to) {
+    scheduleDraft.startTime = scheduleDraft.sleep.to;
   } else {
-    schedule.startTime = e.target.value;
+    scheduleDraft.startTime = e.target.value;
   }
 
   renderSchedule();
 };
 // ***** сохраняю данные  по клику на кнопку сохранить ******
 document.getElementById("saveScheduleBtn").onclick = () => {
+  schedule = JSON.parse(JSON.stringify(scheduleDraft));  //возвращаем копию в schedule
   console.log("Сохранено:", schedule);
   dataSource.saveStatus({  //  так понимаю, этот блок потом тоже заменить
     pumps,
@@ -514,6 +515,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
