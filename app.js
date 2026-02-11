@@ -396,9 +396,9 @@ document.getElementById("closeScheduleBtn").onclick = closeSchedule; // вызо
 
 //----------обновление модалки расписание---------------------
 function renderSchedule() {
-  //document.getElementById("wateringCount").innerText = scheduleDraft.times.length;
-  const innerText = document.getElementById("wateringCount");
-  if (innerText) innerText.innerText = scheduleDraft.times.length;
+  document.getElementById("wateringCount").innerText = scheduleDraft.times.length;
+ // const innerText = document.getElementById("wateringCount");
+ // if (innerText) innerText.innerText = scheduleDraft.times.length;
   console.log("ввввввввввввввввввв:", scheduleDraft);
 
   const list = document.getElementById("timeList");
@@ -515,6 +515,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
