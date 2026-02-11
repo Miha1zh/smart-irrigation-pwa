@@ -494,6 +494,8 @@ document.getElementById("intervalHours").onchange = e => {
   // сразу обновляем поле, чтобы пользователь видел корректное значение
   e.target.value = scheduleDraft.intervalHours;
   // если значение было исправлено, показываем мигание
+  console.log("correctedVal:", correctedVal);
+  console.log("originalVal:", originalVal);
   if (correctedVal !== originalVal) {input.classList.add("input-flash");
    // удаляем класс после окончания анимации
     setTimeout(() => input.classList.remove("input-flash"), 400); // совпадает с длительностью CSS  
@@ -540,6 +542,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
