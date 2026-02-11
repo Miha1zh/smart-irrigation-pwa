@@ -452,7 +452,7 @@ function updateModeUI() {
     scheduleDraft.mode !== "interval"
   );
 }
-scheduleDraft.intervalHours = +(document.getElementById("intervalHours").value); // добавил что считывалось значение интервала
+//scheduleDraft.intervalHours = +(document.getElementById("intervalHours").value); // добавил что считывалось значение интервала
 document.getElementById("addTimeBtn").onclick = () => {
   scheduleDraft.times.push("12:00");
   scheduleDraft.times.sort();
@@ -514,6 +514,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
