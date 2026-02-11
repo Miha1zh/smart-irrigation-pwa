@@ -482,6 +482,12 @@ document.getElementById("sleepTo").onchange = e => {
   renderSchedule();
 };
 
+// ----- обработчик изменения ячейки интервал --------------- это добавил, но убрал инициализацию ячейки в функции сохранения
+document.getElementById("intervalHours").onchange = e => {
+      console.log("До обновления поля:", scheduleDraft);
+  scheduleDraft.intervalHours.from = e.target.value;
+      console.log("после обновления поля:", scheduleDraft);
+};
 document.getElementById("intervalStart").onchange = e => {
   if (e.target.value < scheduleDraft.sleep.to) {
     scheduleDraft.startTime = scheduleDraft.sleep.to;
@@ -493,9 +499,9 @@ document.getElementById("intervalStart").onchange = e => {
 };
 // ***** сохраняю данные  по клику на кнопку сохранить ******
 document.getElementById("saveScheduleBtn").onclick = () => {
-      console.log("До сохранения:", scheduleDraft);
-      console.log("input value:", document.getElementById("intervalHours").value);
-      scheduleDraft.intervalHours = parseInt(document.getElementById("intervalHours").value); // читаем из ячейки интервал, иначе не работает, остается старое значение
+     // console.log("До сохранения:", scheduleDraft);
+     // console.log("input value:", document.getElementById("intervalHours").value);
+      //scheduleDraft.intervalHours = parseInt(document.getElementById("intervalHours").value); // читаем из ячейки интервал, иначе не работает, остается старое значение
   schedule = JSON.parse(JSON.stringify(scheduleDraft));  //возвращаем копию в schedule
   console.log("Сохранено:", schedule);
   dataSource.saveStatus({  //  так понимаю, этот блок потом тоже заменить
@@ -525,6 +531,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
