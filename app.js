@@ -488,7 +488,10 @@ document.getElementById("intervalHours").onchange = e => {
               else if  (e.target.value> 12) {scheduleDraft.intervalHours = 12; }
                     else {scheduleDraft.intervalHours = e.target.value;}
       console.log("после обновления поля:", scheduleDraft.intervalHours);
+  // сразу обновляем поле, чтобы пользователь видел корректное значение
+  e.target.value = scheduleDraft.intervalHours;
 };
+
 // ----- обработчик изменения ячейки время начала при поливе по интервалу --------------- 
 document.getElementById("intervalStart").onchange = e => {
   if (e.target.value < scheduleDraft.sleep.to) {
@@ -529,4 +532,5 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
