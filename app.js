@@ -443,6 +443,11 @@ function isInSleep(time) {
   }
 }
 
+//--------------- Проверка на дубликаты--------------------
+function isDuplicate(time, index) {
+  return scheduleDraft.times.some((t, i) => t === time && i !== index);
+}
+
 //----------обновление модалки расписание---------------------
 function renderSchedule() {
   document.getElementById("wateringCount").innerText = scheduleDraft.times.length;
@@ -462,12 +467,18 @@ function renderSchedule() {
 
     row.querySelector("input").onchange = e => {
             const newTime = e.target.value;
-            // Проверка попадания в sleep
+    // Проверка попадания в sleep
             if (isInSleep(newTime)) {              
               showToast("Время полива попадает в период сна", "warning"); // показываю ошибку
             e.target.value = scheduleDraft.times[i]; // возвращаем старое
             return;
                                      }
+  // Проверка на дубликат
+  if (isDuplicate(newTime, i)) {
+     showToast("Это время уже есть", "Дубликат"); // показываю ошибку
+    e.target.value = scheduleDraft.times[i]; // возвращаем старое
+    return;
+  }
       scheduleDraft.times[i] = e.target.value;
       scheduleDraft.times.sort();
       //saveSchedule();
@@ -592,6 +603,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
