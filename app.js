@@ -471,6 +471,9 @@ function renderSchedule() {
             if (isInSleep(newTime)) {              
               showToast("⚠️ Время полива попадает в период сна", "warning"); // показываю ошибку
             e.target.value = scheduleDraft.times[i]; // возвращаем старое
+            e.target.classList.add("input-flash");  //  показываем мигание
+            // удаляем класс после окончания анимации
+            setTimeout(() => e.target.classList.remove("input-flash"), 500); // совпадает с длительностью CSS  
             return;
                                      }
   // Проверка на дубликат
@@ -479,7 +482,7 @@ function renderSchedule() {
     e.target.value = scheduleDraft.times[i]; // возвращаем старое
     e.target.classList.add("input-flash");  //  показываем мигание
     // удаляем класс после окончания анимации
-    setTimeout(() => e.target.classList.remove("input-flash"), 400); // совпадает с длительностью CSS  
+    setTimeout(() => e.target.classList.remove("input-flash"), 500); // совпадает с длительностью CSS  
     return;
   }
       scheduleDraft.times[i] = e.target.value;
@@ -569,7 +572,7 @@ document.getElementById("intervalStart").onchange = e => {
     scheduleDraft.startTime = scheduleDraft.sleep.to;
      e.target.classList.add("input-flash");  //  показываем мигание
     // удаляем класс после окончания анимации
-    setTimeout(() => e.target.classList.remove("input-flash"), 400); // совпадает с длительностью CSS  
+    setTimeout(() => e.target.classList.remove("input-flash"), 500); // совпадает с длительностью CSS  
   } else {
     scheduleDraft.startTime = e.target.value;
   }
@@ -606,6 +609,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
