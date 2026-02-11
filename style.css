@@ -280,10 +280,11 @@ header {
 }
 
 @keyframes flash {
-  0%   { background-color: #ff5252; }
+  0%   { background-color: #cccccc; }  /* светло-серый */
   50%  { background-color: #1f1f1f; } /* твой фон модалки */
   100% { background-color: #ff5252; }
 }
+
 
 
 
