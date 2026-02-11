@@ -397,8 +397,6 @@ document.getElementById("closeScheduleBtn").onclick = closeSchedule; // вызо
 //----------обновление модалки расписание---------------------
 function renderSchedule() {
   document.getElementById("wateringCount").innerText = scheduleDraft.times.length;
- // const innerText = document.getElementById("wateringCount");
- // if (innerText) innerText.innerText = scheduleDraft.times.length;
   console.log("ввввввввввввввввввв:", scheduleDraft);
 
   const list = document.getElementById("timeList");
@@ -434,7 +432,6 @@ function renderSchedule() {
 
   document.getElementById("sleepFrom").value = scheduleDraft.sleep.from;
   document.getElementById("sleepTo").value = scheduleDraft.sleep.to;
-  //saveSchedule(); //--------------?????????  не уверен
   updateModeUI();
 }
 
@@ -486,6 +483,8 @@ document.getElementById("intervalStart").onchange = e => {
 };
 // ***** сохраняю данные  по клику на кнопку сохранить ******
 document.getElementById("saveScheduleBtn").onclick = () => {
+      console.log("До сохранения:", scheduleDraft);
+      console.log("input value:", document.getElementById("intervalHours").value);
   schedule = JSON.parse(JSON.stringify(scheduleDraft));  //возвращаем копию в schedule
   console.log("Сохранено:", schedule);
   dataSource.saveStatus({  //  так понимаю, этот блок потом тоже заменить
@@ -515,6 +514,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
