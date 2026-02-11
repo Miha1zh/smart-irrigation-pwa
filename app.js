@@ -468,40 +468,39 @@ document.getElementById("addTimeBtn").onclick = () => {
   scheduleDraft.times.sort();
   renderSchedule();
 };
+
 document.getElementById("sleepFrom").onchange = e => {
   scheduleDraft.sleep.from = e.target.value;
 };
 
 document.getElementById("sleepTo").onchange = e => {
   scheduleDraft.sleep.to = e.target.value;
-
   if (scheduleDraft.startTime < scheduleDraft.sleep.to) {
     scheduleDraft.startTime = scheduleDraft.sleep.to;
   }
-
   renderSchedule();
 };
 
 // ----- обработчик изменения ячейки интервал --------------- это добавил, но убрал инициализацию ячейки в функции сохранения
 document.getElementById("intervalHours").onchange = e => {
       console.log("До обновления поля:", scheduleDraft.intervalHours);
-  scheduleDraft.intervalHours = e.target.value;
+           if (e.target.value < 1) {scheduleDraft.intervalHours = 1;   // добавил туту логику чтоб интервал был всегда в промежутке от 1 до 12
+           } else { e.target.value> 12 ; scheduleDraft.intervalHours = 12; };  
+           scheduleDraft.intervalHours = e.target.value;
       console.log("после обновления поля:", scheduleDraft.intervalHours);
 };
+// ----- обработчик изменения ячейки время начала при поливе по интервалу --------------- 
 document.getElementById("intervalStart").onchange = e => {
   if (e.target.value < scheduleDraft.sleep.to) {
     scheduleDraft.startTime = scheduleDraft.sleep.to;
   } else {
     scheduleDraft.startTime = e.target.value;
   }
-
   renderSchedule();
 };
+
 // ***** сохраняю данные  по клику на кнопку сохранить ******
 document.getElementById("saveScheduleBtn").onclick = () => {
-     // console.log("До сохранения:", scheduleDraft);
-     // console.log("input value:", document.getElementById("intervalHours").value);
-      //scheduleDraft.intervalHours = parseInt(document.getElementById("intervalHours").value); // читаем из ячейки интервал, иначе не работает, остается старое значение
   schedule = JSON.parse(JSON.stringify(scheduleDraft));  //возвращаем копию в schedule
   console.log("Сохранено:", schedule);
   dataSource.saveStatus({  //  так понимаю, этот блок потом тоже заменить
@@ -514,7 +513,6 @@ document.getElementById("saveScheduleBtn").onclick = () => {
   });
   scheduleModal.style.display = "none";
 };
-
 
 // ===============================
 // SERVICE WORKER — ВСЕГДА В КОНЦЕ
@@ -531,77 +529,3 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
