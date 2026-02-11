@@ -389,10 +389,15 @@ function closeSchedule() {
 // потом эту конструкцию проверь на правильность------------------------????
 document.getElementById("scheduleBtn").onclick = () => {
   // Проставляем radio button чтоб галочка стояла как при последнем сохранении  а не по умолчанию
-const modeRadios = document.getElementsByName("scheduleMode");
-modeRadios.forEach(radio => {radio.checked = (radio.value === scheduleDraft.mode); // поменял scheduleMode на scheduleDraft
-                            });
+//const modeRadios = document.getElementsByName("scheduleMode");
+//modeRadios.forEach(radio => {radio.checked = (radio.value === scheduleDraft.mode); // поменял scheduleMode на scheduleDraft
+ //                           });
+  
   scheduleDraft = JSON.parse(JSON.stringify(schedule));  // создаём черновик
+  // проставляем radio button в соответствии с последним сохранением
+  const modeRadios = document.getElementsByName("scheduleMode");
+  Array.from(modeRadios).forEach(radio => {radio.checked = (radio.value === scheduleDraft.mode);
+                                          });
   scheduleModal.style.display = "flex";
   renderSchedule();
 };
@@ -520,6 +525,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
