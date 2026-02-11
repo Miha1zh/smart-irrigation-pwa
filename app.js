@@ -477,6 +477,9 @@ function renderSchedule() {
   if (isDuplicate(newTime, i)) {
      showToast("⚠️ Это время уже есть", "warning"); // показываю ошибку
     e.target.value = scheduleDraft.times[i]; // возвращаем старое
+    e.target.classList.add("input-flash");  //  показываем мигание
+    // удаляем класс после окончания анимации
+    setTimeout(() => e.target.classList.remove("input-flash"), 400); // совпадает с длительностью CSS  
     return;
   }
       scheduleDraft.times[i] = e.target.value;
@@ -603,6 +606,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
