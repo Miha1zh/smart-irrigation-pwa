@@ -419,8 +419,7 @@ function renderSchedule() {
 
     row.querySelector("button").onclick = () => {
       scheduleDraft.times.splice(i, 1);
-     // saveSchedule();
-     // renderSchedule(); это было  и работало, попробую без него вдруг будет созранять intervalHours
+      renderSchedule(); 
     };
 
     list.appendChild(row);
@@ -453,6 +452,7 @@ function updateModeUI() {
     scheduleDraft.mode !== "interval"
   );
 }
+scheduleDraft.intervalHours = parseInt(document.getElementById("intervalHours").value); // добавил что считывалось значение интервала
 document.getElementById("addTimeBtn").onclick = () => {
   scheduleDraft.times.push("12:00");
   scheduleDraft.times.sort();
@@ -514,6 +514,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
