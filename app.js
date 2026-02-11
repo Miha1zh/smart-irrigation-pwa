@@ -561,7 +561,7 @@ document.getElementById("intervalHours").onchange = e => {
   console.log("originalVal:", originalVal);
   if (correctedVal !== originalVal) {e.target.classList.add("input-flash");
    // удаляем класс после окончания анимации
-    setTimeout(() => e.target.classList.remove("input-flash"), 1100); // совпадает с длительностью CSS  
+    setTimeout(() => e.target.classList.remove("input-flash"), 4000); // совпадает с длительностью CSS  
                                     }
     document.activeElement.blur(); // убираем фокус с поля
 };
@@ -609,6 +609,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
