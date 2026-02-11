@@ -404,6 +404,25 @@ document.getElementById("scheduleBtn").onclick = () => {
 
 document.getElementById("closeScheduleBtn").onclick = closeSchedule; // вызов функции закрытия модалки расписание
 
+// ----------------Проверка попадания в период сна---------------------
+function isInSleep(time) {
+  const [h, m] = time.split(":").map(Number);
+  const minutes = h * 60 + m;
+
+  const [sh, sm] = scheduleDraft.sleep.from.split(":").map(Number);
+  const [eh, em] = scheduleDraft.sleep.to.split(":").map(Number);
+
+  const start = sh * 60 + sm;
+  const end = eh * 60 + em;
+
+  if (start < end) {
+    return minutes >= start && minutes <= end;
+  } else {
+    // интервал через полночь
+    return minutes >= start || minutes <= end;
+  }
+}
+
 //----------обновление модалки расписание---------------------
 function renderSchedule() {
   document.getElementById("wateringCount").innerText = scheduleDraft.times.length;
@@ -422,6 +441,13 @@ function renderSchedule() {
     `;
 
     row.querySelector("input").onchange = e => {
+            const newTime = e.target.value;
+            // Проверка попадания в sleep
+            if (isInSleep(newTime)) {
+            alert("Время попадает в период сна");
+            e.target.value = scheduleDraft.times[i]; // возвращаем старое
+            return;
+                                     }
       scheduleDraft.times[i] = e.target.value;
       scheduleDraft.times.sort();
       //saveSchedule();
@@ -546,6 +572,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
