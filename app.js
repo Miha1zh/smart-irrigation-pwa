@@ -423,6 +423,7 @@ function renderSchedule() {
 
     row.querySelector("input").onchange = e => {
       scheduleDraft.times[i] = e.target.value;
+      console.log("scheduleDraft.times:", scheduleDraft.times);
       // 1. Проверка на дубликат
   if (scheduleDraft.times.includes(e.target.value)) {alert("Такое время уже есть");
     return;
@@ -550,6 +551,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
