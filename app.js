@@ -485,6 +485,7 @@ document.getElementById("intervalStart").onchange = e => {
 document.getElementById("saveScheduleBtn").onclick = () => {
       console.log("До сохранения:", scheduleDraft);
       console.log("input value:", document.getElementById("intervalHours").value);
+      scheduleDraft.intervalHours = parseInt(document.getElementById("intervalHours").value); // читаем из ячейки интервал
   schedule = JSON.parse(JSON.stringify(scheduleDraft));  //возвращаем копию в schedule
   console.log("Сохранено:", schedule);
   dataSource.saveStatus({  //  так понимаю, этот блок потом тоже заменить
@@ -514,6 +515,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
