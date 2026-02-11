@@ -444,7 +444,9 @@ function renderSchedule() {
             const newTime = e.target.value;
             // Проверка попадания в sleep
             if (isInSleep(newTime)) {              
-              //alert("Время полива попадает в период сна", "Предупреждение");              
+              setTimeout(() => {
+                            Modal.alert("Время полива попадает в период сна", "Предупреждение");      
+                               }, 500);
             e.target.value = scheduleDraft.times[i]; // возвращаем старое
             return;
                                      }
@@ -572,6 +574,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
