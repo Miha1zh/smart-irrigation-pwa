@@ -496,7 +496,8 @@ document.getElementById("intervalHours").onchange = e => {
   // если значение было исправлено, показываем мигание
   if (correctedVal !== originalVal) {input.classList.add("input-flash");
    // удаляем класс после окончания анимации
-    setTimeout(() => input.classList.remove("input-flash"), 400); // совпадает с длительностью CSS                                  
+    setTimeout(() => input.classList.remove("input-flash"), 400); // совпадает с длительностью CSS  
+                                    }
 };
 
 // ----- обработчик изменения ячейки время начала при поливе по интервалу --------------- 
@@ -539,4 +540,5 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
