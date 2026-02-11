@@ -385,8 +385,14 @@ function closeSettings() {
 function closeSchedule() {
   scheduleModal.style.display = 'none';
 } 
+//-------------открытие модального окна расписание-----------------------
 // потом эту конструкцию проверь на правильность------------------------????
 document.getElementById("scheduleBtn").onclick = () => {
+  // Проставляем radio button чтоб галочка стояла как при последнем сохранении  а не по умолчанию
+const modeRadios = document.getElementsByName("scheduleMode");
+modeRadios.forEach(radio => {
+  radio.checked = (radio.value === savedSchedule.mode);
+});
   scheduleDraft = JSON.parse(JSON.stringify(schedule));  // создаём черновик
   scheduleModal.style.display = "flex";
   renderSchedule();
@@ -515,6 +521,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
