@@ -119,16 +119,16 @@
   <div class="section-body disabled" id="intervalMode">
 
     <div class="status-row">
-      <label for="intervalCount">Количество поливов</label>
-      <input type="number" id="intervalCount" min="2">   <!-- минимально два полива утром и вечером, в противном случае лучше задать по времени один полив -->
-    </div>
-
-    <div class="status-row">
       <label for="intervalHours">Интервал (часов):</label>
-      <input type="number" id="intervalHours" min="1" max="12">
+      <input type="number" id="intervalHours" min="1" max="24">
     </div>
 
     <div class="status-row">
+      <label for="intervalCount">Количество поливов</label>
+      <input type="number" id="intervalCount" min="1" max="24">   <!-- минимально два полива утром и вечером, в противном случае лучше задать по времени один полив -->
+    </div>
+
+        <div class="status-row">
       <label for="intervalStart">Начать с:</label>
       <input type="time" id="intervalStart">
     </div>
@@ -162,6 +162,7 @@
 
 </body>
 </html>
+
 
 
 
