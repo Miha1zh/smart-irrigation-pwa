@@ -560,11 +560,11 @@ document.getElementById("sleepTo").onchange = e => {
 //----добавил тут еще мигание чтоб упозорнить внимание пользователя------
 document.getElementById("intervalHours").onchange = e => {
   let originalVal = e.target.value ; // введённое пользователем значение
-  let correctedVal = originalVal; // корректное значение 1-12
+  let correctedVal = originalVal; // корректное значение 1-24
       console.log("До обновления поля:", scheduleDraft.intervalHours);
            if (e.target.value < 1) {scheduleDraft.intervalHours = 1; correctedVal = 1;}   // добавил туту логику чтоб интервал был всегда в промежутке от 1 до 12
-              else if  (e.target.value> 12) {scheduleDraft.intervalHours = 12; correctedVal = 12;
-                                            showToast("⚠️Интервал должен быть в промежутке 1...12 часов! ⚠️");
+              else if  (e.target.value> 24) {scheduleDraft.intervalHours = 24; correctedVal = 24;
+                                            showToast("⚠️Интервал должен быть в промежутке 1...24 часов! ⚠️");
                                             }
                     else {scheduleDraft.intervalHours = e.target.value;}
       console.log("после обновления поля:", scheduleDraft.intervalHours);
@@ -645,6 +645,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
