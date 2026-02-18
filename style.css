@@ -22,6 +22,7 @@ header {
   display: flex;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;   /* чтоб не переносилась строка  */
 }
 
 
@@ -333,6 +334,7 @@ header {
 .toast.success {
   background: #1e6b2c;
 }
+
 
 
 
