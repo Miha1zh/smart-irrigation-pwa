@@ -18,12 +18,19 @@ header {
 }
 
 .status label {
-  margin: 5px 0;
   display: flex;
   align-items: center;
   gap: 8px;
-  white-space: nowrap;   /* чтоб не переносилась строка  */
 }
+
+.status label span {
+  flex: 1;   /* текст занимает всё доступное */
+}
+
+.status input {
+  width: 70px;
+}
+
 
 
 .plants {
@@ -334,6 +341,7 @@ header {
 .toast.success {
   background: #1e6b2c;
 }
+
 
 
 
