@@ -32,7 +32,7 @@ header {
 }
 
 .status-row input {
-  flex: 0 0 70px;
+  flex: 0 0 80px;
   max-width: 30%;      /* максимум 30% от ширины контейнера */
   box-sizing: border-box;
 }
@@ -347,6 +347,7 @@ header {
 .toast.success {
   background: #1e6b2c;
 }
+
 
 
 
