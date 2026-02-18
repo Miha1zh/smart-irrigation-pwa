@@ -619,10 +619,11 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-
+/*
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+*/
 
 
 
