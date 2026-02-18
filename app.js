@@ -562,7 +562,9 @@ document.getElementById("intervalHours").onchange = e => {
   let originalVal = e.target.value ; // введённое пользователем значение
   let correctedVal = originalVal; // корректное значение 1-24
       console.log("До обновления поля:", scheduleDraft.intervalHours);
-           if (e.target.value < 1) {scheduleDraft.intervalHours = 1; correctedVal = 1;}   // добавил туту логику чтоб интервал был всегда в промежутке от 1 до 12
+           if (e.target.value < 1) {scheduleDraft.intervalHours = 1; correctedVal = 1;
+                                     showToast("⚠️Интервал должен быть в промежутке 1...24 часов! ⚠️");
+                                   }   // добавил туту логику чтоб интервал был всегда в промежутке от 1 до 12
               else if  (e.target.value> 24) {scheduleDraft.intervalHours = 24; correctedVal = 24;
                                             showToast("⚠️Интервал должен быть в промежутке 1...24 часов! ⚠️");
                                             }
@@ -645,6 +647,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
