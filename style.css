@@ -22,13 +22,15 @@ header {
   align-items: center;
   justify-content: space-between;
   margin: 5px 0;
+  gap: 8px;       /* расстояние между текстом и полями */
   flex-wrap: wrap; /* на маленьких экранах текст переходит на новую строку, input остаётся рядом */
 }
 
 .status-row label {
   margin: 0;
-  flex: 1 1 auto; /* занимает доступное место */
-  min-width: 120px; /* текст не ужимается слишком сильно */
+  /* flex: 1 1 auto; /* занимает доступное место */
+  flex: 0 0 auto; /* текст не растягивается */
+  /* min-width: 120px; /* текст не ужимается слишком сильно */
 }
 
 .status-row input {
@@ -347,6 +349,7 @@ header {
 .toast.success {
   background: #1e6b2c;
 }
+
 
 
 
