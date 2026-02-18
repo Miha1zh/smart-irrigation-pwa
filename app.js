@@ -582,6 +582,17 @@ document.getElementById("intervalHours").onchange = e => {
 
 // ----- обработчик изменения ячейки время начала при поливе по интервалу --------------- 
 document.getElementById("intervalStart").onchange = e => {
+    if (isInSleep(e.target.value)) {
+    showToast("⚠️Начало полива попадает в спящий режим  ⚠️"); 
+    e.target.classList.add("input-flash");  //  показываем мигание
+    // удаляем класс после окончания анимации
+    setTimeout(() => e.target.classList.remove("input-flash"), 1100); // совпадает с длительностью CSS  
+  } else {
+    scheduleDraft.startTime = e.target.value;
+  }
+  renderSchedule();
+  };
+/*document.getElementById("intervalStart").onchange = e => {
   if (e.target.value < scheduleDraft.sleep.to) {
     scheduleDraft.startTime = scheduleDraft.sleep.to;
     showToast("⚠️Начало полива попадает в спящий режим  ⚠️");
@@ -592,7 +603,7 @@ document.getElementById("intervalStart").onchange = e => {
     scheduleDraft.startTime = e.target.value;
   }
   renderSchedule();
-};
+}; */
 
 // ***** сохраняю данные  по клику на кнопку сохранить ******
 document.getElementById("saveScheduleBtn").onclick = () => {
@@ -625,6 +636,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
