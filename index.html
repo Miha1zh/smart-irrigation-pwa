@@ -128,9 +128,13 @@
       <input type="number" id="intervalCount" min="1" max="24">   <!-- минимально два полива утром и вечером, в противном случае лучше задать по времени один полив -->
     </div>
 
-        <div class="status-row">
+    <div class="status-row">
       <label for="intervalStart">Начать с:</label>
       <input type="time" id="intervalStart">
+    </div>
+    <div class="status-row">
+         <label>Последний полив</label>
+         <input type="time" id="lastWateringTime" readonly>
     </div>
 
   </div>
@@ -162,6 +166,7 @@
 
 </body>
 </html>
+
 
 
 
