@@ -469,7 +469,7 @@ function renderSchedule() {
             const newTime = e.target.value;
     // Проверка попадания в sleep
             if (isInSleep(newTime)) {              
-              showToast("⚠️ Время полива попадает в период сна", "warning"); // показываю ошибку
+              showToast("⚠️ Время полива попадает в период сна , это какая-то хрень, так не может быть! ⚠️", "warning"); // показываю ошибку
             e.target.value = scheduleDraft.times[i]; // возвращаем старое
             e.target.classList.add("input-flash");  //  показываем мигание
             // удаляем класс после окончания анимации
@@ -530,12 +530,12 @@ document.getElementById("addTimeBtn").onclick = () => {
   const newTime = "12:00";
   // Проверка попадания в sleep
   if (isInSleep(newTime)) {
-    showToast("⚠️Время полива попадает в период сна, это какая-то хрень, так не может быть! ⚠️");
+   // showToast("⚠️Время полива попадает в период сна, это какая-то хрень, так не может быть! ⚠️"); //есть  вдругом месте
     return;
   }
   // Проверка на дубликат
   if (scheduleDraft.times.includes(newTime)) {
-    showToast("⚠️Будет добавленно время 12:00, это время уже есть,  ⚠️");
+    showToast("⚠️Попытка добавить время 12:00, это время уже есть,  ⚠️");
     return;
   }
   scheduleDraft.times.push(newTime);
@@ -581,6 +581,7 @@ document.getElementById("intervalHours").onchange = e => {
 document.getElementById("intervalStart").onchange = e => {
   if (e.target.value < scheduleDraft.sleep.to) {
     scheduleDraft.startTime = scheduleDraft.sleep.to;
+    showToast("⚠️Начало полива попадает в спящий режим  ⚠️");
      e.target.classList.add("input-flash");  //  показываем мигание
     // удаляем класс после окончания анимации
     setTimeout(() => e.target.classList.remove("input-flash"), 1100); // совпадает с длительностью CSS  
@@ -620,6 +621,7 @@ if ('serviceWorker' in navigator) {
 setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
+
 
 
 
