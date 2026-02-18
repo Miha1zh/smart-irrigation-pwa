@@ -14,6 +14,7 @@ let schedule = {
   mode: "time",
   times: ["08:00", "18:00"],
   intervalHours: 0,
+  intervalCount: 0,
   startTime: "07:00",
   sleep: {
     from: "22:00",
@@ -49,6 +50,7 @@ const dataSource = {
       mode: "time",
       times: ["06:01", "13:33" ,"18:33"],
       intervalHours: 3,
+      intervalCount: 2,
       startTime: "06:01",
       sleep: {
       from: "21:59",
@@ -499,8 +501,7 @@ function renderSchedule() {
   });
 
   document.getElementById("intervalHours").value = scheduleDraft.intervalHours;
-  document.getElementById("intervalStart").value =
-                                  scheduleDraft.startTime || scheduleDraft.sleep.to;
+  document.getElementById("intervalStart").value = scheduleDraft.startTime || scheduleDraft.sleep.to;
 
   document.getElementById("sleepFrom").value = scheduleDraft.sleep.from;
   document.getElementById("sleepTo").value = scheduleDraft.sleep.to;
@@ -624,6 +625,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
