@@ -110,29 +110,32 @@
     </div>
 
     <!-- ===== Режим по интервалу ===== -->
-    <div class="schedule-section">
-      <label class="section-header">
-        <input type="radio" name="scheduleMode" value="interval">
-        По интервалу
-      </label>
+<div class="schedule-section">
+  <label class="section-header">
+    <input type="radio" name="scheduleMode" value="interval">
+    По интервалу
+  </label>
 
-      <div class="section-body disabled" id="intervalMode">
-        <label>
-              <span>Количество поливов</span>
-                <input type="number" id="intervalCount" min="1">
-       </label>
+  <div class="section-body disabled" id="intervalMode">
 
-        <label>
-          Интервал (часов):
-          <input type="number" id="intervalHours" min="1" max="12">
-        </label>
-
-        <label>
-          Начать с:
-          <input type="time" id="intervalStart">
-        </label>
-      </div>
+    <div class="status-row">
+      <label for="intervalCount">Количество поливов</label>
+      <input type="number" id="intervalCount" min="1">
     </div>
+
+    <div class="status-row">
+      <label for="intervalHours">Интервал (часов):</label>
+      <input type="number" id="intervalHours" min="1" max="12">
+    </div>
+
+    <div class="status-row">
+      <label for="intervalStart">Начать с:</label>
+      <input type="time" id="intervalStart">
+    </div>
+
+  </div>
+</div>
+
 
     <!-- ===== Спящий режим ===== -->
     <div class="schedule-section">
@@ -161,6 +164,7 @@
 
 </body>
 </html>
+
 
 
 
