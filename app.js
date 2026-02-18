@@ -592,18 +592,25 @@ document.getElementById("intervalStart").onchange = e => {
   }
   renderSchedule();
   };
-/*document.getElementById("intervalStart").onchange = e => {
-  if (e.target.value < scheduleDraft.sleep.to) {
-    scheduleDraft.startTime = scheduleDraft.sleep.to;
-    showToast("⚠️Начало полива попадает в спящий режим  ⚠️");
-     e.target.classList.add("input-flash");  //  показываем мигание
+
+// ----- обработчик изменения ячейки количество поливов --------------- 
+document.getElementById("intervalCount").onchange = e => {
+ if (Number.isInteger(Number(e.target.value))) {
+   if (e.target.value>=1 && e.target.value<=24){ scheduleDraft.intervalCount = e.target.value;
+                                               }else{e.target.classList.add("input-flash");  //  показываем мигание
     // удаляем класс после окончания анимации
-    setTimeout(() => e.target.classList.remove("input-flash"), 1100); // совпадает с длительностью CSS  
-  } else {
-    scheduleDraft.startTime = e.target.value;
-  }
+    setTimeout(() => e.target.classList.remove("input-flash"), 1100); // совпадает с длительностью CSS 
+   //return;
+                                                     }
+}else{
+   showToast("⚠️ Должно быть целое число  ⚠️"); 
+    e.target.classList.add("input-flash");  //  показываем мигание
+    // удаляем класс после окончания анимации
+    setTimeout(() => e.target.classList.remove("input-flash"), 1100); // совпадает с длительностью CSS 
+   //return;
+}
   renderSchedule();
-}; */
+}; 
 
 // ***** сохраняю данные  по клику на кнопку сохранить ******
 document.getElementById("saveScheduleBtn").onclick = () => {
@@ -636,6 +643,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
