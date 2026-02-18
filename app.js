@@ -597,7 +597,9 @@ document.getElementById("intervalStart").onchange = e => {
 document.getElementById("intervalCount").onchange = e => {
  if (Number.isInteger(Number(e.target.value))) {
    if (e.target.value>=1 && e.target.value<=24){ scheduleDraft.intervalCount = e.target.value;
-                                               }else{e.target.classList.add("input-flash");  //  показываем мигание
+                                               }else{
+     showToast("⚠️ Количество поливов в интервале от 1 до 24  ⚠️"); 
+     e.target.classList.add("input-flash");  //  показываем мигание
     // удаляем класс после окончания анимации
     setTimeout(() => e.target.classList.remove("input-flash"), 1100); // совпадает с длительностью CSS 
    //return;
@@ -643,6 +645,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
