@@ -453,6 +453,7 @@ function isDuplicate(time, index) {
 //----------обновление модалки расписание---------------------
 function renderSchedule() {
   document.getElementById("wateringCount").innerText = scheduleDraft.times.length;
+  document.getElementById("lastWateringTime").innerText = lastWateringTime; //===========надо добавить функцию расчета этого времени !!!
   console.log("ввввввввввввввввввв:", scheduleDraft);
 
   const list = document.getElementById("timeList");
@@ -503,7 +504,6 @@ function renderSchedule() {
   document.getElementById("intervalHours").value = scheduleDraft.intervalHours;
   document.getElementById("intervalCount").value = scheduleDraft.intervalCount;
   document.getElementById("intervalStart").value = scheduleDraft.startTime || scheduleDraft.sleep.to;
-  document.getElementById("lastWateringTime").value = "00:00"//lastWateringTime // исключительно для пробы , после равно заменить на функция добавитьее еще и в обновление модалки
   document.getElementById("sleepFrom").value = scheduleDraft.sleep.from;
   document.getElementById("sleepTo").value = scheduleDraft.sleep.to;
   updateModeUI();
@@ -648,6 +648,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
