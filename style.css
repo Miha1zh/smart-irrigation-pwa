@@ -28,7 +28,7 @@ header {
 }
 
 .status input {
-  width: 70px;
+  width: 30px;
 }
 
 
@@ -341,6 +341,7 @@ header {
 .toast.success {
   background: #1e6b2c;
 }
+
 
 
 
