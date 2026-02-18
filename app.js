@@ -499,10 +499,10 @@ function renderSchedule() {
 
     list.appendChild(row);
   });
-
+// ==============выводим на экран сохраненные данные================
   document.getElementById("intervalHours").value = scheduleDraft.intervalHours;
+  document.getElementById("intervalCount").value = scheduleDraft.intervalHours;
   document.getElementById("intervalStart").value = scheduleDraft.startTime || scheduleDraft.sleep.to;
-
   document.getElementById("sleepFrom").value = scheduleDraft.sleep.from;
   document.getElementById("sleepTo").value = scheduleDraft.sleep.to;
   updateModeUI();
@@ -636,6 +636,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
