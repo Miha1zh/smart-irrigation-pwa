@@ -17,20 +17,23 @@ header {
   margin: 5px 0;
 }
 
-.status label {
+.status-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+  margin: 5px 0;
+  flex-wrap: wrap; /* на маленьких экранах текст переходит на новую строку, input остаётся рядом */
 }
 
-.status label span {
-  flex: 1;   /* текст занимает всё доступное */
+.status-row label {
+  margin: 0;
+  flex: 1 1 auto; /* занимает доступное место */
+  min-width: 120px; /* текст не ужимается слишком сильно */
 }
 
-.status input {
-  width: 10px;
+.status-row input {
+  flex: 0 0 70px; /* фиксированная ширина поля */
 }
-
 
 
 .plants {
@@ -341,6 +344,7 @@ header {
 .toast.success {
   background: #1e6b2c;
 }
+
 
 
 
