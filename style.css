@@ -17,6 +17,14 @@ header {
   margin: 5px 0;
 }
 
+.status label {
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
 .plants {
   display: grid;
   gap: 15px;
@@ -325,6 +333,7 @@ header {
 .toast.success {
   background: #1e6b2c;
 }
+
 
 
 
