@@ -569,13 +569,14 @@ document.getElementById("sleepTo").onchange = e => {
 document.getElementById("intervalHours").onchange = e => {
   let originalVal = e.target.value ; // введённое пользователем значение
   let correctedVal = originalVal; // корректное значение
+  const VariableOI = operatingInterval() // ввел переменную чтоб функция не вызывалась двадцать раз
       console.log("До обновления поля:", scheduleDraft.intervalHours);
            if (e.target.value < 1) {scheduleDraft.intervalHours = 1; correctedVal = 1;
                                      showToast("⚠️Интервал нельзя задать меньше одного часа! ⚠️");
-                                   }   // добавил туту логику чтоб интервал был всегда в промежутке от 1 до 12
-           else if  (e.target.value> operatingInterval) {
-                                            scheduleDraft.intervalHours = operatingInterval; correctedVal = operatingInterval;
-                                            showToast("⚠️Интервал не может быть больше " + operatingInterval + " часов ! ⚠️");
+                                   }   // добавил туту логику чтоб интервал был всегда в промежутке от 1 до ...
+           else if  (e.target.value> VariableOI) {
+                                            scheduleDraft.intervalHours = VariableOI; correctedVal = VariableOI;
+                                            showToast("⚠️Интервал не может быть больше " + VariableOI + " часов ! ⚠️");
                                             }
                     else {scheduleDraft.intervalHours = e.target.value;}
       console.log("после обновления поля:", scheduleDraft.intervalHours);
@@ -656,6 +657,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
