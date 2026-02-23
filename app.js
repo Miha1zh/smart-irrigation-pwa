@@ -527,9 +527,9 @@ function operatingInterval() {
   const end = eh * 60 + em;
   console.log("интервал бодрствования:", "00000000000");
   if (start > end) {
-    return Number(((start - end) / 60).toFixed(2));
+    return (Number(((start - end) / 60).toFixed(2)));
   } else {   // интервал через полночь
-    return  Number(((24*60+start - end) / 60).toFixed(2));
+    return ( Number(((24*60+start - end) / 60).toFixed(2)));
         }  
 
                             }
@@ -656,6 +656,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
