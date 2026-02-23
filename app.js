@@ -581,7 +581,7 @@ document.getElementById("intervalHours").onchange = e => {
                                    }   // добавил туту логику чтоб интервал был всегда в промежутке от 1 до 12
            else if  (e.target.value> operatingInterval) {
                                             scheduleDraft.intervalHours = operatingInterval; correctedVal = operatingInterval;
-                                            showToast("⚠️Интервал не может быть больше " && operatingInterval " часов ! ⚠️");
+                                            showToast("⚠️Интервал не может быть больше ${operatingInterval} часов ! ⚠️");
                                             }
                     else {scheduleDraft.intervalHours = e.target.value;}
          /*   else if  (e.target.value> 24) {
@@ -667,6 +667,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
