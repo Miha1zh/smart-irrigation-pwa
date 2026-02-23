@@ -576,7 +576,7 @@ document.getElementById("intervalHours").onchange = e => {
                                             scheduleDraft.intervalHours = VariableOI; correctedVal = VariableOI;
                                             showToast("⚠️Интервал не может быть больше " + VariableOI + " часов ! ⚠️");
                                             }
-                    else if  (varIntervalCount*correctedVal < VariableOI) //тут может вылезть ошибка в условии сложное вычисление
+                    else if  (varIntervalCount*correctedVal > VariableOI) //тут может вылезть ошибка в условии сложное вычисление
                              {console.log("varIntervalCount:", varIntervalCount)
                               console.log("correctedVal:", correctedVal)
                               console.log("VariableOI:", VariableOI)
@@ -665,6 +665,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
