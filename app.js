@@ -6,7 +6,8 @@ let autoMode = false;
 let moistureLevels = [];
 let battery = 0;
 let water = 0;
-let lastWateringTime = "00:00";
+let lastWateringTime = "00:00"; // время последнего полива
+let operatingInterval = 1; //интервал в который будет осуществлятся полив
 // ===========================
 // Переменные расписания
 // ===========================
@@ -463,10 +464,7 @@ function renderSchedule() {
     const row = document.createElement("div");
     row.className = "time-row";
 
-    row.innerHTML = `
-      <input type="time" value="${time}">
-      <button>✕</button>
-    `;
+    row.innerHTML = `<input type="time" value="${time}"><button>✕</button>`;
 
     row.querySelector("input").onchange = e => {
             const newTime = e.target.value;
@@ -517,16 +515,25 @@ document.querySelectorAll("input[name='scheduleMode']").forEach(radio => {
 });
 
 function updateModeUI() {
-  document.getElementById("timeMode").classList.toggle(
-    "disabled",
-    scheduleDraft.mode !== "time"
-  );
+  document.getElementById("timeMode").classList.toggle("disabled", scheduleDraft.mode !== "time");
+  document.getElementById("intervalMode").classList.toggle("disabled", scheduleDraft.mode !== "interval");
+                        }
 
-  document.getElementById("intervalMode").classList.toggle(
-    "disabled",
-    scheduleDraft.mode !== "interval"
-  );
-}
+// -----------расчет интервала полива---------------------
+function operatingInterval() {
+  const [sh, sm] = scheduleDraft.sleep.from.split(":").map(Number);
+  const [eh, em] = scheduleDraft.startTime.split(":").map(Number);
+
+  const start = sh * 60 + sm;
+  const end = eh * 60 + em;
+
+  if (start > end) {
+    return Number(((start - end) / 60).toFixed(2));
+  } else {   // интервал через полночь
+    return  Number(((24*60+start - end) / 60).toFixed(2));
+  }
+                            }
+  
 //----------------добавление нового времени--------------------------
 document.getElementById("addTimeBtn").onclick = () => {
   const newTime = "12:00";
@@ -562,18 +569,6 @@ document.getElementById("sleepTo").onchange = e => {
 document.getElementById("intervalHours").onchange = e => {
   let originalVal = e.target.value ; // введённое пользователем значение
   let correctedVal = originalVal; // корректное значение
-  let operatingInterval = 1; // интервал бодрствования системы
-  const [sh, sm] = scheduleDraft.sleep.from.split(":").map(Number);
-  const [eh, em] = scheduleDraft.startTime.split(":").map(Number);
-
-  const start = sh * 60 + sm;
-  const end = eh * 60 + em;
-
-  if (start > end) {
-    operatingInterval = Number(((start - end) / 60).toFixed(2));
-  } else {   // интервал через полночь
-    operatingInterval = Number(((24*60+start - end) / 60).toFixed(2));
-  }
       console.log("интервал бодрствования:", operatingInterval);
       console.log("До обновления поля:", scheduleDraft.intervalHours);
            if (e.target.value < 1) {scheduleDraft.intervalHours = 1; correctedVal = 1;
@@ -584,11 +579,6 @@ document.getElementById("intervalHours").onchange = e => {
                                             showToast("⚠️Интервал не может быть больше " + operatingInterval + " часов ! ⚠️");
                                             }
                     else {scheduleDraft.intervalHours = e.target.value;}
-         /*   else if  (e.target.value> 24) {
-                                            scheduleDraft.intervalHours = 24; correctedVal = 24;
-                                            showToast("⚠️Интервал должен быть в промежутке 1...24 часов! ⚠️");
-                                            }
-                    else {scheduleDraft.intervalHours = e.target.value;} */
       console.log("после обновления поля:", scheduleDraft.intervalHours);
   // сразу обновляем поле, чтобы пользователь видел корректное значение
   e.target.value = scheduleDraft.intervalHours;
@@ -667,6 +657,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
