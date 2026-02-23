@@ -610,7 +610,7 @@ document.getElementById("intervalCount").onchange = e => {
    if (e.target.value>=1 && e.target.value<=kolvoIr){ scheduleDraft.intervalCount = e.target.value;
                                                }else{
      showToast("⚠️ Количество поливов с интервалом " + VariableOI + " должно быть в промежутке от 1 до " + kolvoIr + "  ⚠️"); 
-     scheduleDraft.intervalCount = VariableOI; 
+     scheduleDraft.intervalCount = kolvoIr; 
      e.target.classList.add("input-flash");  //  показываем мигание
     // удаляем класс после окончания анимации
     setTimeout(() => e.target.classList.remove("input-flash"), 1100); // совпадает с длительностью CSS 
@@ -623,7 +623,7 @@ document.getElementById("intervalCount").onchange = e => {
     setTimeout(() => e.target.classList.remove("input-flash"), 1100); // совпадает с длительностью CSS 
    //return;
 }
-  renderSchedule(); // не думаю что это необходимо 
+  renderSchedule(); // не думаю что это необходимо или надо, проверь потом как-нибудь
    document.activeElement.blur(); // убираем фокус с поля
 }; 
 
@@ -658,6 +658,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
