@@ -570,9 +570,9 @@ document.getElementById("intervalHours").onchange = e => {
   const end = eh * 60 + em;
 
   if (start < end) {
-    operatingInterval = end-start;
+    operatingInterval = (end-start)/60;
   } else {   // интервал через полночь
-    operatingInterval = 24+end-start;
+    operatingInterval = (24*60+end-start)/60;
   }
       console.log("интервал бодрствования:", operatingInterval);
       console.log("До обновления поля:", scheduleDraft.intervalHours);
@@ -667,6 +667,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
