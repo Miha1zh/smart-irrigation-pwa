@@ -616,7 +616,7 @@ document.getElementById("intervalCount").onchange = e => {
   if (Number.isInteger(Number(e.target.value))) {
    if (e.target.value>=1 && e.target.value<=kolvoIr){ scheduleDraft.intervalCount = e.target.value;
                                                }else{
-     showToast("⚠️ Количество поливов с интервалом " + VariableOI + " должно быть в промежутке от 1 до " + kolvoIr + "  ⚠️"); 
+     showToast("⚠️ Количество поливов с интервалом " + VariabHI + " должно быть в промежутке от 1 до " + kolvoIr + "  ⚠️"); 
      scheduleDraft.intervalCount = kolvoIr; 
      e.target.classList.add("input-flash");  //  показываем мигание
     // удаляем класс после окончания анимации
@@ -665,6 +665,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
