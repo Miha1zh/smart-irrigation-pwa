@@ -561,15 +561,34 @@ document.getElementById("sleepTo").onchange = e => {
 //----добавил тут еще мигание чтоб упозорнить внимание пользователя------
 document.getElementById("intervalHours").onchange = e => {
   let originalVal = e.target.value ; // введённое пользователем значение
-  let correctedVal = originalVal; // корректное значение 1-24
+  let correctedVal = originalVal; // корректное значение
+  let operatingInterval = 1; // интервал бодрствования системы
+  const [sh, sm] = scheduleDraft.sleep.from.split(":").map(Number);
+  const [eh, em] = scheduleDraft.sleep.to.split(":").map(Number);
+
+  const start = sh * 60 + sm;
+  const end = eh * 60 + em;
+
+  if (start < end) {
+    operatingInterval = end-start;
+  } else {   // интервал через полночь
+    operatingInterval = 24+end-start;
+  }
+      console.log("интервал бодрствования:", operatingInterval);
       console.log("До обновления поля:", scheduleDraft.intervalHours);
            if (e.target.value < 1) {scheduleDraft.intervalHours = 1; correctedVal = 1;
-                                     showToast("⚠️Интервал должен быть в промежутке 1...24 часов! ⚠️");
+                                     showToast("⚠️Интервал нельзя задать меньше одного часа! ⚠️");
                                    }   // добавил туту логику чтоб интервал был всегда в промежутке от 1 до 12
-              else if  (e.target.value> 24) {scheduleDraft.intervalHours = 24; correctedVal = 24;
-                                            showToast("⚠️Интервал должен быть в промежутке 1...24 часов! ⚠️");
+           else if  (e.target.value> operatingInterval) {
+                                            scheduleDraft.intervalHours = operatingInterval; correctedVal = operatingInterval;
+                                            showToast("⚠️Интервал не может быть больше " && operatingInterval " часов ! ⚠️");
                                             }
                     else {scheduleDraft.intervalHours = e.target.value;}
+         /*   else if  (e.target.value> 24) {
+                                            scheduleDraft.intervalHours = 24; correctedVal = 24;
+                                            showToast("⚠️Интервал должен быть в промежутке 1...24 часов! ⚠️");
+                                            }
+                    else {scheduleDraft.intervalHours = e.target.value;} */
       console.log("после обновления поля:", scheduleDraft.intervalHours);
   // сразу обновляем поле, чтобы пользователь видел корректное значение
   e.target.value = scheduleDraft.intervalHours;
@@ -648,6 +667,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
