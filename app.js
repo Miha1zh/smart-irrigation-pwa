@@ -7,7 +7,6 @@ let moistureLevels = [];
 let battery = 0;
 let water = 0;
 let lastWateringTime = "00:00"; // время последнего полива
-let operatingInterval = 1; //интервал в который будет осуществлятся полив
 // ===========================
 // Переменные расписания
 // ===========================
@@ -531,7 +530,8 @@ function operatingInterval() {
     return Number(((start - end) / 60).toFixed(2));
   } else {   // интервал через полночь
     return  Number(((24*60+start - end) / 60).toFixed(2));
-  }
+        }  
+  console.log("интервал бодрствования:", operatingInterval);
                             }
   
 //----------------добавление нового времени--------------------------
@@ -569,7 +569,6 @@ document.getElementById("sleepTo").onchange = e => {
 document.getElementById("intervalHours").onchange = e => {
   let originalVal = e.target.value ; // введённое пользователем значение
   let correctedVal = originalVal; // корректное значение
-      console.log("интервал бодрствования:", operatingInterval);
       console.log("До обновления поля:", scheduleDraft.intervalHours);
            if (e.target.value < 1) {scheduleDraft.intervalHours = 1; correctedVal = 1;
                                      showToast("⚠️Интервал нельзя задать меньше одного часа! ⚠️");
@@ -657,6 +656,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
