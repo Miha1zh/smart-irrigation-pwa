@@ -572,7 +572,7 @@ document.getElementById("intervalHours").onchange = e => {
   if (start > end) {
     operatingInterval = Number(((start - end) / 60).toFixed(2));
   } else {   // интервал через полночь
-    operatingInterval = Number(((24*60start - end) / 60).toFixed(2));
+    operatingInterval = Number(((24*60+start - end) / 60).toFixed(2));
   }
       console.log("интервал бодрствования:", operatingInterval);
       console.log("До обновления поля:", scheduleDraft.intervalHours);
@@ -667,6 +667,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
