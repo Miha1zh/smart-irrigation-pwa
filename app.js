@@ -576,8 +576,11 @@ document.getElementById("intervalHours").onchange = e => {
                                             scheduleDraft.intervalHours = VariableOI; correctedVal = VariableOI;
                                             showToast("⚠️Интервал не может быть больше " + VariableOI + " часов ! ⚠️");
                                             }
-                    else if  (varIntervalCount*correctedVal<VariableOI) //тут может вылезть ошибка в условии сложное вычисление
-                             {correctedVal = VariableOI/varIntervalCount; scheduleDraft.intervalHours = correctedVal;
+                    else if  (varIntervalCount*correctedVal < VariableOI) //тут может вылезть ошибка в условии сложное вычисление
+                             {console.log("varIntervalCount:", varIntervalCount)
+                              console.log("correctedVal:", correctedVal)
+                              console.log("VariableOI:", VariableOI)
+                               correctedVal = VariableOI/varIntervalCount; scheduleDraft.intervalHours = correctedVal;
                                showToast("⚠️ Для увеличения интервала задайте меньшее количество поливов ⚠️");}
                           else {scheduleDraft.intervalHours = e.target.value;}
       console.log("после обновления поля:", scheduleDraft.intervalHours);
@@ -662,6 +665,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
