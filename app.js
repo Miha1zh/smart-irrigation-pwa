@@ -564,7 +564,7 @@ document.getElementById("intervalHours").onchange = e => {
   let correctedVal = originalVal; // корректное значение
   let operatingInterval = 1; // интервал бодрствования системы
   const [sh, sm] = scheduleDraft.sleep.from.split(":").map(Number);
-  const [eh, em] = scheduleDraft.sleep.to.split(":").map(Number);
+  const [eh, em] = scheduleDraft.sleep.startTime.split(":").map(Number);
 
   const start = sh * 60 + sm;
   const end = eh * 60 + em;
@@ -667,6 +667,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
