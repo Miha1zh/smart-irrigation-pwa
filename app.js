@@ -522,10 +522,8 @@ function updateModeUI() {
 function operatingInterval() {
   const [sh, sm] = scheduleDraft.sleep.from.split(":").map(Number);
   const [eh, em] = scheduleDraft.startTime.split(":").map(Number);
-
   const start = sh * 60 + sm;
   const end = eh * 60 + em;
-  console.log("интервал бодрствования:", "00000000000");
   if (start > end) {
     return (Number(((start - end) / 60).toFixed(2)));
   } else {   // интервал через полночь
@@ -564,8 +562,7 @@ document.getElementById("sleepTo").onchange = e => {
   renderSchedule();
 };
 
-// ----- обработчик изменения ячейки интервал --------------- это добавил, но убрал инициализацию ячейки в функции сохранения
-//----добавил тут еще мигание чтоб упозорнить внимание пользователя------
+// ----- обработчик изменения ячейки интервал --------------- 
 document.getElementById("intervalHours").onchange = e => {
   let originalVal = e.target.value ; // введённое пользователем значение
   let correctedVal = originalVal; // корректное значение
@@ -582,10 +579,9 @@ document.getElementById("intervalHours").onchange = e => {
       console.log("после обновления поля:", scheduleDraft.intervalHours);
   // сразу обновляем поле, чтобы пользователь видел корректное значение
   e.target.value = scheduleDraft.intervalHours;
-  // если значение было исправлено, показываем мигание
   console.log("correctedVal:", correctedVal);
   console.log("originalVal:", originalVal);
-  if (correctedVal !== originalVal) {e.target.classList.add("input-flash");
+  if (correctedVal !== originalVal) {e.target.classList.add("input-flash");   // если значение было исправлено, показываем мигание
    // удаляем класс после окончания анимации
     setTimeout(() => e.target.classList.remove("input-flash"), 1100); // совпадает с длительностью CSS  
                                     }
@@ -607,10 +603,14 @@ document.getElementById("intervalStart").onchange = e => {
 
 // ----- обработчик изменения ячейки количество поливов --------------- 
 document.getElementById("intervalCount").onchange = e => {
- if (Number.isInteger(Number(e.target.value))) {
-   if (e.target.value>=1 && e.target.value<=24){ scheduleDraft.intervalCount = e.target.value;
+  const VariableOI = operatingInterval() //интервал полива -- ввел переменную чтоб функция не вызывалась двадцать раз
+  const VariabHI = Number(intervalHours.value);
+  let kolvoIr = Math.trunc(VariableOI/VariabHI)
+  if (Number.isInteger(Number(e.target.value))) {
+   if (e.target.value>=1 && e.target.value<=kolvoIr){ scheduleDraft.intervalCount = e.target.value;
                                                }else{
-     showToast("⚠️ Количество поливов в интервале от 1 до 24  ⚠️"); 
+     showToast("⚠️ Количество поливов с интервалом " + VariableOI + " должно быть в промежутке от 1 до " + kolvoIr + "  ⚠️"); 
+     scheduleDraft.intervalCount = VariableOI; 
      e.target.classList.add("input-flash");  //  показываем мигание
     // удаляем класс после окончания анимации
     setTimeout(() => e.target.classList.remove("input-flash"), 1100); // совпадает с длительностью CSS 
@@ -623,7 +623,8 @@ document.getElementById("intervalCount").onchange = e => {
     setTimeout(() => e.target.classList.remove("input-flash"), 1100); // совпадает с длительностью CSS 
    //return;
 }
-  renderSchedule();
+  renderSchedule(); // не думаю что это необходимо 
+   document.activeElement.blur(); // убираем фокус с поля
 }; 
 
 // ***** сохраняю данные  по клику на кнопку сохранить ******
@@ -657,6 +658,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
