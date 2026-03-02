@@ -531,6 +531,14 @@ function operatingInterval() {
         }  
 
                             }
+
+//----------------расчет последнего времени полива--------------------------
+function lastTimeIr() {
+  const VariableKolIr = Number(intervalCount.value); // количество поливов
+  const VariabHI = Number(intervalHours.value); // интервал поливов
+  const VariabSnart = Number(intervalStart.value); // время начало поливов
+  
+                        }
   
 //----------------добавление нового времени--------------------------
 document.getElementById("addTimeBtn").onclick = () => {
@@ -566,7 +574,7 @@ document.getElementById("sleepTo").onchange = e => {
 document.getElementById("intervalHours").onchange = e => {
   let originalVal = e.target.value ; // введённое пользователем значение
   let correctedVal = originalVal; // корректное значение
-  const VariableKolIr = Number(intervalCount.value);
+  const VariableKolIr = Number(intervalCount.value); // количество поливов
   const VariableOI = operatingInterval() // ввел переменную чтоб функция не вызывалась двадцать раз
   const varIntervalCount = Number(intervalCount.value) //количество поливов
       console.log("До обновления поля:", scheduleDraft.intervalHours);
@@ -613,7 +621,7 @@ document.getElementById("intervalStart").onchange = e => {
 // ----- обработчик изменения ячейки количество поливов --------------- 
 document.getElementById("intervalCount").onchange = e => {
   const VariableOI = operatingInterval() //интервал полива -- ввел переменную чтоб функция не вызывалась двадцать раз
-  const VariabHI = Number(intervalHours.value);
+  const VariabHI = Number(intervalHours.value); // интервал поливов
   let kolvoIr = Math.trunc(VariableOI/VariabHI)
   if (Number.isInteger(Number(e.target.value))) {
    if (e.target.value>=1 && e.target.value<=kolvoIr){ scheduleDraft.intervalCount = e.target.value;
@@ -667,6 +675,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
