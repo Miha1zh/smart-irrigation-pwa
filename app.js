@@ -534,10 +534,12 @@ function operatingInterval() {
 
 //----------------расчет последнего времени полива--------------------------
 function lastTimeIr() {
-  const VariableKolIr = Number(intervalCount.value); // количество поливов
-  const VariabHI = Number(intervalHours.value); // интервал поливов
-  const VariabSnart = Number(intervalStart.value); // время начало поливов
-  
+  const VarKolIr = Number(intervalCount.value); // количество поливов
+  const VarbHI = Number(intervalHours.value); // интервал поливов
+ // const VarbSnart = Number(intervalStart.value); // время начало поливов
+  const [sh, sm] =  Number(intervalStart.split(":").map); // время начало поливов
+  const start = sh * 60 + sm;
+
                         }
   
 //----------------добавление нового времени--------------------------
@@ -675,6 +677,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
