@@ -566,6 +566,7 @@ document.getElementById("sleepTo").onchange = e => {
 document.getElementById("intervalHours").onchange = e => {
   let originalVal = e.target.value ; // введённое пользователем значение
   let correctedVal = originalVal; // корректное значение
+  const VariableKolIr = Number(intervalCount.value);
   const VariableOI = operatingInterval() // ввел переменную чтоб функция не вызывалась двадцать раз
   const varIntervalCount = Number(intervalCount.value) //количество поливов
       console.log("До обновления поля:", scheduleDraft.intervalHours);
@@ -573,8 +574,9 @@ document.getElementById("intervalHours").onchange = e => {
                                      showToast("⚠️Интервал нельзя задать меньше одного часа! ⚠️");
                                    }   // добавил туту логику чтоб интервал был всегда в промежутке от 1 до ...
            else if  (e.target.value> VariableOI) {
-                                            scheduleDraft.intervalHours = VariableOI; correctedVal = VariableOI;
-                                            showToast("⚠️Интервал не может быть больше " + VariableOI + " часов ! ⚠️");
+                                            correctedVal = VariableOI/VariableKolIr; scheduleDraft.intervalHours = correctedVal; 
+                                             console.log("correctedVal:", correctedVal)
+                                            showToast("⚠️Интервал не может быть больше " + correctedVal + " часов ! ⚠️");
                                             }
                     else if  (varIntervalCount*correctedVal > VariableOI) //тут может вылезть ошибка в условии сложное вычисление
                              {console.log("varIntervalCount:", varIntervalCount)
@@ -665,6 +667,7 @@ setTimeout(() => {
   Modal.alert("Модалка работает", "Тест");
 }, 500);
 */
+
 
 
 
